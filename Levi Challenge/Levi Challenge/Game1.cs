@@ -19,8 +19,9 @@ namespace Levi_Challenge
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         BackgroundManager backgroundManager = new BackgroundManager();
-        CollisionManager collisionManager = new CollisionManager();
+        SpawnManager spawnManager = new SpawnManager();
         ProjectileManager projectileManager = new ProjectileManager();
+        CollisionManager collisionManager = new CollisionManager();
         Player player = new Player();
 
         public Game1()
@@ -39,7 +40,7 @@ namespace Levi_Challenge
         {
             // TODO: Add your initialization logic here
             backgroundManager.Initialize(Content, GraphicsDevice, "Cloud-Red-1", "Cloud-Red-2");
-
+            spawnManager.Initialize(GraphicsDevice, Content);
             projectileManager.Initialize();
             player.Initialize(Content, "Player-1", GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             //backgroundManager.Initialize(Content, "Planet3-game", GraphicsDevice.Viewport.Width, -5, 5);
@@ -80,10 +81,10 @@ namespace Levi_Challenge
 
             // TODO: Add your update logic here
             backgroundManager.Update();
-
+            spawnManager.Update(gameTime);
             projectileManager.Update(GraphicsDevice.Viewport);
             player.Update(gameTime, projectileManager);
-            collisionManager.Update(player, enemyManager.enemies, projectileManager.Projectiles);
+            collisionManager.Update(player, spawnManager.enemyManager.enemies, projectileManager.Projectiles);
             base.Update(gameTime);
         }
 
@@ -98,7 +99,7 @@ namespace Levi_Challenge
             // TODO: Add your drawing code here
             backgroundManager.Draw(spriteBatch);
             spriteBatch.Begin();
-            enemyManager.Draw(spriteBatch);
+            spawnManager.Draw(spriteBatch);
             projectileManager.Draw(spriteBatch);
             player.Draw(spriteBatch);
             spriteBatch.End();
