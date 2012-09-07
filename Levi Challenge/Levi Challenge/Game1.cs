@@ -43,7 +43,6 @@ namespace Levi_Challenge
             spawnManager.Initialize(GraphicsDevice, Content);
             projectileManager.Initialize();
             player.Initialize(Content, "Player-1", GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-            //backgroundManager.Initialize(Content, "Planet3-game", GraphicsDevice.Viewport.Width, -5, 5);
             base.Initialize();
         }
 
@@ -84,7 +83,7 @@ namespace Levi_Challenge
             spawnManager.Update(gameTime);
             projectileManager.Update(GraphicsDevice.Viewport);
             player.Update(gameTime, projectileManager);
-            collisionManager.Update(player, spawnManager.enemyManager.enemies, projectileManager.Projectiles);
+            collisionManager.Update(player, spawnManager.enemyManager.Enemies, spawnManager.enemyManager.Astroids, projectileManager.Projectiles);
             base.Update(gameTime);
         }
 

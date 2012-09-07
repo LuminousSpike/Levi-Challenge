@@ -10,6 +10,7 @@ namespace Levi_Challenge
     {
         public EnemyManager enemyManager;
 
+        int Level = 1;
         TimeSpan enemySpawnTime;
         TimeSpan previousSpawnTime;
         Random random;
@@ -28,11 +29,9 @@ namespace Levi_Challenge
         {
             if (gameTime.TotalGameTime - previousSpawnTime > enemySpawnTime)
             {
+                Spawn();
                 previousSpawnTime = gameTime.TotalGameTime;
-                if (gameTime.TotalGameTime < TimeSpan.FromSeconds(30))
-                    enemyManager.AddEnemy(random, enemyManager.enemy1, 20, 40, 5f);
-                else
-                    enemyManager.AddEnemy(random, enemyManager.enemy2, 30, 60, 3f);
+
             }
 
             enemyManager.Update(gameTime);
@@ -41,6 +40,17 @@ namespace Levi_Challenge
         public void Draw(SpriteBatch spriteBatch)
         {
             enemyManager.Draw(spriteBatch);
+        }
+
+        private void Spawn()
+        {
+            int rand = 450;
+            if (rand < 300)
+                enemyManager.AddEnemy(random, enemyManager.enemy1, 20, 40, 5f);
+            else if (rand < 400)
+                enemyManager.AddEnemy(random, enemyManager.enemy2, 30, 60, 3f);
+            else if (rand < 460)
+                enemyManager.AddAstroid(random);
         }
     }
 }
