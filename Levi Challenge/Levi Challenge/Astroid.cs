@@ -15,7 +15,8 @@ namespace Levi_Challenge
         public Vector2 Position;
         public Rectangle CollisionBox;
         public bool Active;
-        public int Value;
+        public float Value;
+        public bool Splitting = false;
 
         public Astroid(Texture2D texture1, Texture2D texture2, Texture2D texture3, Texture2D texture4)
         {
@@ -30,26 +31,28 @@ namespace Levi_Challenge
 
         Random random = new Random();
         float enemyMoveSpeed { get; set; }
-        int Size;
+        public int Size;
         int MaxHealth;
         public int Health;
         float Circle = (float)Math.PI * 2;
         float Rotation;
+        float RotationRate;
 
-
-        public void Initialize()
+        public void Initialize(int size)
         {
-            Size = random.Next(1, 4);
+            Size = size;
+            Value = (float)random.NextDouble();
             SetTexture();
             SetHealth();
             SetSpeed();
+            SetRotation();
             Active = true;
         }
 
         public void Update(GameTime gametime)
         {
             Position.X -= enemyMoveSpeed;
-            Rotation += 0.01f;
+            Rotation += RotationRate;
             Rotation = Rotation % Circle;
             CollisionBox = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
 
@@ -68,14 +71,12 @@ namespace Levi_Challenge
             spriteBatch.Draw(Texture, Position, null, Color.White, Rotation, new Vector2(Width / 2, Height / 2), 1f, SpriteEffects.None, 0f);
         }
 
-
-
         private void Split()
         {
-            if (Size < 1)
+            if (Size <= 1)
             {
                 Active = false;
-                Player.Score += Value;
+                Player.Flamoca += Value;
             }
             else
             {
@@ -84,6 +85,9 @@ namespace Levi_Challenge
                 Size -= 1;
                 SetTexture();
                 SetHealth();
+                SetSpeed();
+                SetRotation();
+                Splitting = true;
             }
         }
 
@@ -124,6 +128,21 @@ namespace Levi_Challenge
                 enemyMoveSpeed = 1.5f;
             else
                 enemyMoveSpeed = 2f;
+        }
+
+        private void SetRotation()
+        {
+            do
+            {
+                if (Size == 4)
+                    RotationRate = (float)random.Next(-2, 2) / 100;
+                else if (Size == 3)
+                    RotationRate = (float)random.Next(-4, 4) / 100;
+                else if (Size == 2)
+                    RotationRate = (float)random.Next(-6, 6) / 100;
+                else
+                    RotationRate = (float)random.Next(-8, 8) / 100;
+            } while (RotationRate == 0);
         }
     }
 }

@@ -64,8 +64,16 @@ namespace Levi_Challenge
         public void AddAstroid(Random random)
         {
             Astroid astroid = new Astroid(AstroidTexture1, AstroidTexture2, AstroidTexture3, AstroidTexture4);
-            astroid.Initialize();
+            astroid.Initialize(random.Next(1, 5));
             astroid.Position = new Vector2(graphicsDevice.Viewport.Width + astroid.Texture.Width / 2, random.Next(100, graphicsDevice.Viewport.Height - 100));
+            Astroids.Add(astroid);
+        }
+
+        public void SplitAstroid(int size, Vector2 position)
+        {
+            Astroid astroid = new Astroid(AstroidTexture1, AstroidTexture2, AstroidTexture3, AstroidTexture4);
+            astroid.Initialize(size);
+            astroid.Position = position;
             Astroids.Add(astroid);
         }
 
@@ -73,12 +81,22 @@ namespace Levi_Challenge
         {
             for (int i = Astroids.Count - 1; i >= 0; i--)
             {
+                if (Astroids[i].Splitting == true)
+                {
+                    Random random = new Random();
+                    SplitAstroid(Astroids[i].Size, Astroids[i].Position + new Vector2(0, -25 * Astroids[i].Size));
+                    Astroids[i].Position += new Vector2(0, 25 * Astroids[i].Size);
+                    Astroids[i].Splitting = false;
+                }
+
                 Astroids[i].Update(gameTime);
 
                 if (Astroids[i].Active == false)
                 {
                     Astroids.RemoveAt(i);
                 }
+
+
             }
 
             for (int i = Enemies.Count - 1; i >= 0; i--)
@@ -94,9 +112,9 @@ namespace Levi_Challenge
 
         public void LoadContent(ContentManager content)
         {
-            AstroidTexture1 = content.Load<Texture2D>("Astroid-4");
-            AstroidTexture2 = content.Load<Texture2D>("Astroid-4");
-            AstroidTexture3 = content.Load<Texture2D>("Astroid-4");
+            AstroidTexture1 = content.Load<Texture2D>("Astroid-1");
+            AstroidTexture2 = content.Load<Texture2D>("Astroid-2");
+            AstroidTexture3 = content.Load<Texture2D>("Astroid-3");
             AstroidTexture4 = content.Load<Texture2D>("Astroid-4");
         }
     }

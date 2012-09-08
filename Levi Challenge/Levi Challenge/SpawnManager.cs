@@ -11,6 +11,9 @@ namespace Levi_Challenge
         public EnemyManager enemyManager;
 
         int Level = 1;
+        int SpawnCount = 0;
+        int SpawnLimit = 10;
+        bool AstroidSwarm = false;
         TimeSpan enemySpawnTime;
         TimeSpan previousSpawnTime;
         Random random;
@@ -44,13 +47,34 @@ namespace Levi_Challenge
 
         private void Spawn()
         {
-            int rand = 450;
-            if (rand < 300)
-                enemyManager.AddEnemy(random, enemyManager.enemy1, 20, 40, 5f);
-            else if (rand < 400)
-                enemyManager.AddEnemy(random, enemyManager.enemy2, 30, 60, 3f);
-            else if (rand < 460)
-                enemyManager.AddAstroid(random);
+            if (SpawnCount < SpawnLimit)
+            {
+                if (AstroidSwarm == false)
+                {
+                    int rand = random.Next(500);
+                    if (rand < 300)
+                        enemyManager.AddEnemy(random, enemyManager.enemy1, 20, 40, 5f);
+                    else if (rand < 400)
+                        enemyManager.AddEnemy(random, enemyManager.enemy2, 30, 60, 3f);
+                    else if (rand < 460)
+                        enemyManager.AddAstroid(random);
+                }
+                else
+                    enemyManager.AddAstroid(random);
+                SpawnCount ++;
+            }
+            else
+            {
+                Level += 1;
+                SpawnCount = 0;
+                SpawnLimit += 5;
+
+                if (Level >= 3)
+                {
+                    if (random.Next(100) <= 12)
+                        AstroidSwarm = true;
+                }
+            }
         }
     }
 }
