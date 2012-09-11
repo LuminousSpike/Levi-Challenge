@@ -43,9 +43,14 @@ namespace Levi_Challenge
         {
             Position.X -= enemyMoveSpeed;
             CollisionBox = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
-            if (Position.X < -Width || Health <= 0)
+            if (Position.X < -Width)
             {
                 Active = false;
+            }
+            if (Health <= 0)
+            {
+                Active = false;
+                Player.Score += Value;
             }
         }
 

@@ -19,9 +19,9 @@ namespace Levi_Challenge
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         BackgroundManager backgroundManager = new BackgroundManager();
-        EnemyManager enemyManager;
-        CollisionManager collisionManager = new CollisionManager();
+        SpawnManager spawnManager = new SpawnManager();
         ProjectileManager projectileManager = new ProjectileManager();
+        CollisionManager collisionManager = new CollisionManager();
         Player player = new Player();
 
         public Game1()
@@ -40,11 +40,9 @@ namespace Levi_Challenge
         {
             // TODO: Add your initialization logic here
             backgroundManager.Initialize(Content, GraphicsDevice, "Cloud-Red-1", "Cloud-Red-2");
-            enemyManager = new EnemyManager(GraphicsDevice);
-            enemyManager.Initialize(Content);
+            spawnManager.Initialize(GraphicsDevice, Content);
             projectileManager.Initialize();
             player.Initialize(Content, "Player-1", GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-            //backgroundManager.Initialize(Content, "Planet3-game", GraphicsDevice.Viewport.Width, -5, 5);
             base.Initialize();
         }
 
@@ -82,10 +80,10 @@ namespace Levi_Challenge
 
             // TODO: Add your update logic here
             backgroundManager.Update();
-            enemyManager.Update(gameTime);
+            spawnManager.Update(gameTime);
             projectileManager.Update(GraphicsDevice.Viewport);
             player.Update(gameTime, projectileManager);
-            collisionManager.Update(player, enemyManager.enemies, projectileManager.Projectiles);
+            collisionManager.Update(player, spawnManager.enemyManager.Enemies, spawnManager.enemyManager.Astroids, projectileManager.Projectiles);
             base.Update(gameTime);
         }
 
@@ -100,7 +98,7 @@ namespace Levi_Challenge
             // TODO: Add your drawing code here
             backgroundManager.Draw(spriteBatch);
             spriteBatch.Begin();
-            enemyManager.Draw(spriteBatch);
+            spawnManager.Draw(spriteBatch);
             projectileManager.Draw(spriteBatch);
             player.Draw(spriteBatch);
             spriteBatch.End();

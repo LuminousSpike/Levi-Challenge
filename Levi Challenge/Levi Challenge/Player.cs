@@ -9,6 +9,8 @@ namespace Levi_Challenge
     class Player
     {
         public Rectangle CollisionBox;
+        public static int Score = 0;
+        public static float Flamoca;
 
         Texture2D texture;
         Vector2 Position;
