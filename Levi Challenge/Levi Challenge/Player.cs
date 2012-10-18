@@ -12,18 +12,20 @@ namespace Levi_Challenge
         public static int Score = 0;
         public static float Flamoca;
 
+        Ship myShip = new Ship(100, 40f, 3.5f);
         Texture2D texture;
-        Vector2 Position;
+        Vector2 position;
         Vector2 screenSize;
         Texture2D basicLaserTexture;
         Texture2D basicMissileTexture;
         Weapon basicLaser;
         Weapon basicMissile;
+
         
         public void Initialize(ContentManager content, String texturePath, int screenWidth, int screenHeight)
         {
             texture = content.Load<Texture2D>(texturePath);
-            Position = new Vector2(screenWidth / 2 - texture.Width / 2, screenHeight / 2 - texture.Height / 2);
+            position = new Vector2(screenWidth / 2 - texture.Width / 2, screenHeight / 2 - texture.Height / 2);
             screenSize = new Vector2(screenWidth, screenHeight);
             basicLaserTexture = content.Load<Texture2D>("Laser-1");
             basicLaser = new Weapon(basicLaserTexture, 8, 20f, 0.3f, texture.Width, texture.Height / 2);
@@ -35,40 +37,40 @@ namespace Levi_Challenge
         {
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                Position.Y += -3.5f;
+                position.Y += -myShip.Speed;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                Position.Y += 3.5f;
+                position.Y += myShip.Speed;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                Position.X += -5f;
+                position.X += -myShip.Speed;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                Position.X += 5f;
+                position.X += myShip.Speed;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                basicMissile.fire(gameTime, projectileManager, Position);
+                basicMissile.fire(gameTime, projectileManager, position);
             }
 
-            basicLaser.fire(gameTime, projectileManager, Position);
+            basicLaser.fire(gameTime, projectileManager, position);
 
             // Make sure that the player does not go out of bounds
-            Position.X = MathHelper.Clamp(Position.X, 0, screenSize.X - texture.Width);
-            Position.Y = MathHelper.Clamp(Position.Y, 0, screenSize.Y - texture.Height);
-            CollisionBox = new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
+            position.X = MathHelper.Clamp(position.X, 0, screenSize.X - texture.Width);
+            position.Y = MathHelper.Clamp(position.Y, 0, screenSize.Y - texture.Height);
+            CollisionBox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, Position, Color.White);
+            spriteBatch.Draw(texture, position, Color.White);
         }
     }
 }

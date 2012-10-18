@@ -87,7 +87,9 @@ namespace Levi_Challenge
                 SetHealth();
                 SetSpeed();
                 SetRotation();
-                Splitting = true;
+                int splitChance = random.Next(0, 100);
+                if (splitChance < Size * 10)
+                    Splitting = true;
             }
         }
 
