@@ -1,0 +1,68 @@
+﻿<Window x:Class="Levi_Challenge_Editor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Levi Challenge Editor" Height="640" Width="768" Loaded="Window_Loaded">
+    <Grid>
+        <TabControl Height="577" HorizontalAlignment="Left" Margin="12,12,0,0" Name="tabControl1" VerticalAlignment="Top" Width="722">
+            <TabItem Header="Player Ships" Name="tabItem1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="212" />
+                        <ColumnDefinition Width="504*" />
+                    </Grid.ColumnDefinitions>
+                    <ListBox Height="514" HorizontalAlignment="Left" Name="PS_LstBox_Items" VerticalAlignment="Top" Width="212" MouseDoubleClick="PS_LstBox_Items_MouseDoubleClick" />
+                    <Button Content="Delete" Height="23" HorizontalAlignment="Left" Margin="7,520,0,0" Name="PS_Btn_Delete" VerticalAlignment="Top" Width="62" />
+                    <Button Content="New" Height="23" HorizontalAlignment="Left" Margin="75,520,0,0" Name="PS_Btn_New" VerticalAlignment="Top" Width="62" Click="PS_Btn_New_Click" />
+                    <Button Content="Save" Height="23" HorizontalAlignment="Right" Margin="0,520,7,0" Name="PS_Btn_Save" VerticalAlignment="Top" Width="62" Click="PS_Btn_Save_Click" />
+                    <Image Grid.Column="1" Height="100" HorizontalAlignment="Left" Margin="398,414,0,0" Name="IB_Ship_Sprite" Stretch="Fill" VerticalAlignment="Top" Width="100" />
+                    <Label Content="Name:" Grid.Column="1" Height="28" HorizontalAlignment="Left" Margin="10,1,0,0" Name="label1" VerticalAlignment="Top" />
+                    <Label Content="Cost:" Height="28" HorizontalAlignment="Left" Margin="10,35,0,0" Name="label2" VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Health:" Height="28" HorizontalAlignment="Left" Margin="10,69,0,0" Name="label3" VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Shield:" Height="28" HorizontalAlignment="Left" Margin="10,103,0,0" Name="label4" VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Speed:" Height="28" HorizontalAlignment="Left" Margin="10,137,0,0" Name="label5" VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Hard Points:" Height="28" HorizontalAlignment="Left" Margin="186,6,0,0" Name="label6" VerticalAlignment="Top" Grid.Column="1" />
+                    <CheckBox Content="Is Starting Ship" Grid.Column="1" Height="16" HorizontalAlignment="Right" Margin="0,149,118,0" Name="PS_ChkBox_StartingShip" VerticalAlignment="Top" />
+                    <TextBox Grid.Column="1" Height="23" HorizontalAlignment="Left" Margin="60,6,0,0" Name="PS_TxtBox_Name" VerticalAlignment="Top" Width="120" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="60,40,0,0" Name="PS_TxtBox_Cost" VerticalAlignment="Top" Width="120" Grid.Column="1" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="60,74,0,0" Name="PS_TxtBox_Health" VerticalAlignment="Top" Width="120" Grid.Column="1" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="60,107,0,0" Name="PS_TxtBox_Shield" VerticalAlignment="Top" Width="120" Grid.Column="1" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="60,141,0,0" Name="PS_TxtBox_Speed" VerticalAlignment="Top" Width="120" Grid.Column="1" />
+                    <ComboBox Grid.Column="1" Height="23" HorizontalAlignment="Left" Margin="266,6,0,0" Name="PS_ComBox_HardPoints" VerticalAlignment="Top" Width="120">
+                        <ComboBoxItem Content="1" IsSelected="True" />
+                        <ComboBoxItem Content="2" />
+                        <ComboBoxItem Content="3" />
+                        <ComboBoxItem Content="4" />
+                        <ComboBoxItem Content="5" />
+                    </ComboBox>
+                    <Button Content="Sprite" Grid.Column="1" Height="23" HorizontalAlignment="Left" Margin="410,520,0,0" Name="button10" VerticalAlignment="Top" Width="75" />
+                    <Label Content="Armour:" Height="28" HorizontalAlignment="Left" Margin="186,36,0,0" Name="label7" VerticalAlignment="Top" Grid.Column="1" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="266,40,0,0" Name="PS_TxtBox_Armour" VerticalAlignment="Top" Width="120" Grid.Column="1" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Enemy Ships">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ListBox Height="514" HorizontalAlignment="Left" Name="listBox1" VerticalAlignment="Top" Width="212" />
+                    <Button Content="Delete" Height="23" HorizontalAlignment="Left" Margin="7,520,0,0" Name="button1" VerticalAlignment="Top" Width="62" />
+                    <Button Content="New" Height="23" HorizontalAlignment="Left" Margin="75,520,0,0" Name="button2" VerticalAlignment="Top" Width="62" />
+                    <Button Content="Apply" Height="23" HorizontalAlignment="Right" Margin="0,520,511,0" Name="button3" VerticalAlignment="Top" Width="62" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Weapons">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ListBox Height="514" HorizontalAlignment="Left" Name="listBox2" VerticalAlignment="Top" Width="212" />
+                    <Button Content="Delete" Height="23" HorizontalAlignment="Left" Margin="7,520,0,0" Name="button4" VerticalAlignment="Top" Width="62" />
+                    <Button Content="New" Height="23" HorizontalAlignment="Left" Margin="75,520,0,0" Name="button5" VerticalAlignment="Top" Width="62" />
+                    <Button Content="Apply" Height="23" HorizontalAlignment="Right" Margin="0,520,511,0" Name="button6" VerticalAlignment="Top" Width="62" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Projectiles">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ListBox Height="514" HorizontalAlignment="Left" Name="listBox3" VerticalAlignment="Top" Width="212" />
+                    <Button Content="Delete" Height="23" HorizontalAlignment="Left" Margin="7,520,0,0" Name="button7" VerticalAlignment="Top" Width="62" />
+                    <Button Content="New" Height="23" HorizontalAlignment="Left" Margin="75,520,0,0" Name="button8" VerticalAlignment="Top" Width="62" />
+                    <Button Content="Apply" Height="23" HorizontalAlignment="Right" Margin="0,520,511,0" Name="button9" VerticalAlignment="Top" Width="62" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
