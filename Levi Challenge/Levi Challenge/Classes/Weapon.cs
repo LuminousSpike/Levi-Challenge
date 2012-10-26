@@ -9,8 +9,8 @@ namespace Levi_Challenge
     class Weapon
     {
         Texture2D Texture;
-        int Damage;
-        float MoveSpeed;
+        int ProjectileDamage;
+        float ProjectileSpeed;
         float RefireRate;
         float OffsetX;
         float OffsetY;
@@ -20,8 +20,8 @@ namespace Levi_Challenge
         public Weapon(Texture2D texture, int damage, float moveSpeed, float refireRate, float offsetX, float offsetY)
         {
             Texture = texture;
-            Damage = damage;
-            MoveSpeed = moveSpeed;
+            ProjectileDamage = damage;
+            ProjectileSpeed = moveSpeed;
             RefireRate = refireRate;
             OffsetX = offsetX;
             OffsetY = offsetY;
@@ -32,7 +32,7 @@ namespace Levi_Challenge
         {
             if (gameTime.TotalGameTime - PreviousFireTime > FireTime)
             {
-                Projectile myProjectile = new Projectile(Texture, postition, Damage, MoveSpeed);
+                Projectile myProjectile = new Projectile(Texture, postition, ProjectileDamage, ProjectileSpeed);
                 myProjectile.Position.X += OffsetX;
                 myProjectile.Position.Y += OffsetY;
                 PreviousFireTime = gameTime.TotalGameTime;

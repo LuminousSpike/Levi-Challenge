@@ -18,30 +18,74 @@ namespace Levi_Challenge_Editor
             InitializeComponent();
         }
 
-        // Functions used more than once
-        #region Functions
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (!Directory.Exists(@"Data"))
                 Directory.CreateDirectory(@"Data");
             if (!Directory.Exists(@"Data\Ships"))
                 Directory.CreateDirectory(@"Data\Ships");
+            if (!Directory.Exists(@"Data\Weapons"))
+                Directory.CreateDirectory(@"Data\Weapons");
 
             UpdateList(S_LstBox_Items, @"Data\Ships");
-            ManageObjects();
+            UpdateList(W_LstBox_Items, @"Data\Weapons");
+            UpdateTextureList(S_ComBox_Texture, @"Content\Ships");
+            UpdateTextureList(W_ComBox_ProjectileTexture, @"Content\Projectiles");
+            S_ManageObjects();
         }
 
-        private void UpdateList(ListBox ListBox, string folder)
+        // Functions used more than once
+        #region Functions
+
+        private void UpdateList(ListBox listBox, string folder)
         {
             string[] filePaths = Directory.GetFiles(folder, "*.xml");
-            S_LstBox_Items.Items.Clear();
+            listBox.Items.Clear();
             for (int i = 0; i < filePaths.Length; i++)
             {
-                ListBox.Items.Add(filePaths[i]);
+                filePaths[i] = Path.GetFileNameWithoutExtension(filePaths[i]);
+                listBox.Items.Add(filePaths[i]);
             }
         }
 
-        private void ManageObjects()
+        private void UpdateTextureList(ComboBox comboBox, string folder)
+        {
+            if (Directory.Exists(folder))
+            {
+                string[] filePaths = Directory.GetFiles(folder, "*.xnb");
+                comboBox.Items.Clear();
+                for (int i = 0; i < filePaths.Length; i++)
+                {
+                    filePaths[i] = Path.GetFileNameWithoutExtension(filePaths[i]);
+                    comboBox.Items.Add(filePaths[i]);
+                }
+            }
+        }
+
+        private string ReadElement(XmlReader reader, string name)
+        {
+            string Value = null;
+            while (reader.NodeType != XmlNodeType.EndElement)
+            {
+                reader.Read();
+                if ((reader.NodeType == XmlNodeType.Element) && reader.Name == name)
+                {
+                    while (reader.NodeType != XmlNodeType.EndElement)
+                    {
+                        if (reader.NodeType == XmlNodeType.Text)
+                        {
+                            Value = reader.Value;
+                        }
+                        reader.Read();
+                    }
+                }
+            }
+            if (Value != null)
+                reader.Read();
+            return Value;
+        }
+
+        private void S_ManageObjects()
         {
             // Enable or Disable need controls
             if (S_ChkBox_PlayerShip.IsChecked == true)
@@ -64,7 +108,7 @@ namespace Levi_Challenge_Editor
             }
         }
 
-        private void ClearObjects()
+        private void S_ClearObjects()
         {
             S_TxtBox_Name.Text = "";
             S_TxtBox_Health.Text = "";
@@ -82,11 +126,45 @@ namespace Levi_Challenge_Editor
             PS_ComBox_Type.SelectedIndex = 0;
         }
 
-        private void DeleteFile(string filename)
+        private void W_ClearObjects()
+        {
+            W_TxtBox_WeaponName.Text = "";
+            W_ComBox_WeaponClass.SelectedIndex = 0;
+            W_TxtBox_WeaponRefireRate.Text = "";
+            W_ComBox_ProjectileTexture.SelectedIndex = 0;
+            W_ComBox_ProjectileType.SelectedIndex = 0;
+            W_TxtBox_ProjectileDamage.Text = "";
+            W_TxtBox_ProjectileSpeed.Text = "";
+        }
+
+        private string SaveDialog(string filename, string folder)
+        {
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.FileName = filename; // Default file name
+            dlg.DefaultExt = ".xml"; // Default file extension
+            dlg.Filter = "XML documents (.xml)|*.xml"; // Filter files by extension
+            string mypath = Directory.GetCurrentDirectory();
+            dlg.InitialDirectory = mypath + @"\Data\" + folder;
+
+            // Show save file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process save file dialog box results
+            if (result == true)
+            {
+                // Save document
+                filename = dlg.FileName;
+            }
+            else
+                filename = null;
+            return filename;
+        }
+
+        private void DeleteFile(string folder, string filename)
         {
             if (MessageBox.Show("Are you sure you wish to delete this item?", filename, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                File.Delete(filename);
+                File.Delete(folder + filename + ".xml");
             }
         }
         #endregion
@@ -151,45 +229,22 @@ namespace Levi_Challenge_Editor
             UpdateList(S_LstBox_Items, @"Data\Ships");
         }
 
-        private string SaveDialog(string filename, string folder)
-        {
-            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.FileName = filename; // Default file name
-            dlg.DefaultExt = ".xml"; // Default file extension
-            dlg.Filter = "XML documents (.xml)|*.xml"; // Filter files by extension
-            string mypath = Directory.GetCurrentDirectory();
-            dlg.InitialDirectory = mypath + @"\Data\" + folder;
-
-            // Show save file dialog box
-            Nullable<bool> result = dlg.ShowDialog();
-
-            // Process save file dialog box results
-            if (result == true)
-            {
-                // Save document
-                filename = dlg.FileName;
-            }
-            else
-                filename = null;
-            return filename;
-        }
-
         private void S_Btn_New_Click(object sender, RoutedEventArgs e)
         {
-            ClearObjects();
-            ManageObjects();
+            S_ClearObjects();
+            S_ManageObjects();
         }
 
         private void S_Btn_Delete_Click(object sender, RoutedEventArgs e)
         {
-            DeleteFile((string)S_LstBox_Items.SelectedItem);
+            DeleteFile(@"Data\Ships\", (string)S_LstBox_Items.SelectedItem);
             UpdateList(S_LstBox_Items, @"Data\Ships");
         }
 
         private void S_LstBox_Items_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ClearObjects();
-            string fileName = (string)S_LstBox_Items.SelectedItem;
+            S_ClearObjects();
+            string fileName = @"Data\Ships\" + (string)S_LstBox_Items.SelectedItem + ".xml";
 
             // Load the XML Document
             XmlReader reader = XmlReader.Create(fileName);
@@ -211,62 +266,41 @@ namespace Levi_Challenge_Editor
                     while (reader.NodeType != XmlNodeType.EndElement)
                     {
                         reader.Read();
-
-                        // General Stuff
-                        switch (reader.Name)
+                        while (reader.NodeType != XmlNodeType.EndElement)
                         {
-                            case "Name":
-                                S_TxtBox_Name.Text = reader.ReadString();
-                                break;
-                            case "Health":
-                                S_TxtBox_Health.Text = reader.ReadString();
-                                break;
-                            case "Shield":
-                                S_TxtBox_Shield.Text = reader.ReadString();
-                                break;
-                            case "Speed":
-                                S_TxtBox_Speed.Text = reader.ReadString();
-                                break;
-                            case "HardPoints":
-                                S_ComBox_HardPoints.Text = reader.ReadString();
-                                break;
-                            case "WeaponClass":
-                                S_ComBox_WeaponClass.Text = reader.ReadString();
-                                break;
-                            case "Armour":
-                                S_TxtBox_Armour.Text = reader.ReadString();
-                                break;
-                        }
+                            // General Stuff
+                            S_TxtBox_Name.Text = ReadElement(reader, "Name");
 
-                        // Player Stuff
-                        if (S_ChkBox_PlayerShip.IsChecked == true)
-                        {
-                            switch (reader.Name)
+                            S_TxtBox_Health.Text = ReadElement(reader, "Health");
+
+                            S_TxtBox_Shield.Text = ReadElement(reader, "Shield");
+
+                            S_TxtBox_Speed.Text = ReadElement(reader, "Speed");
+
+                            S_ComBox_HardPoints.Text = ReadElement(reader, "HardPoints");
+
+                            S_ComBox_WeaponClass.Text = ReadElement(reader, "WeaponClass");
+
+                            S_TxtBox_Armour.Text = ReadElement(reader, "Armour");
+
+                            // Player Stuff
+                            if (S_ChkBox_PlayerShip.IsChecked == true)
                             {
-                                case "Cost":
-                                    PS_TxtBox_Cost.Text = reader.ReadString();
-                                    break;
-                                case "Type":
-                                    PS_ComBox_Type.Text = reader.ReadString();
-                                    break;
-                            }
-                        }
+                                PS_TxtBox_Cost.Text = ReadElement(reader, "Cost");
 
-                        // Enemy Stuff
-                        else
-                        {
-                            switch (reader.Name)
-                            {
-                                case "Level":
-                                    ES_TxtBox_Level.Text = reader.ReadString();
-                                    break;
-                                case "Points":
-                                    ES_TxtBox_Points.Text = reader.ReadString();
-                                    break;
-                                case "AI":
-                                    ES_ComBox_AI.Text = reader.ReadString();
-                                    break;
+                                PS_ComBox_Type.Text = ReadElement(reader, "Type");
                             }
+
+                            // Enemy Stuff
+                            else
+                            {
+                                ES_TxtBox_Level.Text = ReadElement(reader, "Level");
+
+                                ES_TxtBox_Points.Text = ReadElement(reader, "Points");
+
+                                ES_ComBox_AI.Text = ReadElement(reader, "AI");
+                            }
+                            reader.Read();
                         }
                     }
                 }
@@ -277,12 +311,122 @@ namespace Levi_Challenge_Editor
             {
                 MessageBox.Show("Incompatible XML File", fileName, MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            ManageObjects();
+            S_ManageObjects();
         }
 
         private void S_ChkBox_PlayerShip_Click(object sender, RoutedEventArgs e)
         {
-            ManageObjects();
+            S_ManageObjects();
+        }
+        #endregion
+
+        // Weapons Code
+        #region Weapons
+        private void W_Btn_Save_Click(object sender, RoutedEventArgs e)
+        {
+            string header = "WP_";
+
+            string fileName = SaveDialog(header + W_TxtBox_WeaponName.Text, "Weapons");
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+
+            if (fileName != null)
+            {
+                // Create and save the XML Document
+                XmlWriter writer = XmlWriter.Create(fileName, settings);
+                writer.WriteStartDocument();
+                writer.WriteComment("This file was generated by Levi Challenge Editor.");
+                writer.WriteStartElement("Weapon");
+                writer.WriteAttributeString("Type", W_ComBox_WeaponType.Text);
+                writer.WriteStartElement("WeaponStats");
+                writer.WriteElementString("Name", W_TxtBox_WeaponName.Text);
+                writer.WriteElementString("Class", W_ComBox_WeaponClass.Text);
+                writer.WriteElementString("RefireRate", W_TxtBox_WeaponRefireRate.Text);
+                writer.WriteEndElement();
+
+                writer.WriteStartElement("ProjectileStats");
+                writer.WriteElementString("Texture", W_ComBox_ProjectileTexture.Text);
+                writer.WriteElementString("Type", W_ComBox_ProjectileType.Text);
+                writer.WriteElementString("Damage", W_TxtBox_ProjectileDamage.Text);
+                writer.WriteElementString("Speed", W_TxtBox_ProjectileSpeed.Text);
+                writer.WriteEndElement();
+
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+                writer.Flush();
+                writer.Close();
+
+                UpdateList(W_LstBox_Items, @"Data\Weapons");
+            }
+        }
+
+        private void W_Btn_New_Click(object sender, RoutedEventArgs e)
+        {
+            W_ClearObjects();
+        }
+
+        private void W_Btn_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteFile(@"Data\Weapons\", (string)W_LstBox_Items.SelectedItem);
+            UpdateList(W_LstBox_Items, @"Data\Weapons");
+        }
+
+        private void W_LstBox_Items_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            W_ClearObjects();
+            string fileName = @"Data\Weapons\" + (string)W_LstBox_Items.SelectedItem + ".xml";
+
+            // Load the XML Document
+            XmlReader reader = XmlReader.Create(fileName);
+
+            bool Correct_File = false;
+            while (reader.Read())
+            {
+                if ((reader.NodeType == XmlNodeType.Element) && reader.Name == "Weapon")
+                {
+                    W_ComBox_WeaponType.Text = reader.GetAttribute(0);
+                    Correct_File = true;
+                }
+
+                if (Correct_File == true)
+                {
+                    while (reader.NodeType != XmlNodeType.EndElement)
+                    {
+                        reader.Read();
+                        while (reader.NodeType != XmlNodeType.EndElement)
+                        {
+                            // WeaponStats Stuff
+                            if ((reader.NodeType == XmlNodeType.Element) && reader.Name == "WeaponStats")
+                            {
+                                W_TxtBox_WeaponName.Text = ReadElement(reader, "Name");
+
+                                W_ComBox_WeaponClass.Text = ReadElement(reader, "Class");
+
+                                W_TxtBox_WeaponRefireRate.Text = ReadElement(reader, "RefireRate");
+                            }
+
+                            // ProjectileStats Stuff
+                            if ((reader.NodeType == XmlNodeType.Element) && reader.Name == "ProjectileStats")
+                            {
+                                W_ComBox_ProjectileTexture.Text = ReadElement(reader, "Texture");
+
+                                W_ComBox_ProjectileType.Text = ReadElement(reader, "Type");
+
+                                W_TxtBox_ProjectileDamage.Text = ReadElement(reader, "Damage");
+
+                                W_TxtBox_ProjectileSpeed.Text = ReadElement(reader, "Speed");
+                            }
+                            reader.Read();
+                        }
+                    }
+                }
+            }
+            reader.Close();
+
+            if (Correct_File == false)
+            {
+                MessageBox.Show("Incompatible XML File", fileName, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         #endregion
     }

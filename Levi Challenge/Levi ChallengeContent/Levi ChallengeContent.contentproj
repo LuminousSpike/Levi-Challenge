@@ -30,7 +30,7 @@
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.VideoImporters, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Player-1.png">
+    <Compile Include="Ships\Player-1.png">
       <Name>Player-1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -81,28 +81,28 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enemy-1.png">
+    <Compile Include="Ships\Enemy-1.png">
       <Name>Enemy-1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Laser-1.png">
+    <Compile Include="Projectiles\Laser-1.png">
       <Name>Laser-1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Missile-1.png">
+    <Compile Include="Projectiles\Missile-1.png">
       <Name>Missile-1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enemy-2.png">
+    <Compile Include="Ships\Enemy-2.png">
       <Name>Enemy-2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>

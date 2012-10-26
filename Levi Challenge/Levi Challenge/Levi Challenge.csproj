@@ -72,22 +72,22 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Astroid.cs" />
-    <Compile Include="BackgroundManager.cs" />
-    <Compile Include="CollisionManager.cs" />
-    <Compile Include="Enemy.cs" />
-    <Compile Include="EnemyManager.cs" />
-    <Compile Include="ParallaxBackground.cs" />
-    <Compile Include="ParallaxPlanet.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="Projectile.cs" />
-    <Compile Include="ProjectileManager.cs" />
+    <Compile Include="Classes\Astroid.cs" />
+    <Compile Include="Classes\BackgroundManager.cs" />
+    <Compile Include="Classes\CollisionManager.cs" />
+    <Compile Include="Classes\Enemy.cs" />
+    <Compile Include="Classes\EnemyManager.cs" />
+    <Compile Include="Classes\ParallaxBackground.cs" />
+    <Compile Include="Classes\ParallaxPlanet.cs" />
+    <Compile Include="Classes\Player.cs" />
+    <Compile Include="Classes\Projectile.cs" />
+    <Compile Include="Classes\ProjectileManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Ship.cs" />
-    <Compile Include="SpawnManager.cs" />
-    <Compile Include="Weapon.cs" />
+    <Compile Include="Classes\Ship.cs" />
+    <Compile Include="Classes\SpawnManager.cs" />
+    <Compile Include="Classes\Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

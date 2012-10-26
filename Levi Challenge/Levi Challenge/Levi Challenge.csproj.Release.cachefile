@@ -8,10 +8,10 @@ Content\Stars1.xnb
 Content\Stars2.xnb
 Content\Stars3.xnb
 Content\Enemy-1.xnb
-Content\Laser-1.xnb
-Content\Missile-1.xnb
 Content\Enemy-2.xnb
 Content\Astroid-4.xnb
 Content\Astroid-3.xnb
 Content\Astroid-2.xnb
 Content\Astroid-1.xnb
+Content\Projectiles\Laser-1.xnb
+Content\Projectiles\Missile-1.xnb
