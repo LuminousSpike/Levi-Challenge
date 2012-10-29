@@ -39,12 +39,15 @@ namespace Levi_Challenge_Editor
 
         private void UpdateList(ListBox listBox, string folder)
         {
-            string[] filePaths = Directory.GetFiles(folder, "*.xml");
-            listBox.Items.Clear();
-            for (int i = 0; i < filePaths.Length; i++)
+            if (Directory.Exists(folder))
             {
-                filePaths[i] = Path.GetFileNameWithoutExtension(filePaths[i]);
-                listBox.Items.Add(filePaths[i]);
+                string[] filePaths = Directory.GetFiles(folder, "*.xml");
+                listBox.Items.Clear();
+                for (int i = 0; i < filePaths.Length; i++)
+                {
+                    filePaths[i] = Path.GetFileNameWithoutExtension(filePaths[i]);
+                    listBox.Items.Add(filePaths[i]);
+                }
             }
         }
 
@@ -204,6 +207,7 @@ namespace Levi_Challenge_Editor
                 writer.WriteElementString("HardPoints", S_ComBox_HardPoints.Text);
                 writer.WriteElementString("WeaponClass", S_ComBox_WeaponClass.Text);
                 writer.WriteElementString("Armour", S_TxtBox_Armour.Text);
+                writer.WriteElementString("Texture", S_ComBox_Texture.Text);
 
                 // Player Stuff
                 if (isPlayerShip == "true")
@@ -282,6 +286,8 @@ namespace Levi_Challenge_Editor
                             S_ComBox_WeaponClass.Text = ReadElement(reader, "WeaponClass");
 
                             S_TxtBox_Armour.Text = ReadElement(reader, "Armour");
+
+                            S_ComBox_Texture.Text = ReadElement(reader, "Texture");
 
                             // Player Stuff
                             if (S_ChkBox_PlayerShip.IsChecked == true)

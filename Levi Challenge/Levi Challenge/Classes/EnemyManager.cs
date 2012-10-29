@@ -8,8 +8,7 @@ namespace Levi_Challenge
 {
     class EnemyManager
     {
-        public Texture2D enemy1;
-        public Texture2D enemy2;
+        public List<Texture2D> EnemyTexture;
 
         Texture2D AstroidTexture1;
         Texture2D AstroidTexture2;
@@ -29,8 +28,8 @@ namespace Levi_Challenge
         public void Initialize(ContentManager content)
         {
             LoadContent(content);
-            enemy1 = content.Load<Texture2D>("Enemy-1");
-            enemy2 = content.Load<Texture2D>("Enemy-2");
+            EnemyTexture = new List<Texture2D>();
+
             Enemies = new List<Enemy>();
             Astroids = new List<Astroid>();
         }
@@ -53,10 +52,10 @@ namespace Levi_Challenge
             }
         }
 
-        public void AddEnemy(Random random, Texture2D enemyTexture, int health, int value, float enemymovespeed)
+        public void AddEnemy(Random random, Ship ship)
         {
-            Vector2 position = new Vector2(graphicsDevice.Viewport.Width + enemyTexture.Width / 2, random.Next(100, graphicsDevice.Viewport.Height - 100));
-            Enemy enemy = new Enemy(enemyTexture, health, value, enemymovespeed);
+            Enemy enemy = new Enemy(ship);
+            Vector2 position = new Vector2(graphicsDevice.Viewport.Width + enemy.myShip.ShipTexture.Width / 2, random.Next(100, graphicsDevice.Viewport.Height - 100));
             enemy.Initialize(position);
             Enemies.Add(enemy);
         }
@@ -95,7 +94,6 @@ namespace Levi_Challenge
                 {
                     Astroids.RemoveAt(i);
                 }
-
 
             }
 

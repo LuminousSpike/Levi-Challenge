@@ -12,24 +12,29 @@ namespace Levi_Challenge
         public static int Score = 0;
         public static float Flamoca;
 
-        Ship myShip = new Ship(100, 40f, 3.5f, 2);
+        Ship myShip;
         Texture2D texture;
         Vector2 position;
         Vector2 screenSize;
         Texture2D basicLaserTexture;
         Texture2D basicMissileTexture;
         
-        public void Initialize(ContentManager content, String texturePath, int screenWidth, int screenHeight)
+        public void Initialize()
         {
-            texture = content.Load<Texture2D>(texturePath);
+            myShip = XMLEngine.PlayerShips[0];
+            
+        }
+
+        public void LoadContent(ContentManager content, int screenWidth, int screenHeight)
+        {
+            texture = myShip.ShipTexture;
             position = new Vector2(screenWidth / 2 - texture.Width / 2, screenHeight / 2 - texture.Height / 2);
             screenSize = new Vector2(screenWidth, screenHeight);
-
-            basicLaserTexture = content.Load<Texture2D>("Laser-1");
+            basicLaserTexture = content.Load<Texture2D>("Projectiles/Laser-1");
             // Mount Basic Laser
             myShip.MountWeapon(0, new Weapon(basicLaserTexture, 8, 20f, 0.3f, texture.Width, texture.Height / 2));
 
-            basicMissileTexture = content.Load<Texture2D>("Missile-1");
+            basicMissileTexture = content.Load<Texture2D>("Projectiles/Missile-1");
             // Mount Basic Missile
             myShip.MountWeapon(1, new Weapon(basicMissileTexture, 22, 12f, 1f, texture.Width, texture.Height / 2));
         }

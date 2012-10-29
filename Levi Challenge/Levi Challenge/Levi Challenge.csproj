@@ -88,6 +88,7 @@
     <Compile Include="Classes\Ship.cs" />
     <Compile Include="Classes\SpawnManager.cs" />
     <Compile Include="Classes\Weapon.cs" />
+    <Compile Include="XMLEngine.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

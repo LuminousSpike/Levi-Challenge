@@ -53,9 +53,9 @@ namespace Levi_Challenge
                 {
                     int rand = random.Next(500);
                     if (rand < 300)
-                        enemyManager.AddEnemy(random, enemyManager.enemy1, 20, 40, 5f);
+                        enemyManager.AddEnemy(random, XMLEngine.EnemyShips[0]);
                     else if (rand < 400)
-                        enemyManager.AddEnemy(random, enemyManager.enemy2, 30, 60, 3f);
+                        enemyManager.AddEnemy(random, XMLEngine.EnemyShips[0]);
                     else if (rand < 460)
                         enemyManager.AddAstroid(random);
                 }

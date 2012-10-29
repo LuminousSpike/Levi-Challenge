@@ -6,31 +6,22 @@ namespace Levi_Challenge
 {
     class Enemy
     {
-        Texture2D Texture { get; set; }
+        public Ship myShip;
         public Vector2 Position;
         public Rectangle CollisionBox;
         public bool Active;
-        public int Health { get; set; }
-        public int Value { get; set; }
 
-        public int Width
+        public int Health;
+        public float Shield;
+
+        float enemyMoveSpeed;
+
+        public Enemy(Ship ship)
         {
-            get { return Texture.Width; }
-        }
-
-        public int Height
-        {
-            get { return Texture.Height; }
-        }
-
-        float enemyMoveSpeed { get; set; }
-
-        public Enemy(Texture2D texture, int health, int value, float enemymovespeed)
-        {
-            Texture = texture;
-            Health = health;
-            Value = value;
-            enemyMoveSpeed = enemymovespeed;
+            myShip = ship;
+            enemyMoveSpeed = myShip.Speed;
+            Health = ship.Health;
+            Shield = ship.Shield;
         }
 
         public void Initialize(Vector2 position)
@@ -42,21 +33,21 @@ namespace Levi_Challenge
         public void Update(GameTime gametime)
         {
             Position.X -= enemyMoveSpeed;
-            CollisionBox = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
-            if (Position.X < -Width)
+            CollisionBox = new Rectangle((int)Position.X, (int)Position.Y, myShip.ShipTexture.Width, myShip.ShipTexture.Height);
+            if (Position.X < -myShip.ShipTexture.Width)
             {
                 Active = false;
             }
             if (Health <= 0)
             {
                 Active = false;
-                Player.Score += Value;
+                Player.Score += myShip.Points;
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Position, Color.White);
+            spriteBatch.Draw(myShip.ShipTexture, Position, Color.White);
         }
     }
 }
