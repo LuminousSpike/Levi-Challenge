@@ -20,7 +20,7 @@ namespace Levi_Challenge
         public int Level;
         public int Points;
         public string AI;
-        public Weapon[] MountPoints;
+        public Weapon[] Hardpoints;
         public Texture2D ShipTexture;
 
         private int HardPoints;
@@ -38,7 +38,7 @@ namespace Levi_Challenge
             Cost = cost;
             ShipType = shiptype;
 
-            MountPoints = new Weapon[hardpoints];
+            Hardpoints = new Weapon[hardpoints];
         }
 
         // Enemy Constructor
@@ -55,18 +55,18 @@ namespace Levi_Challenge
             Points = points;
             AI = ai;
 
-            MountPoints = new Weapon[hardpoints];
+            Hardpoints = new Weapon[hardpoints];
         }
 
-        public void MountWeapon(int mountpoint, Weapon weapon)
+        public void MountWeapon(int hardpoint, Weapon weapon)
         {
-            MountPoints[mountpoint] = weapon;
+            Hardpoints[hardpoint] = weapon;
         }
 
         public void FireWeapon(GameTime gameTime, ProjectileManager projectileManager, Vector2 position)
         {
-            for (int mPoint = 0; mPoint < MountPoints.Length; mPoint++)
-                MountPoints[mPoint].fire(gameTime, projectileManager, position);
+            for (int mPoint = 0; mPoint < Hardpoints.Length; mPoint++)
+                Hardpoints[mPoint].fire(gameTime, projectileManager, position);
         }
     }
 }

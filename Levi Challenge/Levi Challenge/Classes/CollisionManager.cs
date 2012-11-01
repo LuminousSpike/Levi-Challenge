@@ -21,7 +21,7 @@ namespace Levi_Challenge
                     if (Projectiles[ii].CollisionBox.Intersects(Enemies[i].CollisionBox))
                     {
                         Projectiles[ii].Active = false;
-                        Enemies[i].Health -= Projectiles[ii].Damage;
+                        Enemies[i].Health -= Projectiles[ii].ProjectileDamage;
                     }
                 }
             }
@@ -37,7 +37,7 @@ namespace Levi_Challenge
                     if (Projectiles[ii].CollisionBox.Intersects(Astroids[i].CollisionBox))
                     {
                         Projectiles[ii].Active = false;
-                        Astroids[i].Health -= Projectiles[ii].Damage;
+                        Astroids[i].Health -= Projectiles[ii].ProjectileDamage;
                     }
                 }
             }

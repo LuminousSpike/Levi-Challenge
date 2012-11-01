@@ -8,33 +8,35 @@ namespace Levi_Challenge
     {
         public Rectangle CollisionBox;
 
-        Texture2D Texture;
+        Texture2D ProjectileTexture;
+        string ProjectileType;
+        float ProjectileSpeed;
+
         public Vector2 Position;
-        public int Damage;
-        float MoveSpeed;
+        public int ProjectileDamage;
         public bool Active = true;
 
         public int Width
         {
-            get { return Texture.Width; }
+            get { return ProjectileTexture.Width; }
         }
 
         public int Height
         {
-            get { return Texture.Height; }
+            get { return ProjectileTexture.Height; }
         }
 
-        public Projectile(Texture2D texture, Vector2 position, int damage, float moveSpeed)
+        public Projectile(Texture2D projectileTexture, string projectileType, float projectileSpeed, int projectileDamage)
         {
-            Texture = texture;
-            Position = position;
-            Damage = damage;
-            MoveSpeed = moveSpeed;
+            ProjectileTexture = projectileTexture;
+            ProjectileType = projectileType;
+            ProjectileSpeed = projectileSpeed;
+            ProjectileDamage = projectileDamage;
         }
 
         public void Update(Viewport viewport)
         {
-            Position.X += MoveSpeed;
+            Position.X += ProjectileSpeed;
             CollisionBox = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
             if (Position.X + Width / 2 > viewport.Width)
                 Active = false;
@@ -42,7 +44,7 @@ namespace Levi_Challenge
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Position, null, Color.White, 0f, new Vector2(Width / 2, Height / 2), 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(ProjectileTexture, Position, null, Color.White, 0f, new Vector2(Width / 2, Height / 2), 1f, SpriteEffects.None, 0f);
         }
     }
 }

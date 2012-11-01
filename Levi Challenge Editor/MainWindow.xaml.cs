@@ -29,8 +29,11 @@ namespace Levi_Challenge_Editor
 
             UpdateList(S_LstBox_Items, @"Data\Ships");
             UpdateList(W_LstBox_Items, @"Data\Weapons");
-            UpdateTextureList(S_ComBox_Texture, @"Content\Ships");
-            UpdateTextureList(W_ComBox_ProjectileTexture, @"Content\Projectiles");
+            UpdateComBox(S_ComBox_Texture, @"Content\Ships", "*.xnb");
+            UpdateComBox(S_ComBox_Weapon1, @"Data\Weapons", "*.xml");
+            UpdateComBox(S_ComBox_Weapon2, @"Data\Weapons", "*.xml");
+            UpdateComBox(S_ComBox_Weapon3, @"Data\Weapons", "*.xml");
+            UpdateComBox(W_ComBox_ProjectileTexture, @"Content\Projectiles", "*.xnb");
             S_ManageObjects();
         }
 
@@ -51,17 +54,18 @@ namespace Levi_Challenge_Editor
             }
         }
 
-        private void UpdateTextureList(ComboBox comboBox, string folder)
+        private void UpdateComBox(ComboBox comboBox, string folder, string filetype)
         {
             if (Directory.Exists(folder))
             {
-                string[] filePaths = Directory.GetFiles(folder, "*.xnb");
+                string[] filePaths = Directory.GetFiles(folder, filetype);
                 comboBox.Items.Clear();
                 for (int i = 0; i < filePaths.Length; i++)
                 {
                     filePaths[i] = Path.GetFileNameWithoutExtension(filePaths[i]);
                     comboBox.Items.Add(filePaths[i]);
                 }
+                comboBox.SelectedIndex = 0;
             }
         }
 
@@ -90,7 +94,7 @@ namespace Levi_Challenge_Editor
 
         private void S_ManageObjects()
         {
-            // Enable or Disable need controls
+            // Enable or disable Player/Enemy controls
             if (S_ChkBox_PlayerShip.IsChecked == true)
             {
                 ES_TxtBox_Level.IsEnabled = false;
@@ -109,6 +113,21 @@ namespace Levi_Challenge_Editor
                 PS_TxtBox_Cost.IsEnabled = false;
                 PS_ComBox_Type.IsEnabled = false;
             }
+
+            // Enable or disable Weapon ComboBoxes
+            if (Convert.ToInt32(S_ComBox_Hardpoints.Text) > 1)
+            {
+                S_ComBox_Weapon2.IsEnabled = true;
+                if (Convert.ToInt32(S_ComBox_Hardpoints.Text) > 2)
+                    S_ComBox_Weapon3.IsEnabled = true;
+                else
+                    S_ComBox_Weapon3.IsEnabled = false;
+            }
+            else
+            {
+                S_ComBox_Weapon2.IsEnabled = false;
+                S_ComBox_Weapon3.IsEnabled = false;
+            }
         }
 
         private void S_ClearObjects()
@@ -117,7 +136,7 @@ namespace Levi_Challenge_Editor
             S_TxtBox_Health.Text = "";
             S_TxtBox_Shield.Text = "";
             S_TxtBox_Speed.Text = "";
-            S_ComBox_HardPoints.SelectedIndex = 0;
+            S_ComBox_Hardpoints.SelectedIndex = 0;
             S_ComBox_WeaponClass.SelectedIndex = 0;
             S_TxtBox_Armour.Text = "";
 
@@ -204,8 +223,15 @@ namespace Levi_Challenge_Editor
                 writer.WriteElementString("Health", S_TxtBox_Health.Text);
                 writer.WriteElementString("Shield", S_TxtBox_Shield.Text);
                 writer.WriteElementString("Speed", S_TxtBox_Speed.Text);
-                writer.WriteElementString("HardPoints", S_ComBox_HardPoints.Text);
+                writer.WriteElementString("Hardpoints", S_ComBox_Hardpoints.Text);
                 writer.WriteElementString("WeaponClass", S_ComBox_WeaponClass.Text);
+                writer.WriteElementString("Weapon1", S_ComBox_Weapon1.Text);
+                if (Convert.ToInt32(S_ComBox_Hardpoints.Text) > 1)
+                {
+                    writer.WriteElementString("Weapon2", S_ComBox_Weapon2.Text);
+                    if (Convert.ToInt32(S_ComBox_Hardpoints.Text) > 2)
+                        writer.WriteElementString("Weapon3", S_ComBox_Weapon3.Text);
+                }
                 writer.WriteElementString("Armour", S_TxtBox_Armour.Text);
                 writer.WriteElementString("Texture", S_ComBox_Texture.Text);
 
@@ -281,9 +307,18 @@ namespace Levi_Challenge_Editor
 
                             S_TxtBox_Speed.Text = ReadElement(reader, "Speed");
 
-                            S_ComBox_HardPoints.Text = ReadElement(reader, "HardPoints");
+                            S_ComBox_Hardpoints.Text = ReadElement(reader, "Hardpoints");
 
                             S_ComBox_WeaponClass.Text = ReadElement(reader, "WeaponClass");
+
+                            S_ComBox_Weapon1.Text = ReadElement(reader, "Weapon1");
+
+                            if (Convert.ToInt32(S_ComBox_Hardpoints.Text) > 1)
+                            {
+                                S_ComBox_Weapon1.Text = ReadElement(reader, "Weapon2");
+                                if (Convert.ToInt32(S_ComBox_Hardpoints.Text) > 2)
+                                    S_ComBox_Weapon1.Text = ReadElement(reader, "Weapon3");
+                            }
 
                             S_TxtBox_Armour.Text = ReadElement(reader, "Armour");
 
@@ -321,6 +356,11 @@ namespace Levi_Challenge_Editor
         }
 
         private void S_ChkBox_PlayerShip_Click(object sender, RoutedEventArgs e)
+        {
+            S_ManageObjects();
+        }
+
+        private void S_ComBox_Hardpoints_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             S_ManageObjects();
         }
@@ -363,6 +403,9 @@ namespace Levi_Challenge_Editor
                 writer.Close();
 
                 UpdateList(W_LstBox_Items, @"Data\Weapons");
+                UpdateComBox(S_ComBox_Weapon1, @"Data\Weapons", "*.xml");
+                UpdateComBox(S_ComBox_Weapon2, @"Data\Weapons", "*.xml");
+                UpdateComBox(S_ComBox_Weapon3, @"Data\Weapons", "*.xml");
             }
         }
 
@@ -375,6 +418,9 @@ namespace Levi_Challenge_Editor
         {
             DeleteFile(@"Data\Weapons\", (string)W_LstBox_Items.SelectedItem);
             UpdateList(W_LstBox_Items, @"Data\Weapons");
+            UpdateComBox(S_ComBox_Weapon1, @"Data\Weapons", "*.xml");
+            UpdateComBox(S_ComBox_Weapon2, @"Data\Weapons", "*.xml");
+            UpdateComBox(S_ComBox_Weapon3, @"Data\Weapons", "*.xml");
         }
 
         private void W_LstBox_Items_MouseDoubleClick(object sender, MouseButtonEventArgs e)

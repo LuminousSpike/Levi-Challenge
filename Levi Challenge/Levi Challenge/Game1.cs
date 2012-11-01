@@ -39,6 +39,7 @@ namespace Levi_Challenge
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            XMLEngine.PhraseWeaponXML();
             XMLEngine.PhraseShipXML();
             backgroundManager.Initialize(Content, GraphicsDevice, "Cloud-Red-1", "Cloud-Red-2");
             spawnManager.Initialize(GraphicsDevice, Content);
@@ -59,10 +60,17 @@ namespace Levi_Challenge
             {
                 XMLEngine.PlayerShips[i].ShipTexture = (Content.Load<Texture2D>(XMLEngine.PlayerShips[i].ShipTexturePath));
             }
+
             for (int i = 0; i < XMLEngine.EnemyShips.Count; i++)
             {
                 XMLEngine.EnemyShips[i].ShipTexture = (Content.Load<Texture2D>(XMLEngine.EnemyShips[i].ShipTexturePath));
             }
+
+            foreach (Weapon weapon in XMLEngine.Weapons)
+            {
+                weapon.ProjectileTexture = (Content.Load<Texture2D>(weapon.ProjectileTexturePath));
+            }
+
             player.LoadContent(Content, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 
             // TODO: use this.Content to load your game content here

@@ -8,31 +8,42 @@ namespace Levi_Challenge
 {
     class Weapon
     {
-        Texture2D Texture;
-        int ProjectileDamage;
-        float ProjectileSpeed;
-        float RefireRate;
+        string WeaponType = null;
+        public string WeaponName = null;
+        int WeaponClass = 0;
+        float WeaponRefireRate = 0f;
+
+        public string ProjectileTexturePath = null;
+        string ProjectileType = null;
+        int ProjectileDamage = 0;
+        float ProjectileSpeed = 0f;
+
         float OffsetX;
         float OffsetY;
         TimeSpan FireTime;
         TimeSpan PreviousFireTime;
+        public Texture2D ProjectileTexture { get; set; }
 
-        public Weapon(Texture2D texture, int damage, float moveSpeed, float refireRate, float offsetX, float offsetY)
+        public Weapon(string weaponType, string weaponName, int weaponClass, float weaponRefireRate, string projectileTexture,
+            string projectileType, int projectileDamage, float projectileSpeed)
         {
-            Texture = texture;
-            ProjectileDamage = damage;
-            ProjectileSpeed = moveSpeed;
-            RefireRate = refireRate;
-            OffsetX = offsetX;
-            OffsetY = offsetY;
-            FireTime = TimeSpan.FromSeconds(RefireRate);
+            WeaponType = weaponType;
+            WeaponName = weaponName;
+            WeaponClass = weaponClass;
+            WeaponRefireRate = weaponRefireRate;
+
+            ProjectileTexturePath = projectileTexture;
+            ProjectileType = projectileType;
+            ProjectileDamage = projectileDamage;
+            ProjectileSpeed = projectileSpeed;
         }
+
 
         public void fire(GameTime gameTime, ProjectileManager projectileManager, Vector2 postition)
         {
             if (gameTime.TotalGameTime - PreviousFireTime > FireTime)
             {
-                Projectile myProjectile = new Projectile(Texture, postition, ProjectileDamage, ProjectileSpeed);
+                Projectile myProjectile = new Projectile(ProjectileTexture, ProjectileType, ProjectileSpeed, ProjectileDamage);
                 myProjectile.Position.X += OffsetX;
                 myProjectile.Position.Y += OffsetY;
                 PreviousFireTime = gameTime.TotalGameTime;

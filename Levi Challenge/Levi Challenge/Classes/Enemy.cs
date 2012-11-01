@@ -14,12 +14,9 @@ namespace Levi_Challenge
         public int Health;
         public float Shield;
 
-        float enemyMoveSpeed;
-
         public Enemy(Ship ship)
         {
             myShip = ship;
-            enemyMoveSpeed = myShip.Speed;
             Health = ship.Health;
             Shield = ship.Shield;
         }
@@ -32,7 +29,7 @@ namespace Levi_Challenge
 
         public void Update(GameTime gametime)
         {
-            Position.X -= enemyMoveSpeed;
+            Position.X -= myShip.Speed;
             CollisionBox = new Rectangle((int)Position.X, (int)Position.Y, myShip.ShipTexture.Width, myShip.ShipTexture.Height);
             if (Position.X < -myShip.ShipTexture.Width)
             {
