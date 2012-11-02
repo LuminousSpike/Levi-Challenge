@@ -18,8 +18,8 @@ namespace Levi_Challenge
         int ProjectileDamage = 0;
         float ProjectileSpeed = 0f;
 
-        float OffsetX;
-        float OffsetY;
+        public float OffsetX { get; set; }
+        public float OffsetY { get; set; }
         TimeSpan FireTime;
         TimeSpan PreviousFireTime;
         public Texture2D ProjectileTexture { get; set; }
@@ -36,6 +36,8 @@ namespace Levi_Challenge
             ProjectileType = projectileType;
             ProjectileDamage = projectileDamage;
             ProjectileSpeed = projectileSpeed;
+
+            FireTime = TimeSpan.FromSeconds((double)WeaponRefireRate);
         }
 
 
@@ -43,7 +45,7 @@ namespace Levi_Challenge
         {
             if (gameTime.TotalGameTime - PreviousFireTime > FireTime)
             {
-                Projectile myProjectile = new Projectile(ProjectileTexture, ProjectileType, ProjectileSpeed, ProjectileDamage);
+                Projectile myProjectile = new Projectile(ProjectileTexture, ProjectileType, ProjectileSpeed, ProjectileDamage, postition);
                 myProjectile.Position.X += OffsetX;
                 myProjectile.Position.Y += OffsetY;
                 PreviousFireTime = gameTime.TotalGameTime;

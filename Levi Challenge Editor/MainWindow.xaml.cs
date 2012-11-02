@@ -362,6 +362,7 @@ namespace Levi_Challenge_Editor
 
         private void S_ComBox_Hardpoints_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (IsInitialized == true)
             S_ManageObjects();
         }
         #endregion

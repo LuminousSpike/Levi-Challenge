@@ -26,12 +26,13 @@ namespace Levi_Challenge
             get { return ProjectileTexture.Height; }
         }
 
-        public Projectile(Texture2D projectileTexture, string projectileType, float projectileSpeed, int projectileDamage)
+        public Projectile(Texture2D projectileTexture, string projectileType, float projectileSpeed, int projectileDamage, Vector2 projectilePostition)
         {
             ProjectileTexture = projectileTexture;
             ProjectileType = projectileType;
             ProjectileSpeed = projectileSpeed;
             ProjectileDamage = projectileDamage;
+            Position = projectilePostition;
         }
 
         public void Update(Viewport viewport)

@@ -61,6 +61,8 @@ namespace Levi_Challenge
         public void MountWeapon(int hardpoint, Weapon weapon)
         {
             Hardpoints[hardpoint] = weapon;
+            Hardpoints[hardpoint].OffsetX = ShipTexture.Width / 2;
+            Hardpoints[hardpoint].OffsetY = ShipTexture.Height / 2;
         }
 
         public void FireWeapon(GameTime gameTime, ProjectileManager projectileManager, Vector2 position)
