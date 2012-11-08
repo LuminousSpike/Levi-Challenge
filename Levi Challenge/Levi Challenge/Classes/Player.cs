@@ -28,11 +28,6 @@ namespace Levi_Challenge
             texture = myShip.ShipTexture;
             position = new Vector2(screenWidth / 2 - texture.Width / 2, screenHeight / 2 - texture.Height / 2);
             screenSize = new Vector2(screenWidth, screenHeight);
-            // Mount Basic Laser
-            //myShip.MountWeapon(0, XMLEngine.Weapons[0]);
-
-            // Mount Basic Missile
-            //myShip.MountWeapon(1, XMLEngine.Weapons[1]);
         }
 
         public void Update(GameTime gameTime, ProjectileManager projectileManager)
