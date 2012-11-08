@@ -233,7 +233,16 @@ namespace Levi_Challenge
                         }
                     }
                     if (isPlayer)
-                        PlayerShips.Add(new Ship(Name, Health, Shield, Speed, WeaponClass, Armour, @"Ships\" + Texture, Cost, ShipType, Hardpoints));
+                    {
+                        Ship playerShip = new Ship(Name, Health, Shield, Speed, WeaponClass, Armour, @"Ships\" + Texture, Cost, ShipType, Hardpoints);
+                        int weaponPoint = 0;
+                        foreach (Weapon weapon in Weapons)
+                        {
+                            playerShip.MountWeapon(weaponPoint, weapon);
+                            weaponPoint++;
+                        }
+                        PlayerShips.Add(playerShip);
+                    }
                     else
                         EnemyShips.Add(new Ship(Name, Health, Shield, Speed, WeaponClass, Armour, @"Ships\" + Texture, Level, Points, AI, Hardpoints));
                 }

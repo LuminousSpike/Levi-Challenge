@@ -23,8 +23,6 @@ namespace Levi_Challenge
         public Weapon[] Hardpoints;
         public Texture2D ShipTexture;
 
-        private int HardPoints;
-
         // Player Constructor
         public Ship(string name, int health, float shield, float speed, int weaponclass, int armour, string texture, int cost, string shiptype, int hardpoints)
         {
@@ -61,14 +59,14 @@ namespace Levi_Challenge
         public void MountWeapon(int hardpoint, Weapon weapon)
         {
             Hardpoints[hardpoint] = weapon;
-            Hardpoints[hardpoint].OffsetX = ShipTexture.Width / 2;
-            Hardpoints[hardpoint].OffsetY = ShipTexture.Height / 2;
+            Hardpoints[hardpoint].OffsetX =0;
+            Hardpoints[hardpoint].OffsetY =0;
         }
 
         public void FireWeapon(GameTime gameTime, ProjectileManager projectileManager, Vector2 position)
         {
             for (int mPoint = 0; mPoint < Hardpoints.Length; mPoint++)
-                Hardpoints[mPoint].fire(gameTime, projectileManager, position);
+                Hardpoints[mPoint].fire(gameTime, projectileManager, position + new Vector2(ShipTexture.Width / 2, ShipTexture.Height / 2));
         }
     }
 }
