@@ -10,7 +10,7 @@ namespace Levi_Challenge
     {
         public EnemyManager enemyManager;
 
-        int Level = 1;
+        int Level = 0;
         int SpawnCount = 0;
         int SpawnLimit = 10;
         bool AstroidSwarm = false;
@@ -51,12 +51,24 @@ namespace Levi_Challenge
             {
                 if (AstroidSwarm == false)
                 {
-                    int rand = random.Next(500);
-                    if (rand < 300)
-                        enemyManager.AddEnemy(random, XMLEngine.EnemyShips[0]);
-                    else if (rand < 400)
-                        enemyManager.AddEnemy(random, XMLEngine.EnemyShips[0]);
-                    else if (rand < 460)
+                    int rand = random.Next(100);
+                    if (rand < 95)
+                    {
+                        bool spawned = false;
+                        while (spawned == false)
+                        {
+                            int minLvl = random.Next(Level + 1);
+                            foreach (Ship ship in XMLEngine.EnemyShips)
+                            {
+                                if ((ship.Level <= Level) && (ship.Level == minLvl))
+                                {
+                                    enemyManager.AddEnemy(random, ship);
+                                    spawned = true;
+                                }
+                            }
+                        }
+                    }
+                    else
                         enemyManager.AddAstroid(random);
                 }
                 else
