@@ -16,8 +16,6 @@ namespace Levi_Challenge
         Texture2D texture;
         Vector2 position;
         Vector2 screenSize;
-        Texture2D basicLaserTexture;
-        Texture2D basicMissileTexture;
         
         public void Initialize()
         {
@@ -30,11 +28,9 @@ namespace Levi_Challenge
             texture = myShip.ShipTexture;
             position = new Vector2(screenWidth / 2 - texture.Width / 2, screenHeight / 2 - texture.Height / 2);
             screenSize = new Vector2(screenWidth, screenHeight);
-            basicLaserTexture = content.Load<Texture2D>("Projectiles/Laser-1");
             // Mount Basic Laser
             myShip.MountWeapon(0, XMLEngine.Weapons[0]);
 
-            basicMissileTexture = content.Load<Texture2D>("Projectiles/Missile-1");
             // Mount Basic Missile
             myShip.MountWeapon(1, XMLEngine.Weapons[1]);
         }
