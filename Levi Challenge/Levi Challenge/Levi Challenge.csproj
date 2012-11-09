@@ -94,7 +94,9 @@
     <Content Include="Data\Ships\ES_Trimil.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\Ships\ES_Vemrail.xml" />
+    <Content Include="Data\Ships\ES_Vemrail.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\Ships\PS_Old Gum.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

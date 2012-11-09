@@ -15,3 +15,8 @@ Content\Projectiles\Missile-1.xnb
 Content\Ships\Player-1.xnb
 Content\Ships\Enemy-1.xnb
 Content\Ships\Enemy-2.xnb
+Data\Ships\ES_Trimil.xml
+Data\Ships\ES_Vemrail.xml
+Data\Ships\PS_Old Gum.xml
+Data\Weapons\WP_Joul MK1.xml
+Data\Weapons\WP_Juice MK1.xml
