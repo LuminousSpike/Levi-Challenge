@@ -121,8 +121,8 @@ namespace Levi_Challenge
             // TODO: Add your drawing code here
             backgroundManager.Draw(spriteBatch);
             spriteBatch.Begin();
-            spawnManager.Draw(spriteBatch);
             projectileManager.Draw(spriteBatch);
+            spawnManager.Draw(spriteBatch);
             player.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
