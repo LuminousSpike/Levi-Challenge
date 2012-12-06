@@ -15,6 +15,8 @@ namespace Levi_Challenge
         public Vector2 Position;
         public int ProjectileDamage;
         public bool Active = true;
+        public Ship ShooterShip;
+
 
         public int Width
         {
@@ -26,13 +28,14 @@ namespace Levi_Challenge
             get { return ProjectileTexture.Height; }
         }
 
-        public Projectile(Texture2D projectileTexture, string projectileType, float projectileSpeed, int projectileDamage, Vector2 projectilePostition)
+        public Projectile(Texture2D projectileTexture, string projectileType, float projectileSpeed, int projectileDamage, Vector2 projectilePostition, Ship ship)
         {
             ProjectileTexture = projectileTexture;
             ProjectileType = projectileType;
             ProjectileSpeed = projectileSpeed;
             ProjectileDamage = projectileDamage;
             Position = projectilePostition;
+            ShooterShip = ship;
         }
 
         public void Update(Viewport viewport)

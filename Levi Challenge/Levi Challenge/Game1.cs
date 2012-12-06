@@ -56,20 +56,25 @@ namespace Levi_Challenge
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            for (int i = 0; i < XMLEngine.PlayerShips.Count; i++)
+            foreach (Ship ship in XMLEngine.PlayerShips)
             {
-                XMLEngine.PlayerShips[i].ShipTexture = (Content.Load<Texture2D>(XMLEngine.PlayerShips[i].ShipTexturePath));
+                ship.ShipTexture = (Content.Load<Texture2D>(ship.ShipTexturePath));
+                foreach (Weapon weapon in ship.myHardpoints)
+                {
+                    weapon.ProjectileTexture = (Content.Load<Texture2D>(weapon.ProjectileTexturePath));
+                }
             }
 
-            for (int i = 0; i < XMLEngine.EnemyShips.Count; i++)
+            foreach (Ship ship in XMLEngine.EnemyShips)
             {
-                XMLEngine.EnemyShips[i].ShipTexture = (Content.Load<Texture2D>(XMLEngine.EnemyShips[i].ShipTexturePath));
+                ship.ShipTexture = (Content.Load<Texture2D>(ship.ShipTexturePath));
+                foreach (Weapon weapon in ship.myHardpoints)
+                {
+                    weapon.ProjectileTexture = (Content.Load<Texture2D>(weapon.ProjectileTexturePath));
+                }
             }
 
-            foreach (Weapon weapon in XMLEngine.Weapons)
-            {
-                weapon.ProjectileTexture = (Content.Load<Texture2D>(weapon.ProjectileTexturePath));
-            }
+            
 
             player.LoadContent(Content, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 
@@ -98,9 +103,9 @@ namespace Levi_Challenge
 
             // TODO: Add your update logic here
             backgroundManager.Update();
-            spawnManager.Update(gameTime);
-            projectileManager.Update(GraphicsDevice.Viewport);
+            spawnManager.Update(gameTime, projectileManager);
             player.Update(gameTime, projectileManager);
+            projectileManager.Update(GraphicsDevice.Viewport);
             collisionManager.Update(player, spawnManager.enemyManager.Enemies, spawnManager.enemyManager.Astroids, projectileManager.Projectiles);
             base.Update(gameTime);
         }

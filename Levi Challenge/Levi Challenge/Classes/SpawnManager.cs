@@ -28,7 +28,7 @@ namespace Levi_Challenge
             random = new Random();
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, ProjectileManager projectilemanager)
         {
             if (gameTime.TotalGameTime - previousSpawnTime > enemySpawnTime)
             {
@@ -37,7 +37,7 @@ namespace Levi_Challenge
 
             }
 
-            enemyManager.Update(gameTime);
+            enemyManager.Update(gameTime, projectilemanager);
         }
 
         public void Draw(SpriteBatch spriteBatch)

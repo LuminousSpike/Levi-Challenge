@@ -34,9 +34,9 @@ namespace Levi_Challenge
             Astroids = new List<Astroid>();
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, ProjectileManager projectilemanager)
         {
-            UpdateEnemies(gameTime);
+            UpdateEnemies(gameTime, projectilemanager);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -56,7 +56,7 @@ namespace Levi_Challenge
         {
             Enemy enemy = new Enemy(ship);
             Vector2 position = new Vector2(graphicsDevice.Viewport.Width + enemy.myShip.ShipTexture.Width / 2, random.Next(100, graphicsDevice.Viewport.Height - 100));
-            enemy.Initialize(position);
+            enemy.LoadContent(position);
             Enemies.Add(enemy);
         }
 
@@ -76,7 +76,7 @@ namespace Levi_Challenge
             Astroids.Add(astroid);
         }
 
-        private void UpdateEnemies(GameTime gameTime)
+        private void UpdateEnemies(GameTime gameTime, ProjectileManager projectilemanager)
         {
             for (int i = Astroids.Count - 1; i >= 0; i--)
             {
@@ -99,7 +99,7 @@ namespace Levi_Challenge
 
             for (int i = Enemies.Count - 1; i >= 0; i--)
             {
-                Enemies[i].Update(gameTime);
+                Enemies[i].Update(gameTime, projectilemanager);
 
                 if (Enemies[i].Active == false)
                 {

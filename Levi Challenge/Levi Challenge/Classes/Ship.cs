@@ -20,7 +20,8 @@ namespace Levi_Challenge
         public int Level;
         public int Points;
         public string AI;
-        public Weapon[] Hardpoints;
+        public int Hardpoints;
+        public Weapon[] myHardpoints;
         public Texture2D ShipTexture;
 
         // Player Constructor
@@ -36,7 +37,8 @@ namespace Levi_Challenge
             Cost = cost;
             ShipType = shiptype;
 
-            Hardpoints = new Weapon[hardpoints];
+            Hardpoints = hardpoints;
+            myHardpoints = new Weapon[hardpoints];
         }
 
         // Enemy Constructor
@@ -53,20 +55,33 @@ namespace Levi_Challenge
             Points = points;
             AI = ai;
 
-            Hardpoints = new Weapon[hardpoints];
+            Hardpoints = hardpoints;
+            myHardpoints = new Weapon[hardpoints];
+        }
+
+        public Ship ShallowCopy()
+        {
+            Ship other = (Ship)this.MemberwiseClone();
+            other.myHardpoints = new Weapon[Hardpoints];
+            for (int i = 0; i < other.Hardpoints; i++)
+            {
+                other.myHardpoints[i] = this.myHardpoints[i].ShallowCopy();
+            }
+            return other;
         }
 
         public void MountWeapon(int hardpoint, Weapon weapon)
         {
-            Hardpoints[hardpoint] = weapon;
-            Hardpoints[hardpoint].OffsetX =0;
-            Hardpoints[hardpoint].OffsetY =0;
+            myHardpoints[hardpoint] = weapon.ShallowCopy();
+            myHardpoints[hardpoint].OffsetX = 0;
+            myHardpoints[hardpoint].OffsetY = 0;
         }
 
-        public void FireWeapon(GameTime gameTime, ProjectileManager projectileManager, Vector2 position)
+        public void FireWeapon(GameTime gameTime, ProjectileManager projectileManager, Vector2 position, bool isplayer)
         {
-            for (int mPoint = 0; mPoint < Hardpoints.Length; mPoint++)
-                Hardpoints[mPoint].fire(gameTime, projectileManager, position + new Vector2(ShipTexture.Width / 2, ShipTexture.Height / 2));
+            for (int mPoint = 0; mPoint < Hardpoints; mPoint++)
+                if (this.myHardpoints[mPoint] != null)
+                    this.myHardpoints[mPoint].fire(gameTime, projectileManager, position + new Vector2(ShipTexture.Width / 2, ShipTexture.Height / 2), isplayer, this);
         }
     }
 }

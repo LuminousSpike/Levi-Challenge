@@ -11,23 +11,25 @@ namespace Levi_Challenge
         public Rectangle CollisionBox;
         public bool Active;
 
-        public int Health;
-        public float Shield;
-
         public Enemy(Ship ship)
         {
-            myShip = ship;
-            Health = ship.Health;
-            Shield = ship.Shield;
+            myShip = ship.ShallowCopy();
         }
 
-        public void Initialize(Vector2 position)
+        public Enemy ShallowCopy()
+        {
+            Enemy other = (Enemy)this.MemberwiseClone();
+            other.myShip = this.myShip.ShallowCopy();
+            return other;
+        }
+
+        public void LoadContent(Vector2 position)
         {
             Position = position;
             Active = true;
         }
 
-        public void Update(GameTime gametime)
+        public void Update(GameTime gametime, ProjectileManager projectilemanager)
         {
             Position.X -= myShip.Speed;
             CollisionBox = new Rectangle((int)Position.X, (int)Position.Y, myShip.ShipTexture.Width, myShip.ShipTexture.Height);
@@ -35,11 +37,12 @@ namespace Levi_Challenge
             {
                 Active = false;
             }
-            if (Health <= 0)
+            if (myShip.Health <= 0)
             {
                 Active = false;
                 Player.Score += myShip.Points;
             }
+            myShip.FireWeapon(gametime, projectilemanager, Position, false);
         }
 
         public void Draw(SpriteBatch spriteBatch)

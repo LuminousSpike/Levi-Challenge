@@ -19,12 +19,12 @@ namespace Levi_Challenge
         
         public void Initialize()
         {
-            myShip = XMLEngine.PlayerShips[0];
             
         }
 
         public void LoadContent(ContentManager content, int screenWidth, int screenHeight)
         {
+            myShip = XMLEngine.PlayerShips[0].ShallowCopy();
             texture = myShip.ShipTexture;
             position = new Vector2(screenWidth / 2 - texture.Width / 2, screenHeight / 2 - texture.Height / 2);
             screenSize = new Vector2(screenWidth, screenHeight);
@@ -52,7 +52,7 @@ namespace Levi_Challenge
                 position.X += myShip.Speed;
             }
 
-            myShip.FireWeapon(gameTime, projectileManager, position);
+            myShip.FireWeapon(gameTime, projectileManager, position, true);
 
             // Make sure that the player does not go out of bounds
             position.X = MathHelper.Clamp(position.X, 0, screenSize.X - texture.Width);
