@@ -41,7 +41,7 @@ namespace Levi_Challenge
             // TODO: Add your initialization logic here
             XMLEngine.PhraseWeaponXML();
             XMLEngine.PhraseShipXML();
-            backgroundManager.Initialize(Content, GraphicsDevice, "Cloud-Red-1", "Cloud-Red-2");
+            backgroundManager.Initialize(Content, GraphicsDevice, @"Clouds\Cloud-Red-1", @"Clouds\Cloud-Red-2");
             spawnManager.Initialize(GraphicsDevice, Content);
             projectileManager.Initialize();
             player.Initialize();

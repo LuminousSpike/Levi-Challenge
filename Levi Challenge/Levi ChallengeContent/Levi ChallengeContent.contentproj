@@ -37,44 +37,44 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cloud-Blue-1.png">
+    <Compile Include="Clouds\Cloud-Blue-1.png">
       <Name>Cloud-Blue-1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Cloud-Blue-2.png">
+    <Compile Include="Clouds\Cloud-Blue-2.png">
       <Name>Cloud-Blue-2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Cloud-Red-1.png">
+    <Compile Include="Clouds\Cloud-Red-1.png">
       <Name>Cloud-Red-1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Cloud-Red-2.png">
+    <Compile Include="Clouds\Cloud-Red-2.png">
       <Name>Cloud-Red-2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Planet3-game.png">
+    <Compile Include="Planets\Planet3-game.png">
       <Name>Planet3-game</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Stars1.png">
+    <Compile Include="Stars\Stars1.png">
       <Name>Stars1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Stars2.png">
+    <Compile Include="Stars\Stars2.png">
       <Name>Stars2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Stars3.png">
+    <Compile Include="Stars\Stars3.png">
       <Name>Stars3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -109,28 +109,28 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Astroid-4.png">
+    <Compile Include="Astroids\Astroid-4.png">
       <Name>Astroid-4</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Astroid-3.png">
+    <Compile Include="Astroids\Astroid-3.png">
       <Name>Astroid-3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Astroid-2.png">
+    <Compile Include="Astroids\Astroid-2.png">
       <Name>Astroid-2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Astroid-1.png">
+    <Compile Include="Astroids\Astroid-1.png">
       <Name>Astroid-1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
