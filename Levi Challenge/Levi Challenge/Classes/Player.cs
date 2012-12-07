@@ -11,8 +11,8 @@ namespace Levi_Challenge
         public Rectangle CollisionBox;
         public static int Score = 0;
         public static float Flamoca;
-
-        Ship myShip;
+        public Ship myShip;
+        
         Texture2D texture;
         Vector2 position;
         Vector2 screenSize;

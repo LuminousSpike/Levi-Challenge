@@ -18,6 +18,14 @@ namespace Levi_Challenge
                 }
                 for (int ii = 0; ii < Projectiles.Count; ii++)
                 {
+                    // Player
+                    if (Projectiles[ii].CollisionBox.Intersects(player.CollisionBox) && Projectiles[ii].ShooterShip != player.myShip)
+                    {
+                        Projectiles[ii].Active = false;
+                        player.myShip.Health -= Projectiles[ii].ProjectileDamage;
+                    }
+
+                    // Enemies
                     if (Projectiles[ii].CollisionBox.Intersects(Enemies[i].CollisionBox) && Projectiles[ii].ShooterShip != Enemies[i].myShip)
                     {
                         Projectiles[ii].Active = false;
