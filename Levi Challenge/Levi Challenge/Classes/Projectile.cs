@@ -7,16 +7,14 @@ namespace Levi_Challenge
     class Projectile
     {
         public Rectangle CollisionBox;
-
-        Texture2D ProjectileTexture;
-        string ProjectileType;
-        float ProjectileSpeed;
-
         public Vector2 Position;
         public int ProjectileDamage;
         public bool Active = true;
         public Ship ShooterShip;
 
+        private Texture2D ProjectileTexture;
+        private string ProjectileType;
+        private float ProjectileSpeed;
 
         public int Width
         {

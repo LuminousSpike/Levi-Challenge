@@ -13,9 +13,8 @@ namespace Levi_Challenge
         public static float Flamoca;
         public Ship myShip;
         
-        Texture2D texture;
-        Vector2 position;
-        Vector2 screenSize;
+        private Texture2D texture;
+        private Vector2 screenSize;
         
         public void Initialize()
         {
@@ -26,7 +25,7 @@ namespace Levi_Challenge
         {
             myShip = XMLEngine.PlayerShips[0].ShallowCopy();
             texture = myShip.ShipTexture;
-            position = new Vector2(screenWidth / 2 - texture.Width / 2, screenHeight / 2 - texture.Height / 2);
+            myShip.position = new Vector2(screenWidth / 2 - texture.Width / 2, screenHeight / 2 - texture.Height / 2);
             screenSize = new Vector2(screenWidth, screenHeight);
         }
 
@@ -34,35 +33,36 @@ namespace Levi_Challenge
         {
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                position.Y += -myShip.Speed;
+                myShip.Move(0f, -myShip.Speed);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                position.Y += myShip.Speed;
+                myShip.Move(0f, myShip.Speed);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                position.X += -myShip.Speed;
+                myShip.Move(-myShip.Speed, 0f);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                position.X += myShip.Speed;
+                myShip.Move(myShip.Speed, 0f);
             }
 
-            myShip.FireWeapon(gameTime, projectileManager, position, true);
+            myShip.Update();
+            myShip.FireWeapon(gameTime, projectileManager, myShip.position, true);
 
             // Make sure that the player does not go out of bounds
-            position.X = MathHelper.Clamp(position.X, 0, screenSize.X - texture.Width);
-            position.Y = MathHelper.Clamp(position.Y, 0, screenSize.Y - texture.Height);
-            CollisionBox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            myShip.position.X = MathHelper.Clamp(myShip.position.X, 0, screenSize.X - texture.Width);
+            myShip.position.Y = MathHelper.Clamp(myShip.position.Y, 0, screenSize.Y - texture.Height);
+            CollisionBox = new Rectangle((int)myShip.position.X, (int)myShip.position.Y, texture.Width, texture.Height);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, Color.White);
+            spriteBatch.Draw(texture, myShip.position, Color.White);
         }
     }
 }

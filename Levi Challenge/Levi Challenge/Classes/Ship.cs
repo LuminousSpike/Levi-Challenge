@@ -8,21 +8,15 @@ namespace Levi_Challenge
 {
     class Ship
     {
-        public string Name;
-        public int Health;
-        public float Shield;
-        public float Speed;
-        public int WeaponClass;
-        public int Armour;
-        public string ShipTexturePath;
-        public int Cost;
-        public string ShipType;
-        public int Level;
-        public int Points;
-        public string AI;
-        public int Hardpoints;
+        public string Name, ShipTexturePath, ShipType, AI;
+        public int Health, WeaponClass, Armour, Cost, Level, Points, Hardpoints;
+        public float Shield, Speed;
         public Weapon[] myHardpoints;
         public Texture2D ShipTexture;
+        public Vector2 position;
+        
+        private bool acceleratingX = false, acceleratingY = false;
+        private Vector2 mySpeed = new Vector2();
 
         // Player Constructor
         public Ship(string name, int health, float shield, float speed, int weaponclass, int armour, string texture, int cost, string shiptype, int hardpoints)
@@ -82,6 +76,84 @@ namespace Levi_Challenge
             for (int mPoint = 0; mPoint < Hardpoints; mPoint++)
                 if (this.myHardpoints[mPoint] != null)
                     this.myHardpoints[mPoint].fire(gameTime, projectileManager, position + new Vector2(ShipTexture.Width / 2, ShipTexture.Height / 2), isplayer, this);
+        }
+
+        public void Move(float XSpeed, float YSpeed)
+        {
+            // To stop vectors adding
+            if (XSpeed != 0)
+            {
+                if (mySpeed.X < XSpeed)
+                {
+                    mySpeed.X += (Speed / 5);
+                }
+                if (mySpeed.X > XSpeed)
+                {
+                    mySpeed.X -= (Speed / 5);
+                }
+                acceleratingX = true;
+            }
+            if (YSpeed != 0)
+            {
+                if (mySpeed.Y < YSpeed)
+                {
+                    mySpeed.Y += (Speed / 5);
+                }
+                if (mySpeed.Y > YSpeed)
+                {
+                    mySpeed.Y -= (Speed / 5);
+                }
+                acceleratingY = true;
+            }
+        }
+
+        public void Deaccelerate(bool X, bool Y)
+        {
+            if (X == true)
+            {
+                if (mySpeed.X < 0.8f && mySpeed.X > -0.8f)
+                {
+                    mySpeed.X = 0f;
+                }
+                if (mySpeed.X > 0)
+                {
+                    mySpeed.X -= (Speed / 5);
+                }
+                if (mySpeed.X < 0)
+                {
+                    mySpeed.X += (Speed / 5);
+                }
+            }
+
+            if (Y == true)
+            {
+                if (mySpeed.Y < 0.8f && mySpeed.Y > -0.8f)
+                {
+                    mySpeed.Y = 0f;
+                }
+                if (mySpeed.Y > 0)
+                {
+                    mySpeed.Y -= (Speed / 5);
+                }
+                if (mySpeed.Y < 0)
+                {
+                    mySpeed.Y += (Speed / 5);
+                }
+            }
+        }
+
+        public void Update()
+        {
+            position += mySpeed;
+            if (acceleratingX == true)
+                acceleratingX = false;
+            else
+                Deaccelerate(true, false);
+
+            if (acceleratingY == true)
+                acceleratingY = false;
+            else
+                Deaccelerate(false, true);
         }
     }
 }

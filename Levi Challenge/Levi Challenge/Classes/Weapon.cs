@@ -8,23 +8,17 @@ namespace Levi_Challenge
 {
     class Weapon
     {
-        string WeaponType = null;
-        public string WeaponName = null;
-        int WeaponClass = 0;
-        float WeaponRefireRate = 0f;
-
-        public string ProjectileTexturePath = null;
-        string ProjectileType = null;
-        int ProjectileDamage = 0;
-        float ProjectileSpeed = 0f;
-        int fired = 0;
-
+        public string WeaponName = null, ProjectileTexturePath = null;
         public float OffsetX { get; set; }
         public float OffsetY { get; set; }
-        private TimeSpan FireTime;
-        private TimeSpan PreviousFireTime = new TimeSpan();
         public Texture2D ProjectileTexture { get; set; }
 
+        private string WeaponType = null, ProjectileType = null;
+        private int WeaponClass = 0, ProjectileDamage = 0, fired = 0;
+        private float WeaponRefireRate = 0f, ProjectileSpeed = 0f;
+        private TimeSpan FireTime;
+        private TimeSpan PreviousFireTime = new TimeSpan();
+        
         public Weapon(string weaponType, string weaponName, int weaponClass, float weaponRefireRate, string projectileTexture,
             string projectileType, int projectileDamage, float projectileSpeed)
         {

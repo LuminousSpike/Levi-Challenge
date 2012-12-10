@@ -8,15 +8,11 @@ namespace Levi_Challenge
     class Astroid
     {
         public Texture2D Texture;
-        Texture2D Texture1 { get; set; }
-        Texture2D Texture2 { get; set; }
-        Texture2D Texture3 { get; set; }
-        Texture2D Texture4 { get; set; }
         public Vector2 Position;
         public Rectangle CollisionBox;
-        public bool Active;
+        public bool Active, Splitting = false;
         public float Value;
-        public bool Splitting = false;
+        public int Width, Height, Size, Health;
 
         public Astroid(Texture2D texture1, Texture2D texture2, Texture2D texture3, Texture2D texture4)
         {
@@ -26,17 +22,17 @@ namespace Levi_Challenge
             Texture4 = texture4;
         }
 
-        public int Width;
-        public int Height;
+        private Texture2D Texture1 { get; set; }
+        private Texture2D Texture2 { get; set; }
+        private Texture2D Texture3 { get; set; }
+        private Texture2D Texture4 { get; set; }
 
-        Random random = new Random();
-        float enemyMoveSpeed { get; set; }
-        public int Size;
-        int MaxHealth;
-        public int Health;
-        float Circle = (float)Math.PI * 2;
-        float Rotation;
-        float RotationRate;
+        private Random random = new Random();
+        private float enemyMoveSpeed { get; set; }
+        private int MaxHealth;
+        private float Circle = (float)Math.PI * 2;
+        private float Rotation;
+        private float RotationRate;
 
         public void Initialize(int size)
         {

@@ -37,16 +37,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clouds\Cloud-Blue-1.png">
+    <None Include="Clouds\Cloud-Blue-1.png">
       <Name>Cloud-Blue-1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Clouds\Cloud-Blue-2.png">
+    </None>
+    <None Include="Clouds\Cloud-Blue-2.png">
       <Name>Cloud-Blue-2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
-    </Compile>
+    </None>
     <Compile Include="Clouds\Cloud-Red-1.png">
       <Name>Cloud-Red-1</Name>
       <Importer>TextureImporter</Importer>

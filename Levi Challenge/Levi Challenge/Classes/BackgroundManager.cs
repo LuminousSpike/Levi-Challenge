@@ -8,8 +8,8 @@ namespace Levi_Challenge
 {
     class BackgroundManager
     {
-        ParallaxBackground[] Backgrounds = new ParallaxBackground[6];
-        ParallaxPlanet Planet = new ParallaxPlanet();
+        private ParallaxBackground[] Backgrounds = new ParallaxBackground[6];
+        private ParallaxPlanet Planet = new ParallaxPlanet();
 
         public void Initialize(ContentManager content, GraphicsDevice graphics, String Cloud1, String Cloud2)
         {

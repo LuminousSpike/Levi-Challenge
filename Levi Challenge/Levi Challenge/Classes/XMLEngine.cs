@@ -9,8 +9,7 @@ namespace Levi_Challenge
 {
     class XMLEngine
     {
-        public static List<Ship> PlayerShips = new List<Ship>();
-        public static List<Ship> EnemyShips = new List<Ship>();
+        public static List<Ship> PlayerShips = new List<Ship>(), EnemyShips = new List<Ship>();
         public static List<Weapon> Weapons = new List<Weapon>();
 
         private static string ReadElement(XmlReader reader, string name)
@@ -67,15 +66,9 @@ namespace Levi_Challenge
 
             bool Correct_File = false;
 
-            string WeaponType = null;
-            string WeaponName = null;
-            int WeaponClass = 0;
-            float WeaponRefireRate = 0f;
-
-            string ProjectileTexture = null;
-            string ProjectileType = null;
-            int ProjectileDamage = 0;
-            float ProjectileSpeed = 0f;
+            string WeaponType = null, WeaponName = null, ProjectileTexture = null, ProjectileType = null;
+            int WeaponClass = 0, ProjectileDamage = 0;
+            float WeaponRefireRate = 0f, ProjectileSpeed = 0f;
 
 
             while (reader.Read())
@@ -134,23 +127,12 @@ namespace Levi_Challenge
             // Load the XML Document
             XmlReader reader = XmlReader.Create(fileName);
 
-            string Name = null;
-            int Health = 0;
-            float Shield = 0f;
-            float Speed = 0f;
-            int Hardpoints = 0;
-            int WeaponClass = 0;
-            int Armour = 0;
-            string Texture = null;
-            int Cost = 0;
-            string ShipType = null;
-            int Level = 0;
-            int Points = 0;
-            string AI = null;
+            string Name = null, Texture = null, ShipType = null, AI = null;
+            int Health = 0, Hardpoints = 0, WeaponClass = 0, Armour = 0, Cost = 0, Level = 0, Points = 0;
+            float Shield = 0f, Speed = 0f;
             List<Weapon>ShipWeapons = new List<Weapon>();
+            bool Correct_File = false, isPlayer = false;
 
-            bool Correct_File = false;
-            bool isPlayer = false;
             while (reader.Read())
             {
                 if ((reader.NodeType == XmlNodeType.Element) && reader.Name == "Ship")

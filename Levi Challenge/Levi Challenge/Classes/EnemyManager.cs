@@ -9,16 +9,11 @@ namespace Levi_Challenge
     class EnemyManager
     {
         public List<Texture2D> EnemyTexture;
-
-        Texture2D AstroidTexture1;
-        Texture2D AstroidTexture2;
-        Texture2D AstroidTexture3;
-        Texture2D AstroidTexture4;
-
         public List<Enemy> Enemies;
         public List<Astroid> Astroids;
 
-        GraphicsDevice graphicsDevice { get; set; }
+        private GraphicsDevice graphicsDevice { get; set; }
+        private Texture2D AstroidTexture1, AstroidTexture2, AstroidTexture3, AstroidTexture4;
 
         public EnemyManager(GraphicsDevice graphicsdevice)
         {
