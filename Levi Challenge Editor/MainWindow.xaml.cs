@@ -4,6 +4,7 @@ using System.Windows.Input;
 using System.Xml;
 using System.IO;
 using System.Windows.Controls;
+using System.Collections;
 
 namespace Levi_Challenge_Editor
 {
@@ -12,7 +13,6 @@ namespace Levi_Challenge_Editor
     /// </summary>
     public partial class MainWindow : Window
     {
-
         public MainWindow()
         {
             InitializeComponent();
@@ -62,7 +62,27 @@ namespace Levi_Challenge_Editor
                 comboBox.Items.Clear();
                 for (int i = 0; i < filePaths.Length; i++)
                 {
-                    filePaths[i] = Path.GetFileNameWithoutExtension(filePaths[i]);
+                    if (Path.GetExtension(filePaths[i]) == ".xml")
+                    {
+                        XmlReader reader = XmlReader.Create(filePaths[i]);
+                        bool Correct_File = false;
+                        while (reader.Read())
+                        {
+                            if ((reader.NodeType == XmlNodeType.Element) && reader.Name == "Weapon")
+                            {
+                                Correct_File = true;
+                            }
+
+                            if (Correct_File == true)
+                            {
+                                filePaths[i] = ReadElement(reader, "Name");
+                                reader.Close();
+                            }
+                            // Need code to close if wrong file
+                        }
+                    }
+                    else
+                        filePaths[i] = Path.GetFileNameWithoutExtension(filePaths[i]);
                     comboBox.Items.Add(filePaths[i]);
                 }
                 comboBox.SelectedIndex = 0;
@@ -115,16 +135,26 @@ namespace Levi_Challenge_Editor
             }
 
             // Enable or disable Weapon ComboBoxes
-            if (Convert.ToInt32(S_ComBox_Hardpoints.Text) > 1)
+            if (Convert.ToInt32(S_ComBox_Hardpoints.SelectedIndex) > 0)
             {
-                S_ComBox_Weapon2.IsEnabled = true;
-                if (Convert.ToInt32(S_ComBox_Hardpoints.Text) > 2)
-                    S_ComBox_Weapon3.IsEnabled = true;
+                S_ComBox_Weapon1.IsEnabled = true;
+                if (Convert.ToInt32(S_ComBox_Hardpoints.SelectedIndex) > 1)
+                {
+                    S_ComBox_Weapon2.IsEnabled = true;
+                    if (Convert.ToInt32(S_ComBox_Hardpoints.SelectedIndex) > 2)
+                        S_ComBox_Weapon3.IsEnabled = true;
+                    else
+                        S_ComBox_Weapon3.IsEnabled = false;
+                }
                 else
+                {
+                    S_ComBox_Weapon2.IsEnabled = false;
                     S_ComBox_Weapon3.IsEnabled = false;
+                }
             }
             else
             {
+                S_ComBox_Weapon1.IsEnabled = false;
                 S_ComBox_Weapon2.IsEnabled = false;
                 S_ComBox_Weapon3.IsEnabled = false;
             }
@@ -363,7 +393,9 @@ namespace Levi_Challenge_Editor
         private void S_ComBox_Hardpoints_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (IsInitialized == true)
-            S_ManageObjects();
+            {
+                S_ManageObjects();
+            }
         }
         #endregion
 

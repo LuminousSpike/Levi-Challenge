@@ -164,28 +164,30 @@ namespace Levi_Challenge
                             WeaponClass = Convert.ToInt32(ReadElement(reader, "WeaponClass"));
 
                             string weaponName = ReadElement(reader, "Weapon1");
-
-                            foreach(Weapon weapon in Weapons)
-                            {
-                                if(weapon.WeaponName == weaponName)
-                                    ShipWeapons.Add(weapon);
-                            }
-
-                            if (Hardpoints > 1)
-                            {
-                                weaponName = ReadElement(reader, "Weapon2");
+                                if (Hardpoints > 0)
+                                {
                                 foreach (Weapon weapon in Weapons)
                                 {
                                     if (weapon.WeaponName == weaponName)
                                         ShipWeapons.Add(weapon);
                                 }
-                                if (Hardpoints > 2)
+
+                                if (Hardpoints > 1)
                                 {
-                                    weaponName = ReadElement(reader, "Weapon3");
+                                    weaponName = ReadElement(reader, "Weapon2");
                                     foreach (Weapon weapon in Weapons)
                                     {
                                         if (weapon.WeaponName == weaponName)
                                             ShipWeapons.Add(weapon);
+                                    }
+                                    if (Hardpoints > 2)
+                                    {
+                                        weaponName = ReadElement(reader, "Weapon3");
+                                        foreach (Weapon weapon in Weapons)
+                                        {
+                                            if (weapon.WeaponName == weaponName)
+                                                ShipWeapons.Add(weapon);
+                                        }
                                     }
                                 }
                             }

@@ -36,6 +36,7 @@
                             </ComboBox>
                             <TextBox Height="23" HorizontalAlignment="Left" Margin="86,180,0,0" Name="S_TxtBox_Armour" VerticalAlignment="Top" Width="120" />
                             <ComboBox Height="23" HorizontalAlignment="Left" Margin="338,8,0,0" Name="S_ComBox_Hardpoints" VerticalAlignment="Top" Width="120" SelectionChanged="S_ComBox_Hardpoints_SelectionChanged">
+                                <ComboBoxItem Content="0" />
                                 <ComboBoxItem Content="1" IsSelected="True" />
                                 <ComboBoxItem Content="2" />
                                 <ComboBoxItem Content="3" />
