@@ -220,7 +220,7 @@ namespace Levi_Challenge
                     {
                         Ship playerShip = new Ship(Name, Health, Shield, Speed, WeaponClass, Armour, @"Ships\" + Texture, Cost, ShipType, Hardpoints);
                         int weaponPoint = 0;
-                        foreach (Weapon weapon in Weapons)
+                        foreach (Weapon weapon in ShipWeapons)
                         {
                             playerShip.MountWeapon(weaponPoint, weapon);
                             weaponPoint++;
