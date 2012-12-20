@@ -129,26 +129,6 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Planets">
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="88*" />
-                        <ColumnDefinition Width="628*" />
-                    </Grid.ColumnDefinitions>
-                    <ListBox Height="514" HorizontalAlignment="Left" MouseDoubleClick="W_LstBox_Items_MouseDoubleClick" Name="listBox1" VerticalAlignment="Top" Width="212" Grid.ColumnSpan="2" />
-                    <Button Click="W_Btn_Delete_Click" Content="Delete" Height="23" HorizontalAlignment="Left" Margin="7,520,0,0" Name="button1" VerticalAlignment="Top" Width="62" />
-                    <Button Click="W_Btn_New_Click" Content="New" Height="23" HorizontalAlignment="Left" Margin="75,520,0,0" Name="button2" VerticalAlignment="Top" Width="62" Grid.ColumnSpan="2" />
-                    <Button Click="W_Btn_Save_Click" Content="Save" Height="23" HorizontalAlignment="Right" Margin="0,520,511,0" Name="button3" VerticalAlignment="Top" Width="62" Grid.Column="1" />
-                </Grid>
-            </TabItem>
-            <TabItem Header="Clouds">
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <ListBox Height="514" HorizontalAlignment="Left" Margin="0,-1,0,0" MouseDoubleClick="W_LstBox_Items_MouseDoubleClick" Name="listBox2" VerticalAlignment="Top" Width="212" />
-                    <Button Click="W_Btn_Delete_Click" Content="Delete" Height="23" HorizontalAlignment="Left" Margin="7,519,0,0" Name="button4" VerticalAlignment="Top" Width="62" />
-                    <Button Click="W_Btn_New_Click" Content="New" Height="23" HorizontalAlignment="Left" Margin="75,519,0,0" Name="button5" VerticalAlignment="Top" Width="62" />
-                    <Button Click="W_Btn_Save_Click" Content="Save" Height="23" HorizontalAlignment="Right" Margin="0,519,511,0" Name="button6" VerticalAlignment="Top" Width="62" />
-                </Grid>
-            </TabItem>
         </TabControl>
     </Grid>
 </Window>
