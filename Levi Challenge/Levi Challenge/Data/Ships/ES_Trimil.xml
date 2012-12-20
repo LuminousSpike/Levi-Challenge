@@ -5,7 +5,7 @@
   <Health>20</Health>
   <Shield>40</Shield>
   <Speed>2</Speed>
-  <Hardpoints>1</Hardpoints>
+  <Hardpoints>0</Hardpoints>
   <WeaponClass>1</WeaponClass>
   <Weapon1>Juice MK1</Weapon1>
   <Armour>0</Armour>

@@ -7,10 +7,10 @@
   <Speed>1.5</Speed>
   <Hardpoints>1</Hardpoints>
   <WeaponClass>1</WeaponClass>
-  <Weapon1>Juice MK1</Weapon1>
+  <Weapon1>Gail MK1</Weapon1>
   <Armour>0</Armour>
   <Texture>Enemy-2</Texture>
-  <Level>0</Level>
+  <Level>1</Level>
   <Points>60</Points>
   <AI>Normal</AI>
 </Ship>
