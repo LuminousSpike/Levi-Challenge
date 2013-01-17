@@ -23,6 +23,7 @@ namespace Levi_Challenge
         ProjectileManager projectileManager = new ProjectileManager();
         CollisionManager collisionManager = new CollisionManager();
         Player player = new Player();
+        HudManager hudManager = new HudManager();
 
         public Game1()
         {
@@ -45,6 +46,7 @@ namespace Levi_Challenge
             spawnManager.Initialize(GraphicsDevice, Content);
             projectileManager.Initialize();
             player.Initialize();
+            hudManager.Initialize();
             base.Initialize();
         }
 
@@ -77,7 +79,7 @@ namespace Levi_Challenge
             
 
             player.LoadContent(Content, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-
+            hudManager.LoadContent(Content, GraphicsDevice);
             // TODO: use this.Content to load your game content here
         }
 
@@ -88,6 +90,7 @@ namespace Levi_Challenge
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            hudManager.UnloadContent();
         }
 
         /// <summary>
@@ -107,6 +110,7 @@ namespace Levi_Challenge
             player.Update(gameTime, projectileManager);
             projectileManager.Update(GraphicsDevice.Viewport);
             collisionManager.Update(player, spawnManager.enemyManager.Enemies, spawnManager.enemyManager.Astroids, projectileManager.Projectiles);
+            hudManager.Update(GraphicsDevice);
             base.Update(gameTime);
         }
 
@@ -125,6 +129,7 @@ namespace Levi_Challenge
             spawnManager.Draw(spriteBatch);
             player.Draw(spriteBatch);
             spriteBatch.End();
+            hudManager.Draw(spriteBatch);
             base.Draw(gameTime);
         }
     }
