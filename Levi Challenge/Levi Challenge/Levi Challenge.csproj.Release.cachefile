@@ -13,6 +13,12 @@ Content\Astroids\Astroid-4.xnb
 Content\Astroids\Astroid-3.xnb
 Content\Astroids\Astroid-2.xnb
 Content\Astroids\Astroid-1.xnb
+Content\GUI\Button-Base.xnb
+Content\GUI\Health-Bar.xnb
+Content\GUI\HS-Base.xnb
+Content\GUI\Shield-Bar.xnb
+Content\GUI\Stat-Base.xnb
+Content\GUIFont.xnb
 Data\Ships\ES_Trimil.xml
 Data\Ships\ES_Vemrail.xml
 Data\Ships\PS_Old Gum.xml

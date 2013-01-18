@@ -10,9 +10,9 @@ namespace Solar
         private Texture2D MainTexture, BorderTexture;
         private int Width, Height, BWidth;
         private Color MColor, BColor;
-        private float Alpha;
+        private double Alpha;
 
-        public GuiBox(Vector2 position, int width, int height, int bWidth, Color mColor, Color bColor, float mainAlpha, float borderAlpha, GraphicsDevice graphicsdevice)
+        public GuiBox(Vector2 position, int width, int height, int bWidth, Color mColor, Color bColor, double mainAlpha, double borderAlpha, GraphicsDevice graphicsdevice)
         {
             Position = position;
             Width = width;
@@ -22,18 +22,18 @@ namespace Solar
             MColor = mColor;
             BColor = bColor;
             Alpha = mainAlpha;
-            MColor.A = (byte)(255 / 100 * mainAlpha);
-            BColor.A = (byte)(255 / 100 * borderAlpha);
+            MColor.A = (byte)(255d / 100d * mainAlpha);
+            BColor.A = (byte)(255d / 100d * borderAlpha);
 
             // Set border positions
             bVertical = new Vector2(bWidth, height - BWidth);
             bHorizontal = new Vector2(width + BWidth, bWidth);
 
             // Create Texture
-            Color myMainColor = new Color(100f, 100f, 100f, Alpha);
+            Color myMainColor = new Color(100f, 100f, 100f, (float)Alpha);
             MainTexture = new Texture2D(graphicsdevice, 1, 1);
             MainTexture.SetData(new[] { myMainColor });
-            Color myBorderColor = new Color(100f, 100f, 100f, Alpha);
+            Color myBorderColor = new Color(100f, 100f, 100f, (float)Alpha);
             BorderTexture = new Texture2D(graphicsdevice, 1, 1);
             BorderTexture.SetData(new[] { myBorderColor });
         }
@@ -41,6 +41,11 @@ namespace Solar
         public void UnloadContent()
         {
             MainTexture.Dispose();
+        }
+
+        public void UpdateScale(int value)
+        {
+            Scale.X = (((float)Width / 100) * value) - BWidth;
         }
 
         public void Draw(SpriteBatch spritebatch)

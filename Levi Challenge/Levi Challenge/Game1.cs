@@ -23,7 +23,7 @@ namespace Levi_Challenge
         ProjectileManager projectileManager = new ProjectileManager();
         CollisionManager collisionManager = new CollisionManager();
         Player player = new Player();
-        HudManager hudManager = new HudManager();
+        HudManager hudManager;
 
         public Game1()
         {
@@ -46,6 +46,7 @@ namespace Levi_Challenge
             spawnManager.Initialize(GraphicsDevice, Content);
             projectileManager.Initialize();
             player.Initialize();
+            hudManager = new HudManager(player);
             hudManager.Initialize();
             base.Initialize();
         }

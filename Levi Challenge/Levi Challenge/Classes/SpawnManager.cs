@@ -10,10 +10,18 @@ namespace Levi_Challenge
     {
         public EnemyManager enemyManager;
 
-        private int Level = 0, SpawnCount = 0, SpawnLimit = 10;
+        private static int Level = 0, SpawnCount = 0, SpawnLimit = 10;
         private bool AstroidSwarm = false;
         private TimeSpan enemySpawnTime, previousSpawnTime;
         private Random random;
+
+        public static int WaveCount
+        {
+            get
+            {
+                return Level;
+            }
+        }
 
         public void Initialize(GraphicsDevice graphicsDevice, ContentManager content)
         {

@@ -142,28 +142,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI\Button-Base.png">
-      <Name>Button-Base</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="GUI\Health-Bar.png">
       <Name>Health-Bar</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="GUI\HS-Base.png">
-      <Name>HS-Base</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="GUI\Shield-Bar.png">
       <Name>Shield-Bar</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="GUI\Stat-Base.png">
-      <Name>Stat-Base</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
