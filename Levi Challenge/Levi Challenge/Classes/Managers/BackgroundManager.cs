@@ -13,12 +13,12 @@ namespace Levi_Challenge
 
         public void Initialize(ContentManager content, GraphicsDevice graphics, String Cloud1, String Cloud2)
         {
-            Create(content, @"Stars\Stars1", graphics.Viewport.Width, -0.1f, 0);
-            Create(content, @"Stars\Stars2", graphics.Viewport.Width, -0.3f, 1);
-            Create(content, @"Stars\Stars3", graphics.Viewport.Width, -1f, 2);
+            Create(content, @"Backgrounds\Stars\Stars1", graphics.Viewport.Width, -0.1f, 0);
+            Create(content, @"Backgrounds\Stars\Stars2", graphics.Viewport.Width, -0.3f, 1);
+            Create(content, @"Backgrounds\Stars\Stars3", graphics.Viewport.Width, -1f, 2);
             Create(content, Cloud1, graphics.Viewport.Width, -0.2f, 3);
             Create(content, Cloud2, graphics.Viewport.Width, -0.6f, 4);
-            Planet.Initialize(content, @"Planets\Planet3-game", graphics.Viewport.Width, -0.1f);
+            Planet.Initialize(content, @"Backgrounds\Planets\Planet3-game", graphics.Viewport.Width, -0.1f);
         }
 
         public void Create(ContentManager content, String texturePath, int screenWidth, float speed, int Layer)

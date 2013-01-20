@@ -33,7 +33,7 @@ namespace Levi_Challenge_Editor
             UpdateComBox(S_ComBox_Weapon1, @"Data\Weapons", "*.xml");
             UpdateComBox(S_ComBox_Weapon2, @"Data\Weapons", "*.xml");
             UpdateComBox(S_ComBox_Weapon3, @"Data\Weapons", "*.xml");
-            UpdateComBox(W_ComBox_ProjectileTexture, @"Content\Projectiles", "*.xnb");
+            UpdateComBox(W_ComBox_ProjectileTexture, @"Content\Sprites\Projectiles", "*.xnb");
             S_ManageObjects();
         }
 

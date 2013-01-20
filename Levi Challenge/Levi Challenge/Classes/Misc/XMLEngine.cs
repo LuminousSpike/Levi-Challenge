@@ -111,7 +111,7 @@ namespace Levi_Challenge
                         }
                     }
                     if ((reader.NodeType == XmlNodeType.EndElement) && reader.Name == "ProjectileStats")
-                        Weapons.Add(new Weapon(WeaponType, WeaponName, WeaponClass, WeaponRefireRate, @"Projectiles\" + ProjectileTexture, ProjectileType, ProjectileDamage, ProjectileSpeed));
+                        Weapons.Add(new Weapon(WeaponType, WeaponName, WeaponClass, WeaponRefireRate, @"Sprites\Projectiles\" + ProjectileTexture, ProjectileType, ProjectileDamage, ProjectileSpeed));
                 }
             }
             reader.Close();
@@ -218,7 +218,7 @@ namespace Levi_Challenge
                     }
                     if (isPlayer)
                     {
-                        Ship playerShip = new Ship(Name, Health, Shield, Speed, WeaponClass, Armour, @"Ships\" + Texture, Cost, ShipType, Hardpoints);
+                        Ship playerShip = new Ship(Name, Health, Shield, Speed, WeaponClass, Armour, @"Sprites\Ships\" + Texture, Cost, ShipType, Hardpoints);
                         int weaponPoint = 0;
                         foreach (Weapon weapon in ShipWeapons)
                         {
@@ -229,7 +229,7 @@ namespace Levi_Challenge
                     }
                     else
                     {
-                        Ship enemyShip = new Ship(Name, Health, Shield, Speed, WeaponClass, Armour, @"Ships\" + Texture, Level, Points, AI, Hardpoints);
+                        Ship enemyShip = new Ship(Name, Health, Shield, Speed, WeaponClass, Armour, @"Sprites\Ships\" + Texture, Level, Points, AI, Hardpoints);
                         int weaponPoint = 0;
                         foreach (Weapon weapon in ShipWeapons)
                         {

@@ -16,14 +16,21 @@ namespace Levi_Challenge
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
+        public enum GameState
+        {
+            StartMenu,
+            Loading,
+            Playing,
+            Paused
+        }
+
+        static public GameState gameState = new GameState();
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        BackgroundManager backgroundManager = new BackgroundManager();
-        SpawnManager spawnManager = new SpawnManager();
-        ProjectileManager projectileManager = new ProjectileManager();
-        CollisionManager collisionManager = new CollisionManager();
-        Player player = new Player();
-        HudManager hudManager;
+
+        GameScreen gameScreen;
+        StartMenu startMenu;
 
         public Game1()
         {
@@ -40,14 +47,13 @@ namespace Levi_Challenge
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            XMLEngine.PhraseWeaponXML();
-            XMLEngine.PhraseShipXML();
-            backgroundManager.Initialize(Content, GraphicsDevice, @"Clouds\Cloud-Red-1", @"Clouds\Cloud-Red-2");
-            spawnManager.Initialize(GraphicsDevice, Content);
-            projectileManager.Initialize();
-            player.Initialize();
-            hudManager = new HudManager(player);
-            hudManager.Initialize();
+            gameState = GameState.StartMenu;
+
+            startMenu = new StartMenu(graphics);
+            startMenu.Initialize();
+
+            gameScreen = new GameScreen(graphics);
+            gameScreen.Initialize(Content, GraphicsDevice);
             base.Initialize();
         }
 
@@ -59,28 +65,8 @@ namespace Levi_Challenge
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            foreach (Ship ship in XMLEngine.PlayerShips)
-            {
-                ship.ShipTexture = (Content.Load<Texture2D>(ship.ShipTexturePath));
-                foreach (Weapon weapon in ship.myHardpoints)
-                {
-                    weapon.ProjectileTexture = (Content.Load<Texture2D>(weapon.ProjectileTexturePath));
-                }
-            }
-
-            foreach (Ship ship in XMLEngine.EnemyShips)
-            {
-                ship.ShipTexture = (Content.Load<Texture2D>(ship.ShipTexturePath));
-                foreach (Weapon weapon in ship.myHardpoints)
-                {
-                    weapon.ProjectileTexture = (Content.Load<Texture2D>(weapon.ProjectileTexturePath));
-                }
-            }
-
-            
-
-            player.LoadContent(Content, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-            hudManager.LoadContent(Content, GraphicsDevice);
+            startMenu.LoadContent(Content, GraphicsDevice);
+            gameScreen.LoadContent(Content, GraphicsDevice);
             // TODO: use this.Content to load your game content here
         }
 
@@ -91,7 +77,8 @@ namespace Levi_Challenge
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
-            hudManager.UnloadContent();
+            startMenu.UnloadContent();
+            gameScreen.UnloadContent();
         }
 
         /// <summary>
@@ -106,12 +93,12 @@ namespace Levi_Challenge
                 this.Exit();
 
             // TODO: Add your update logic here
-            backgroundManager.Update();
-            spawnManager.Update(gameTime, projectileManager);
-            player.Update(gameTime, projectileManager);
-            projectileManager.Update(GraphicsDevice.Viewport);
-            collisionManager.Update(player, spawnManager.enemyManager.Enemies, spawnManager.enemyManager.Astroids, projectileManager.Projectiles);
-            hudManager.Update(GraphicsDevice);
+            if (gameState == GameState.StartMenu)
+                startMenu.Update(gameTime);
+
+            if (gameState == GameState.Playing)
+                gameScreen.Update(gameTime, GraphicsDevice);
+
             base.Update(gameTime);
         }
 
@@ -124,13 +111,12 @@ namespace Levi_Challenge
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            backgroundManager.Draw(spriteBatch);
-            spriteBatch.Begin();
-            projectileManager.Draw(spriteBatch);
-            spawnManager.Draw(spriteBatch);
-            player.Draw(spriteBatch);
-            spriteBatch.End();
-            hudManager.Draw(spriteBatch);
+            if (gameState == GameState.StartMenu)
+                startMenu.Draw(gameTime, spriteBatch);
+
+            if (gameState == GameState.Playing)
+                gameScreen.Draw(gameTime, GraphicsDevice, spriteBatch);
+
             base.Draw(gameTime);
         }
     }

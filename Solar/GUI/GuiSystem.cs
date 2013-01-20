@@ -26,6 +26,10 @@ namespace Solar
         // Anything which needs to load content or do something at content load time.
         public void LoadContent(ContentManager content, GraphicsDevice graphicsDevice)
         {
+            foreach (GuiButton item in GuiButtonList)
+            {
+                item.LoadContent(content, graphicsDevice);
+            }
             foreach (GuiLifeBar item in GuiLifeBarList)
             {
                 item.LoadContent(content, graphicsDevice);

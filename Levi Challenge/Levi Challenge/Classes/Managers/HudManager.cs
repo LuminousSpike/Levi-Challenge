@@ -29,16 +29,16 @@ namespace Levi_Challenge
         public void Initialize()
         {
             guiSystem.Initialize();
-            txtBoxScore = new GuiTextBox(new Vector2(10, 10), 137, 29, 1, new Color(0, 0, 0), new Color(98, 0, 0), 39f, 100f, "Score: " + Player.Score, @"GUIFont");
-            txtBoxFlamoca = new GuiTextBox(new Vector2(10, 49), 137, 29, 1, new Color(0, 0, 0), new Color(98, 0, 0), 39f, 100f, "Flamoca: " + Player.Flamoca, @"GUIFont");
+            txtBoxScore = new GuiTextBox(new Vector2(10, 10), 137, 29, 1, new Color(0, 0, 0), new Color(98, 0, 0), 39f, 100f, "Score: " + Player.Score, @"Fonts\GUIFont");
+            txtBoxFlamoca = new GuiTextBox(new Vector2(10, 49), 137, 29, 1, new Color(0, 0, 0), new Color(98, 0, 0), 39f, 100f, "Flamoca: " + Player.Flamoca, @"Fonts\GUIFont");
         }
 
         public void LoadContent(ContentManager content, GraphicsDevice graphicsDevice)
         {
-            txtBoxWaves = new GuiTextBox(new Vector2(graphicsDevice.Viewport.Width - 147, graphicsDevice.Viewport.Height - 39), 137, 29, 1, new Color(0, 0, 0), new Color(98, 0, 0), 39f, 100f, "Waves: " + SpawnManager.WaveCount, @"GUIFont");
+            txtBoxWaves = new GuiTextBox(new Vector2(graphicsDevice.Viewport.Width - 147, graphicsDevice.Viewport.Height - 39), 137, 29, 1, new Color(0, 0, 0), new Color(98, 0, 0), 39f, 100f, "Waves: " + SpawnManager.WaveCount, @"Fonts\GUIFont");
             boxLifeBars = new GuiBox(new Vector2(10, graphicsDevice.Viewport.Height - 54), 162, 44, 1, new Color(0, 0, 0), new Color(98, 0, 0), 39f, 100f, graphicsDevice);
-            lfbHealthBar = new GuiLifeBar(new Vector2(28, graphicsDevice.Viewport.Height - 45), playerRef.myShip.Health, @"GUI\Health-Bar");
-            lfbShieldBar = new GuiLifeBar(new Vector2(28, graphicsDevice.Viewport.Height - 29), playerRef.myShip.Shield, @"GUI\Shield-Bar");
+            lfbHealthBar = new GuiLifeBar(new Vector2(28, graphicsDevice.Viewport.Height - 45), playerRef.myShip.Health, @"Sprites\GUI\Health-Bar");
+            lfbShieldBar = new GuiLifeBar(new Vector2(28, graphicsDevice.Viewport.Height - 29), playerRef.myShip.Shield, @"Sprites\GUI\Shield-Bar");
 
             guiSystem.Add(txtBoxScore);
             guiSystem.Add(txtBoxFlamoca);
