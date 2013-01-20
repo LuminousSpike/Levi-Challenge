@@ -18,14 +18,15 @@ namespace Solar
 
         public Texture2D CurrentTexture;
 
-        public GuiTextBox(Vector2 position, string text)
+        public GuiTextBox(Vector2 position, string text, string texturePath = null)
         {
             Position = position;
             Textured = true;
             Text = text;
+            TexturePath = texturePath;
         }
 
-        public GuiTextBox(Vector2 position, int width, int height, int bWidth, Color mColor, Color bColor, float mainAlpha, float borderAlpha, string text, string fontPath, string texturePath = null)
+        public GuiTextBox(Vector2 position, int width, int height, int bWidth, Color mColor, Color bColor, float mainAlpha, float borderAlpha, string text, string fontPath)
         {
             Position = position;
             Width = width;
@@ -38,7 +39,6 @@ namespace Solar
             BorderAlpha = borderAlpha;
             Text = text;
             FontPath = fontPath;
-            TexturePath = texturePath;
         }
 
         public void LoadContent(ContentManager content, GraphicsDevice graphicsdevice)
