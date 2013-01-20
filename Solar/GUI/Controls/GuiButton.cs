@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Solar
 {
-    public class GuiTextBox
+    public class GuiButton
     {
         private Vector2 Position, Scale, TextPosition;
         private Texture2D MainTexture, BorderTexture, HoverTexture, SelectedTexture;
@@ -18,14 +18,14 @@ namespace Solar
 
         public Texture2D CurrentTexture;
 
-        public GuiTextBox(Vector2 position, string text)
+        public GuiButton(Vector2 position, string text)
         {
             Position = position;
             Textured = true;
             Text = text;
         }
 
-        public GuiTextBox(Vector2 position, int width, int height, int bWidth, Color mColor, Color bColor, float mainAlpha, float borderAlpha, string text)
+        public GuiButton(Vector2 position, int width, int height, int bWidth, Color mColor, Color bColor, float mainAlpha, float borderAlpha, string text)
         {
             Position = position;
             Width = width;
@@ -56,18 +56,6 @@ namespace Solar
         public void UnloadContent()
         {
             DefaultBox.UnloadContent();
-        }
-
-        public void UpdateText(string text, GraphicsDevice graphicsdevice)
-        {
-            Text = text;
-            if (MainTexture == null)
-            {
-                DefaultBox = new GuiBox(Position, Width, Height, BWidth, MColor, BColor, MainAlpha, BorderAlpha, graphicsdevice);
-                TextPosition = new Vector2((int)(Position.X + (Width / 2) - (Font.MeasureString(Text).X / 2)), (int)(Position.Y + (Height / 2) - (Font.MeasureString(Text).Y / 2)));
-            }
-            else
-                TextPosition = new Vector2((int)(Position.X + (CurrentTexture.Width / 2) - (Font.MeasureString(Text).X / 2)), (int)(Position.Y + (CurrentTexture.Height / 2) - (Font.MeasureString(Text).Y / 2)));
         }
 
         public void Draw(SpriteBatch spritebatch)

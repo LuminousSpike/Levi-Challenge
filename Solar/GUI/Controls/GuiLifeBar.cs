@@ -8,15 +8,17 @@ namespace Solar
     {
         private Vector2 Position, Scale;
         private float MaxValue, MainAlpha, BorderAlpha;
-        Texture2D Texture;
+        private Texture2D Texture;
         private int Width, Height, BWidth;
+        private string TexturePath;
         private Color MColor, BColor;
         private GuiBox myBox;
 
-        public GuiLifeBar(Vector2 position, float maxValue)
+        public GuiLifeBar(Vector2 position, float maxValue, string texturePath = null)
         {
             Position = position;
             MaxValue = maxValue;
+            TexturePath = texturePath;
         }
 
         public GuiLifeBar(Vector2 position, float maxValue, int width, int height, int bWidth, Color mColor, Color bColor, float mainAlpha, float borderAlpha)
@@ -37,13 +39,18 @@ namespace Solar
 
         }
 
-        public void LoadContent(Texture2D texture, GraphicsDevice graphicsdevice)
+        // Loads any content required
+        public void LoadContent(ContentManager content, GraphicsDevice graphicsdevice)
         {
-            Texture = texture;
-            if (Texture == null)
-                myBox = new GuiBox(Position, Width, Height, BWidth, MColor, BColor, MainAlpha, BorderAlpha, graphicsdevice);
-            else
+            
+            if (TexturePath != null)
+            {
+                Texture = content.Load<Texture2D>(TexturePath);
                 Scale = new Vector2(1, 1);
+            }
+            else
+                myBox = new GuiBox(Position, Width, Height, BWidth, MColor, BColor, MainAlpha, BorderAlpha, graphicsdevice);
+                
         }
 
         public void UnloadContent()
