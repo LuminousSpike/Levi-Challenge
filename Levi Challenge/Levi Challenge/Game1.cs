@@ -16,21 +16,27 @@ namespace Levi_Challenge
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
+        // Global Varibles and Constants
         public enum GameState
         {
             StartMenu,
+            OptionsMenu,
             Loading,
             Playing,
-            Paused
+            Paused,
+            Exiting
         }
+
+        private GameState LoadedGameState = new GameState();
 
         static public GameState gameState = new GameState();
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        StartMenuScreen startMenu;
+        OptionsMenuScreen optionsMenuScreen;
         GameScreen gameScreen;
-        StartMenu startMenu;
 
         public Game1()
         {
@@ -48,12 +54,17 @@ namespace Levi_Challenge
         {
             // TODO: Add your initialization logic here
             gameState = GameState.StartMenu;
+            LoadedGameState = GameState.StartMenu;
 
-            startMenu = new StartMenu(graphics);
+            startMenu = new StartMenuScreen(graphics);
             startMenu.Initialize();
 
-            gameScreen = new GameScreen(graphics);
-            gameScreen.Initialize(Content, GraphicsDevice);
+            //optionsMenuScreen = new OptionsMenuScreen();
+            //optionsMenuScreen.Initialize();
+
+            //gameScreen = new GameScreen(graphics);
+            // Move all code which requires Content to LoadContent
+            //gameScreen.Initialize(Content, GraphicsDevice);
             base.Initialize();
         }
 
@@ -66,7 +77,8 @@ namespace Levi_Challenge
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             startMenu.LoadContent(Content, GraphicsDevice);
-            gameScreen.LoadContent(Content, GraphicsDevice);
+            //optionsMenuScreen.LoadContent(Content, GraphicsDevice);
+            //gameScreen.LoadContent(Content, GraphicsDevice);
             // TODO: use this.Content to load your game content here
         }
 
@@ -78,7 +90,8 @@ namespace Levi_Challenge
         {
             // TODO: Unload any non ContentManager content here
             startMenu.UnloadContent();
-            gameScreen.UnloadContent();
+            //optionsMenuScreen.UnloadContent();
+            //gameScreen.UnloadContent();
         }
 
         /// <summary>
@@ -92,12 +105,52 @@ namespace Levi_Challenge
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                gameState = GameState.StartMenu;
+
             // TODO: Add your update logic here
             if (gameState == GameState.StartMenu)
+            {
+                if (LoadedGameState != GameState.StartMenu)
+                {
+                    Content.Unload();
+                    startMenu = new StartMenuScreen(graphics);
+                    startMenu.Initialize();
+                    startMenu.LoadContent(Content, GraphicsDevice);
+                    LoadedGameState = GameState.StartMenu;
+                }
                 startMenu.Update(gameTime);
+            }
+
+            if (gameState == GameState.OptionsMenu)
+            {
+                if (LoadedGameState != GameState.OptionsMenu)
+                {
+                    Content.Unload();
+                    optionsMenuScreen = new OptionsMenuScreen();
+                    optionsMenuScreen.Initialize();
+                    optionsMenuScreen.LoadContent(Content, GraphicsDevice);
+                    LoadedGameState = GameState.OptionsMenu;
+                }
+                optionsMenuScreen.Update(gameTime);
+            }
 
             if (gameState == GameState.Playing)
+            {
+                if (LoadedGameState != GameState.Playing)
+                {
+                    Content.Unload();
+                    gameScreen = new GameScreen(graphics);
+                    gameScreen.Initialize(Content, GraphicsDevice);
+                    gameScreen.LoadContent(Content, GraphicsDevice);
+                    LoadedGameState = GameState.Playing;
+                }
                 gameScreen.Update(gameTime, GraphicsDevice);
+            }
+
+
+            if (gameState == GameState.Exiting)
+                this.Exit();
 
             base.Update(gameTime);
         }
@@ -111,10 +164,13 @@ namespace Levi_Challenge
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            if (gameState == GameState.StartMenu)
+            if (gameState == GameState.StartMenu && LoadedGameState == GameState.StartMenu)
                 startMenu.Draw(gameTime, spriteBatch);
 
-            if (gameState == GameState.Playing)
+            if (gameState == GameState.OptionsMenu && LoadedGameState == GameState.OptionsMenu)
+                optionsMenuScreen.Draw(spriteBatch);
+
+            if (gameState == GameState.Playing && LoadedGameState == GameState.Playing)
                 gameScreen.Draw(gameTime, GraphicsDevice, spriteBatch);
 
             base.Draw(gameTime);

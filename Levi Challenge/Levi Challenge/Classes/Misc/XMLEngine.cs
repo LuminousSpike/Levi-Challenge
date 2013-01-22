@@ -9,10 +9,10 @@ namespace Levi_Challenge
 {
     class XMLEngine
     {
-        public static List<Ship> PlayerShips = new List<Ship>(), EnemyShips = new List<Ship>();
-        public static List<Weapon> Weapons = new List<Weapon>();
+        public List<Ship> PlayerShips = new List<Ship>(), EnemyShips = new List<Ship>();
+        public List<Weapon> Weapons = new List<Weapon>();
 
-        private static string ReadElement(XmlReader reader, string name)
+        private string ReadElement(XmlReader reader, string name)
         {
             string Value = null;
             while (reader.NodeType != XmlNodeType.EndElement)
@@ -35,7 +35,7 @@ namespace Levi_Challenge
             return Value;
         }
 
-        public static void PhraseShipXML()
+        public void PhraseShipXML()
         {
             if (Directory.Exists(@"Data\Ships\"))
             {
@@ -47,7 +47,7 @@ namespace Levi_Challenge
             }
         }
 
-        public static void PhraseWeaponXML()
+        public void PhraseWeaponXML()
         {
             if (Directory.Exists(@"Data\Weapons\"))
             {
@@ -59,7 +59,7 @@ namespace Levi_Challenge
             }
         }
 
-        private static void LoadWeapons(string fileName)
+        private void LoadWeapons(string fileName)
         {
             // Load the XML Document
             XmlReader reader = XmlReader.Create(fileName);
@@ -122,7 +122,7 @@ namespace Levi_Challenge
             }
         }
 
-        private static void LoadShips(string fileName)
+        private void LoadShips(string fileName)
         {
             // Load the XML Document
             XmlReader reader = XmlReader.Create(fileName);

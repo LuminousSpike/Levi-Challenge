@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
 namespace Solar
@@ -14,9 +15,17 @@ namespace Solar
         private List<GuiLifeBar> GuiLifeBarList;
         private List<GuiTextBox> GuiTextBoxList;
 
+        private KeyboardState CurrentKeyboardState, PreviousKeyboardState;
+        private int ButtonIndex = 0;
+
         public int GuiButtonCount
         {
             get { return GuiButtonList.Count; }
+        }
+
+        public int GuiButtonIndex
+        {
+            get { return ButtonIndex; }
         }
 
         // Initializes the list, here incase an Object requires something at runtime in the future.
@@ -93,7 +102,24 @@ namespace Solar
         // Any update code which is generic for all Objects of a type.
         public void Update()
         {
+            // Button Management
+            CurrentKeyboardState = Keyboard.GetState();
+            if ((CurrentKeyboardState.IsKeyUp(Keys.Down) && PreviousKeyboardState.IsKeyDown(Keys.Down)) || (CurrentKeyboardState.IsKeyUp(Keys.S) && PreviousKeyboardState.IsKeyDown(Keys.S)))
+            {
+                if (ButtonIndex < GuiButtonCount - 1)
+                    ButtonIndex++;
 
+                ButtonIndexUpdate(ButtonIndex);
+            }
+
+            if ((CurrentKeyboardState.IsKeyUp(Keys.Up) && PreviousKeyboardState.IsKeyDown(Keys.Up)) || (CurrentKeyboardState.IsKeyUp(Keys.W) && PreviousKeyboardState.IsKeyDown(Keys.W)))
+            {
+                if (ButtonIndex > 0)
+                    ButtonIndex--;
+
+                ButtonIndexUpdate(ButtonIndex);
+            }
+            PreviousKeyboardState = CurrentKeyboardState;
         }
 
         public void ButtonIndexUpdate(int index)

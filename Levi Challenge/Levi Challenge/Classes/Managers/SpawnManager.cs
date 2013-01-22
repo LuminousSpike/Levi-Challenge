@@ -14,6 +14,7 @@ namespace Levi_Challenge
         private bool AstroidSwarm = false;
         private TimeSpan enemySpawnTime, previousSpawnTime;
         private Random random;
+        private XMLEngine xmlEngine;
 
         public static int WaveCount
         {
@@ -21,6 +22,11 @@ namespace Levi_Challenge
             {
                 return Level;
             }
+        }
+
+        public SpawnManager(XMLEngine xmlengine)
+        {
+            xmlEngine = xmlengine;
         }
 
         public void Initialize(GraphicsDevice graphicsDevice, ContentManager content)
@@ -63,7 +69,7 @@ namespace Levi_Challenge
                         while (spawned == false)
                         {
                             int minLvl = random.Next(Level + 1);
-                            foreach (Ship ship in XMLEngine.EnemyShips)
+                            foreach (Ship ship in xmlEngine.EnemyShips)
                             {
                                 if ((ship.Level <= Level) && (ship.Level == minLvl))
                                 {

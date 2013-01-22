@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 using Solar;
 
 namespace Levi_Challenge
 {
     // All the stuff that a player expects to be on a start menu: New Game, Continue, Options, and Exit Game.
-    class StartMenu
+    class StartMenuScreen
     {
         private GraphicsDeviceManager graphics;
 
@@ -26,9 +20,8 @@ namespace Levi_Challenge
         private SpriteFont HeaderFont, HUDFont;
         private Vector2 HeaderPosition, MadeByPosition;
         private KeyboardState CurrentKeyboardState, PreviousKeyboardState;
-        private int ButtonIndex = 0;
 
-        public StartMenu(GraphicsDeviceManager graphicsDeviceManager)
+        public StartMenuScreen(GraphicsDeviceManager graphicsDeviceManager)
         {
             graphics = graphicsDeviceManager;
         }
@@ -64,7 +57,7 @@ namespace Levi_Challenge
             guiSystem.Add(btnExit);
 
             guiSystem.LoadContent(Content, graphicsDevice);
-            guiSystem.ButtonIndexUpdate(ButtonIndex);
+            guiSystem.ButtonIndexUpdate(0);
         }
 
         public void UnloadContent()
@@ -76,29 +69,23 @@ namespace Levi_Challenge
         public void Update(GameTime gameTime)
         {
             backgroundManager.Update();
+
             CurrentKeyboardState = Keyboard.GetState();
-            if (CurrentKeyboardState.IsKeyDown(Keys.Enter) || CurrentKeyboardState.IsKeyDown(Keys.E))
+            // Button actions go here
+            if ((CurrentKeyboardState.IsKeyUp(Keys.Enter) && PreviousKeyboardState.IsKeyDown(Keys.Enter)) || (CurrentKeyboardState.IsKeyUp(Keys.E) && PreviousKeyboardState.IsKeyDown(Keys.E)))
             {
                 if (btnNewGame.IsSelected)
                     Game1.gameState = Game1.GameState.Playing;
+
+                if (btnOptions.IsSelected)
+                    Game1.gameState = Game1.GameState.OptionsMenu;
+
+                if (btnExit.IsSelected)
+                    Game1.gameState = Game1.GameState.Exiting;
             }
-
-            if ((CurrentKeyboardState.IsKeyUp(Keys.Down) && PreviousKeyboardState.IsKeyDown(Keys.Down)) || (CurrentKeyboardState.IsKeyUp(Keys.S) && PreviousKeyboardState.IsKeyDown(Keys.S)))
-            {
-                if (ButtonIndex < guiSystem.GuiButtonCount - 1)
-                    ButtonIndex++;
-
-                guiSystem.ButtonIndexUpdate(ButtonIndex);
-            }
-
-            if ((CurrentKeyboardState.IsKeyUp(Keys.Up) && PreviousKeyboardState.IsKeyDown(Keys.Up)) || (CurrentKeyboardState.IsKeyUp(Keys.W) && PreviousKeyboardState.IsKeyDown(Keys.W)))
-            {
-                if (ButtonIndex > 0)
-                    ButtonIndex--;
-
-                guiSystem.ButtonIndexUpdate(ButtonIndex);
-            }
-            PreviousKeyboardState = CurrentKeyboardState;
+            PreviousKeyboardState = Keyboard.GetState();
+            guiSystem.Update();
+            
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

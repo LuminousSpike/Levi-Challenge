@@ -14,11 +14,12 @@ namespace Levi_Challenge
     class GameScreen
     {
         GraphicsDeviceManager graphics;
+        XMLEngine xmlEngine = new XMLEngine();
         BackgroundManager backgroundManager = new BackgroundManager(true);
-        SpawnManager spawnManager = new SpawnManager();
+        SpawnManager spawnManager;
         ProjectileManager projectileManager = new ProjectileManager();
         CollisionManager collisionManager = new CollisionManager();
-        Player player = new Player();
+        Player player;
         HudManager hudManager;
 
         public GameScreen(GraphicsDeviceManager graphicsDevice)
@@ -35,8 +36,10 @@ namespace Levi_Challenge
         public void Initialize(ContentManager Content, GraphicsDevice graphicsDevice)
         {
             // TODO: Add your initialization logic here
-            XMLEngine.PhraseWeaponXML();
-            XMLEngine.PhraseShipXML();
+            spawnManager = new SpawnManager(xmlEngine);
+            player = new Player(xmlEngine);
+            xmlEngine.PhraseWeaponXML();
+            xmlEngine.PhraseShipXML();
             spawnManager.Initialize(graphicsDevice, Content);
             projectileManager.Initialize();
             player.Initialize();
@@ -52,7 +55,7 @@ namespace Levi_Challenge
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             backgroundManager.LoadContent(Content, graphicsDevice, @"Backgrounds\Clouds\Cloud-Red-1", @"Backgrounds\Clouds\Cloud-Red-2");
-            foreach (Ship ship in XMLEngine.PlayerShips)
+            foreach (Ship ship in xmlEngine.PlayerShips)
             {
                 ship.ShipTexture = (Content.Load<Texture2D>(ship.ShipTexturePath));
                 foreach (Weapon weapon in ship.myHardpoints)
@@ -61,7 +64,7 @@ namespace Levi_Challenge
                 }
             }
 
-            foreach (Ship ship in XMLEngine.EnemyShips)
+            foreach (Ship ship in xmlEngine.EnemyShips)
             {
                 ship.ShipTexture = (Content.Load<Texture2D>(ship.ShipTexturePath));
                 foreach (Weapon weapon in ship.myHardpoints)
