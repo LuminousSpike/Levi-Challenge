@@ -33,11 +33,13 @@ namespace Levi_Challenge
             graphics = graphicsDeviceManager;
         }
 
+        // Set up anything which does not load content
         public void Initialize()
         {
             guiSystem.Initialize();
         }
 
+        // Loading the content and setting up said content
         public void LoadContent(ContentManager Content, GraphicsDevice graphicsDevice)
         {
             backgroundManager.LoadContent(Content, graphicsDevice, @"Backgrounds\Clouds\Cloud-Blue-1", @"Backgrounds\Clouds\Cloud-Blue-2");
@@ -68,6 +70,7 @@ namespace Levi_Challenge
             guiSystem.UnloadContent();
         }
 
+        // Manage the GUI here, all the buttons and player input.
         public void Update(GameTime gameTime)
         {
             backgroundManager.Update();
