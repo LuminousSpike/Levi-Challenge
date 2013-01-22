@@ -62,8 +62,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Fonts\GUIFont.spritefont">
-      <Name>GUIFont</Name>
+    <Compile Include="Fonts\HUDFont.spritefont">
+      <Name>HUDFont</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>

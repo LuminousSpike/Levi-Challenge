@@ -29,13 +29,13 @@ namespace Levi_Challenge
         public void Initialize()
         {
             guiSystem.Initialize();
-            txtBoxScore = new GuiTextBox(new Vector2(10, 10), 137, 29, 1, Color.Black * 0.39f, new Color(98, 0, 0), "Score: " + Player.Score, @"Fonts\GUIFont");
-            txtBoxFlamoca = new GuiTextBox(new Vector2(10, 49), 137, 29, 1, Color.Black * 0.39f, new Color(98, 0, 0), "Flamoca: " + Player.Flamoca, @"Fonts\GUIFont");
+            txtBoxScore = new GuiTextBox(new Vector2(10, 10), 137, 29, 1, Color.Black * 0.39f, new Color(98, 0, 0), "Score: " + Player.Score, @"Fonts\HUDFont");
+            txtBoxFlamoca = new GuiTextBox(new Vector2(10, 49), 137, 29, 1, Color.Black * 0.39f, new Color(98, 0, 0), "Flamoca: " + Player.Flamoca, @"Fonts\HUDFont");
         }
 
         public void LoadContent(ContentManager content, GraphicsDevice graphicsDevice)
         {
-            txtBoxWaves = new GuiTextBox(new Vector2(graphicsDevice.Viewport.Width - 147, graphicsDevice.Viewport.Height - 39), 137, 29, 1, Color.Black * 0.39f, new Color(98, 0, 0), "Waves: " + SpawnManager.WaveCount, @"Fonts\GUIFont");
+            txtBoxWaves = new GuiTextBox(new Vector2(graphicsDevice.Viewport.Width - 147, graphicsDevice.Viewport.Height - 39), 137, 29, 1, Color.Black * 0.39f, new Color(98, 0, 0), "Waves: " + SpawnManager.WaveCount, @"Fonts\HUDFont");
             boxLifeBars = new GuiBox(new Vector2(10, graphicsDevice.Viewport.Height - 54), 162, 44, 1, Color.Black * 0.39f, new Color(98, 0, 0), graphicsDevice);
             lfbHealthBar = new GuiLifeBar(new Vector2(28, graphicsDevice.Viewport.Height - 45), playerRef.myShip.Health, @"Sprites\GUI\Health-Bar");
             lfbShieldBar = new GuiLifeBar(new Vector2(28, graphicsDevice.Viewport.Height - 29), playerRef.myShip.Shield, @"Sprites\GUI\Shield-Bar");
