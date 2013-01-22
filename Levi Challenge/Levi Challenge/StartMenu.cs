@@ -75,7 +75,7 @@ namespace Levi_Challenge
         {
             backgroundManager.Update();
             CurrentKeyboardState = Keyboard.GetState();
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            if (CurrentKeyboardState.IsKeyDown(Keys.Enter) || CurrentKeyboardState.IsKeyDown(Keys.E))
             {
                 if (btnNewGame.IsSelected)
                     Game1.gameState = Game1.GameState.Playing;
