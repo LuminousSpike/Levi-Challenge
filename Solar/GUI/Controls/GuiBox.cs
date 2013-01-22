@@ -10,9 +10,8 @@ namespace Solar
         private Texture2D MainTexture, BorderTexture;
         private int Width, Height, BWidth;
         private Color MColor, BColor;
-        private double Alpha;
 
-        public GuiBox(Vector2 position, int width, int height, int bWidth, Color mColor, Color bColor, double mainAlpha, double borderAlpha, GraphicsDevice graphicsdevice)
+        public GuiBox(Vector2 position, int width, int height, int bWidth, Color mColor, Color bColor, GraphicsDevice graphicsdevice)
         {
             Position = position;
             Width = width;
@@ -21,19 +20,16 @@ namespace Solar
             Scale = new Vector2(width - bWidth, height - bWidth);
             MColor = mColor;
             BColor = bColor;
-            Alpha = mainAlpha;
-            MColor.A = (byte)(255d / 100d * mainAlpha);
-            BColor.A = (byte)(255d / 100d * borderAlpha);
 
             // Set border positions
             bVertical = new Vector2(bWidth, height - BWidth);
             bHorizontal = new Vector2(width + BWidth, bWidth);
 
             // Create Texture
-            Color myMainColor = new Color(100f, 100f, 100f, (float)Alpha);
+            Color myMainColor = new Color(100f, 100f, 100f, 100);
             MainTexture = new Texture2D(graphicsdevice, 1, 1);
             MainTexture.SetData(new[] { myMainColor });
-            Color myBorderColor = new Color(100f, 100f, 100f, (float)Alpha);
+            Color myBorderColor = new Color(100f, 100f, 100f, 100);
             BorderTexture = new Texture2D(graphicsdevice, 1, 1);
             BorderTexture.SetData(new[] { myBorderColor });
         }

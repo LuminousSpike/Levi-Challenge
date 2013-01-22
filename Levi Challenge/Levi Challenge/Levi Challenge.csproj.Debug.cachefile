@@ -16,6 +16,10 @@ Content\Backgrounds\Planets\Planet3-game.xnb
 Content\Backgrounds\Stars\Stars1.xnb
 Content\Backgrounds\Stars\Stars2.xnb
 Content\Backgrounds\Stars\Stars3.xnb
+Content\Fonts\StartMenuButtonFont.xnb
+Content\Fonts\StartMenuHeaderFont.xnb
+Content\Backgrounds\Clouds\Cloud-Blue-1.xnb
+Content\Backgrounds\Clouds\Cloud-Blue-2.xnb
 Data\Ships\ES_Trimil.xml
 Data\Ships\ES_Vemrail.xml
 Data\Ships\PS_Old Gum.xml

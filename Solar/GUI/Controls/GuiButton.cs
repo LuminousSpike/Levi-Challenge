@@ -10,13 +10,17 @@ namespace Solar
         private Texture2D MainTexture, BorderTexture, HoverTexture, SelectedTexture;
         private GuiBox DefaultBox, HoverBox, SelectedBox;
         private int Width, Height, BWidth;
-        private Color MColor, BColor;
-        private bool Textured = false;
-        private float MainAlpha, BorderAlpha;
+        private Color MColor, MColorSelected, BColor, FontColor = Color.White;
+        private bool Textured = false, Selected = false;
         private string Text, TexturePath, FontPath;
         private SpriteFont Font;
 
         public Texture2D CurrentTexture;
+        public bool IsSelected
+        {
+            get { return Selected; }
+            set { Selected = value; }
+        }
 
         public GuiButton(Vector2 position, string text, string texturePath, string fontPath)
         {
@@ -27,7 +31,7 @@ namespace Solar
             FontPath = fontPath;
         }
 
-        public GuiButton(Vector2 position, int width, int height, int bWidth, Color mColor, Color bColor, float mainAlpha, float borderAlpha, string text, string fontPath)
+        public GuiButton(Vector2 position, int width, int height, int bWidth, Color mColor, Color mColorSelected, Color bColor, Color fontColor, string text, string fontPath)
         {
             Position = position;
             Width = width;
@@ -35,9 +39,9 @@ namespace Solar
             BWidth = bWidth;
             Scale = new Vector2(width - bWidth, height - bWidth);
             MColor = mColor;
+            MColorSelected = mColorSelected;
             BColor = bColor;
-            MainAlpha = mainAlpha;
-            BorderAlpha = borderAlpha;
+            FontColor = fontColor;
             Text = text;
             FontPath = fontPath;
         }
@@ -48,7 +52,8 @@ namespace Solar
             Font = content.Load<SpriteFont>(FontPath);
             if (MainTexture == null)
             {
-                DefaultBox = new GuiBox(Position, Width, Height, BWidth, MColor, BColor, MainAlpha, BorderAlpha, graphicsdevice);
+                DefaultBox = new GuiBox(Position, Width, Height, BWidth, MColor, BColor, graphicsdevice);
+                SelectedBox = new GuiBox(Position, Width, Height, BWidth, MColorSelected, BColor, graphicsdevice);
                 TextPosition = new Vector2((int)(Position.X + (Width / 2) - (Font.MeasureString(Text).X / 2)), (int)(Position.Y + (Height / 2) - (Font.MeasureString(Text).Y / 2)));
             }
             else
@@ -69,12 +74,15 @@ namespace Solar
             if (Textured == true)
             {
                 spritebatch.Draw(CurrentTexture, Position, Color.White);
-                spritebatch.DrawString(Font, Text, TextPosition, Color.White);
+                spritebatch.DrawString(Font, Text, TextPosition, FontColor);
             }
             else
             {
-                DefaultBox.Draw(spritebatch);
-                spritebatch.DrawString(Font, Text, TextPosition, Color.White);
+                if (Selected == true)
+                    SelectedBox.Draw(spritebatch);
+                else
+                    DefaultBox.Draw(spritebatch);
+                spritebatch.DrawString(Font, Text, TextPosition, FontColor);
             }
         }
     }

@@ -37,16 +37,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Backgrounds\Clouds\Cloud-Blue-1.png">
+    <Compile Include="Backgrounds\Clouds\Cloud-Blue-1.png">
       <Name>Cloud-Blue-1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
-    </None>
-    <None Include="Backgrounds\Clouds\Cloud-Blue-2.png">
+    </Compile>
+    <Compile Include="Backgrounds\Clouds\Cloud-Blue-2.png">
       <Name>Cloud-Blue-2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
-    </None>
+    </Compile>
     <Compile Include="Backgrounds\Clouds\Cloud-Red-1.png">
       <Name>Cloud-Red-1</Name>
       <Importer>TextureImporter</Importer>
@@ -64,6 +64,16 @@
     </Compile>
     <Compile Include="Fonts\GUIFont.spritefont">
       <Name>GUIFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+    <Compile Include="Fonts\StartMenuButtonFont.spritefont">
+      <Name>StartMenuButtonFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+    <Compile Include="Fonts\StartMenuHeaderFont.spritefont">
+      <Name>StartMenuHeaderFont</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>

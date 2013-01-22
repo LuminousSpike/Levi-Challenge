@@ -49,7 +49,7 @@ namespace Solar
                 Scale = new Vector2(1, 1);
             }
             else
-                myBox = new GuiBox(Position, Width, Height, BWidth, MColor, BColor, MainAlpha, BorderAlpha, graphicsdevice);
+                myBox = new GuiBox(Position, Width, Height, BWidth, MColor, BColor, graphicsdevice);
                 
         }
 

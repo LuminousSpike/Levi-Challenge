@@ -14,7 +14,7 @@ namespace Levi_Challenge
     class GameScreen
     {
         GraphicsDeviceManager graphics;
-        BackgroundManager backgroundManager = new BackgroundManager();
+        BackgroundManager backgroundManager = new BackgroundManager(true);
         SpawnManager spawnManager = new SpawnManager();
         ProjectileManager projectileManager = new ProjectileManager();
         CollisionManager collisionManager = new CollisionManager();
@@ -37,7 +37,6 @@ namespace Levi_Challenge
             // TODO: Add your initialization logic here
             XMLEngine.PhraseWeaponXML();
             XMLEngine.PhraseShipXML();
-            backgroundManager.Initialize(Content, graphicsDevice, @"Backgrounds\Clouds\Cloud-Red-1", @"Backgrounds\Clouds\Cloud-Red-2");
             spawnManager.Initialize(graphicsDevice, Content);
             projectileManager.Initialize();
             player.Initialize();
@@ -52,6 +51,7 @@ namespace Levi_Challenge
         public void LoadContent(ContentManager Content, GraphicsDevice graphicsDevice)
         {
             // Create a new SpriteBatch, which can be used to draw textures.
+            backgroundManager.LoadContent(Content, graphicsDevice, @"Backgrounds\Clouds\Cloud-Red-1", @"Backgrounds\Clouds\Cloud-Red-2");
             foreach (Ship ship in XMLEngine.PlayerShips)
             {
                 ship.ShipTexture = (Content.Load<Texture2D>(ship.ShipTexturePath));
@@ -113,8 +113,6 @@ namespace Levi_Challenge
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public void Draw(GameTime gameTime, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
         {
-            graphicsDevice.Clear(Color.Black);
-
             // TODO: Add your drawing code here
             backgroundManager.Draw(spriteBatch);
             spriteBatch.Begin();

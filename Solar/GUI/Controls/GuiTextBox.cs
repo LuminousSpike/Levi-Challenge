@@ -12,7 +12,6 @@ namespace Solar
         private int Width, Height, BWidth;
         private Color MColor, BColor;
         private bool Textured = false;
-        private float MainAlpha, BorderAlpha;
         private string Text, FontPath, TexturePath;
         private SpriteFont Font;
 
@@ -26,7 +25,7 @@ namespace Solar
             TexturePath = texturePath;
         }
 
-        public GuiTextBox(Vector2 position, int width, int height, int bWidth, Color mColor, Color bColor, float mainAlpha, float borderAlpha, string text, string fontPath)
+        public GuiTextBox(Vector2 position, int width, int height, int bWidth, Color mColor, Color bColor, string text, string fontPath)
         {
             Position = position;
             Width = width;
@@ -35,8 +34,6 @@ namespace Solar
             Scale = new Vector2(width - bWidth, height - bWidth);
             MColor = mColor;
             BColor = bColor;
-            MainAlpha = mainAlpha;
-            BorderAlpha = borderAlpha;
             Text = text;
             FontPath = fontPath;
         }
@@ -52,7 +49,7 @@ namespace Solar
             }
             else
             {
-                DefaultBox = new GuiBox(Position, Width, Height, BWidth, MColor, BColor, MainAlpha, BorderAlpha, graphicsdevice);
+                DefaultBox = new GuiBox(Position, Width, Height, BWidth, MColor, BColor, graphicsdevice);
                 TextPosition = new Vector2((int)(Position.X + (Width / 2) - (Font.MeasureString(Text).X / 2)), (int)(Position.Y + (Height / 2) - (Font.MeasureString(Text).Y / 2)));
             }
         }
@@ -67,7 +64,7 @@ namespace Solar
             Text = text;
             if (MainTexture == null)
             {
-                DefaultBox = new GuiBox(Position, Width, Height, BWidth, MColor, BColor, MainAlpha, BorderAlpha, graphicsdevice);
+                DefaultBox = new GuiBox(Position, Width, Height, BWidth, MColor, BColor, graphicsdevice);
                 TextPosition = new Vector2((int)(Position.X + (Width / 2) - (Font.MeasureString(Text).X / 2)), (int)(Position.Y + (Height / 2) - (Font.MeasureString(Text).Y / 2)));
             }
             else

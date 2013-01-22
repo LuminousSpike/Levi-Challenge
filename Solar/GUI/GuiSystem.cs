@@ -14,6 +14,11 @@ namespace Solar
         private List<GuiLifeBar> GuiLifeBarList;
         private List<GuiTextBox> GuiTextBoxList;
 
+        public int GuiButtonCount
+        {
+            get { return GuiButtonList.Count; }
+        }
+
         // Initializes the list, here incase an Object requires something at runtime in the future.
         public void Initialize()
         {
@@ -91,6 +96,17 @@ namespace Solar
 
         }
 
+        public void ButtonIndexUpdate(int index)
+        {
+            for (int i = 0; i < GuiButtonList.Count; i++)
+            {
+                if (i == index)
+                    GuiButtonList[i].IsSelected = true;
+                else
+                    GuiButtonList[i].IsSelected = false;
+            }
+        }
+
         // Loops through each Object to execute the draw code.
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -101,7 +117,7 @@ namespace Solar
 
             foreach (GuiButton item in GuiButtonList)
             {
-                item.Draw(spriteBatch); ;
+                item.Draw(spriteBatch);
             }
 
             foreach (GuiLifeBar item in GuiLifeBarList)
