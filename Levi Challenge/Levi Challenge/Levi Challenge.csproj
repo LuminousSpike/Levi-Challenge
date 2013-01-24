@@ -29,7 +29,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -85,23 +85,27 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Astroid.cs" />
-    <Compile Include="Classes\BackgroundManager.cs" />
-    <Compile Include="Classes\CollisionManager.cs" />
-    <Compile Include="Classes\Enemy.cs" />
-    <Compile Include="Classes\EnemyManager.cs" />
-    <Compile Include="Classes\ParallaxBackground.cs" />
-    <Compile Include="Classes\ParallaxPlanet.cs" />
-    <Compile Include="Classes\Player.cs" />
-    <Compile Include="Classes\Projectile.cs" />
-    <Compile Include="Classes\ProjectileManager.cs" />
+    <Compile Include="Classes\Entities\Astroid.cs" />
+    <Compile Include="Classes\Managers\BackgroundManager.cs" />
+    <Compile Include="Classes\Managers\CollisionManager.cs" />
+    <Compile Include="Classes\Entities\Enemy.cs" />
+    <Compile Include="Classes\Managers\EnemyManager.cs" />
+    <Compile Include="Classes\Managers\HudManager.cs" />
+    <Compile Include="Classes\Misc\ParallaxBackground.cs" />
+    <Compile Include="Classes\Misc\ParallaxPlanet.cs" />
+    <Compile Include="Classes\Entities\Player.cs" />
+    <Compile Include="Classes\Entities\Projectile.cs" />
+    <Compile Include="Classes\Managers\ProjectileManager.cs" />
+    <Compile Include="Classes\Screens\GameScreen.cs" />
+    <Compile Include="Classes\Screens\OptionsMenuScreen.cs" />
+    <Compile Include="Classes\Screens\StartMenuScreen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Classes\Ship.cs" />
-    <Compile Include="Classes\SpawnManager.cs" />
-    <Compile Include="Classes\Weapon.cs" />
-    <Compile Include="Classes\XMLEngine.cs" />
+    <Compile Include="Classes\Entities\Ship.cs" />
+    <Compile Include="Classes\Managers\SpawnManager.cs" />
+    <Compile Include="Classes\Entities\Weapon.cs" />
+    <Compile Include="Classes\Misc\XMLEngine.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\Ships\ES_Trimil.xml">
@@ -125,6 +129,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Solar\Solar.csproj">
+      <Project>{7A0717A6-11BE-4AC7-B658-0BD2C94501E3}</Project>
+      <Name>Solar</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Levi ChallengeContent\Levi ChallengeContent.contentproj">
       <Name>Levi_ChallengeContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>
