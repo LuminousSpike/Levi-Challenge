@@ -77,8 +77,8 @@ namespace Levi_Challenge
                 if (btnNewGame.IsSelected)
                     Game1.gameState = Game1.GameState.Playing;
 
-                if (btnOptions.IsSelected)
-                    Game1.gameState = Game1.GameState.OptionsMenu;
+                //if (btnOptions.IsSelected)
+                    //Game1.gameState = Game1.GameState.OptionsMenu;
 
                 if (btnExit.IsSelected)
                     Game1.gameState = Game1.GameState.Exiting;

@@ -26,10 +26,11 @@ namespace Levi_Challenge
             Paused,
             Exiting
         }
+        public static Keys MoveUpKey = Keys.W, MoveDownKey = Keys.S, MoveLeftKey = Keys.A, MoveRightKey = Keys.D;
 
         private GameState LoadedGameState = new GameState();
 
-        static public GameState gameState = new GameState();
+        public static GameState gameState = new GameState();
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;

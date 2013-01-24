@@ -15,11 +15,11 @@ Content\Sprites\Astroids\Astroid-2.xnb
 Content\Sprites\Astroids\Astroid-1.xnb
 Content\Sprites\GUI\Health-Bar.xnb
 Content\Sprites\GUI\Shield-Bar.xnb
-Content\Fonts\GUIFont.xnb
 Content\Fonts\StartMenuButtonFont.xnb
 Content\Fonts\StartMenuHeaderFont.xnb
 Content\Backgrounds\Clouds\Cloud-Blue-1.xnb
 Content\Backgrounds\Clouds\Cloud-Blue-2.xnb
+Content\Fonts\HUDFont.xnb
 Data\Ships\ES_Trimil.xml
 Data\Ships\ES_Vemrail.xml
 Data\Ships\PS_Old Gum.xml
