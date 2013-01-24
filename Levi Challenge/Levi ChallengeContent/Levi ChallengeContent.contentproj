@@ -30,108 +30,135 @@
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.VideoImporters, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ships\Player-1.png">
+    <Compile Include="Sprites\Ships\Player-1.png">
       <Name>Player-1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Clouds\Cloud-Blue-1.png">
+    <Compile Include="Backgrounds\Clouds\Cloud-Blue-1.png">
       <Name>Cloud-Blue-1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
-    </None>
-    <None Include="Clouds\Cloud-Blue-2.png">
+    </Compile>
+    <Compile Include="Backgrounds\Clouds\Cloud-Blue-2.png">
       <Name>Cloud-Blue-2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
-    </None>
-    <Compile Include="Clouds\Cloud-Red-1.png">
+    </Compile>
+    <Compile Include="Backgrounds\Clouds\Cloud-Red-1.png">
       <Name>Cloud-Red-1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Clouds\Cloud-Red-2.png">
+    <Compile Include="Backgrounds\Clouds\Cloud-Red-2.png">
       <Name>Cloud-Red-2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Planets\Planet3-game.png">
+    <Compile Include="Backgrounds\Planets\Planet3-game.png">
       <Name>Planet3-game</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="Fonts\HUDFont.spritefont">
+      <Name>HUDFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+    <Compile Include="Fonts\StartMenuButtonFont.spritefont">
+      <Name>StartMenuButtonFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+    <Compile Include="Fonts\StartMenuHeaderFont.spritefont">
+      <Name>StartMenuHeaderFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Stars\Stars1.png">
+    <Compile Include="Backgrounds\Stars\Stars1.png">
       <Name>Stars1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Stars\Stars2.png">
+    <Compile Include="Backgrounds\Stars\Stars2.png">
       <Name>Stars2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Stars\Stars3.png">
+    <Compile Include="Backgrounds\Stars\Stars3.png">
       <Name>Stars3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ships\Enemy-1.png">
+    <Compile Include="Sprites\Ships\Enemy-1.png">
       <Name>Enemy-1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Projectiles\Laser-1.png">
+    <Compile Include="Sprites\Projectiles\Laser-1.png">
       <Name>Laser-1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Projectiles\Missile-1.png">
+    <Compile Include="Sprites\Projectiles\Missile-1.png">
       <Name>Missile-1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ships\Enemy-2.png">
+    <Compile Include="Sprites\Ships\Enemy-2.png">
       <Name>Enemy-2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Astroids\Astroid-4.png">
+    <Compile Include="Sprites\Astroids\Astroid-4.png">
       <Name>Astroid-4</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Astroids\Astroid-3.png">
+    <Compile Include="Sprites\Astroids\Astroid-3.png">
       <Name>Astroid-3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Astroids\Astroid-2.png">
+    <Compile Include="Sprites\Astroids\Astroid-2.png">
       <Name>Astroid-2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Astroids\Astroid-1.png">
+    <Compile Include="Sprites\Astroids\Astroid-1.png">
       <Name>Astroid-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\GUI\Health-Bar.png">
+      <Name>Health-Bar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\GUI\Shield-Bar.png">
+      <Name>Shield-Bar</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

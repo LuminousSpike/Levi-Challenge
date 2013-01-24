@@ -15,6 +15,12 @@ namespace Levi_Challenge
         
         private Texture2D texture;
         private Vector2 screenSize;
+        private XMLEngine xmlEngine;
+
+        public Player(XMLEngine xmlengine)
+        {
+            xmlEngine = xmlengine;
+        }
         
         public void Initialize()
         {
@@ -23,7 +29,7 @@ namespace Levi_Challenge
 
         public void LoadContent(ContentManager content, int screenWidth, int screenHeight)
         {
-            myShip = XMLEngine.PlayerShips[0].ShallowCopy();
+            myShip = xmlEngine.PlayerShips[0].ShallowCopy();
             texture = myShip.ShipTexture;
             myShip.position = new Vector2(screenWidth / 2 - texture.Width / 2, screenHeight / 2 - texture.Height / 2);
             screenSize = new Vector2(screenWidth, screenHeight);
