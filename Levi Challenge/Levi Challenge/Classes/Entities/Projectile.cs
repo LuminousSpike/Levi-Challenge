@@ -43,7 +43,7 @@ namespace Levi_Challenge
         {
             Position.X += ProjectileSpeed;
             CollisionBox = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
-            if (Position.X + Width / 2 > viewport.Width)
+            if (Position.X - Width / 2 > viewport.Width || Position.X + Width / 2 < 0)
                 Active = false;
         }
 
