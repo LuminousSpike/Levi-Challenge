@@ -18,27 +18,27 @@ namespace Levi_Challenge
                     if (Projectiles[i].CollisionBox.Intersects(Enemies[ii].CollisionBox) && Projectiles[i].ShooterShip != Enemies[ii].myShip)
                     {
                         Projectiles[i].Active = false;
-                        Enemies[ii].myShip.Health -= Projectiles[i].ProjectileDamage;
+                        DamageShip(Projectiles[i].ProjectileDamage, Enemies[ii].myShip);
                     }
-
-                    if (player.CollisionBox.Intersects(Enemies[ii].CollisionBox))
-                    {
-                        Enemies[ii].myShip.Health = 0;
-                    }
+                    
                 }
 
                 // Player
                 if (Projectiles[i].CollisionBox.Intersects(player.CollisionBox) && Projectiles[i].ShooterShip != player.myShip)
                 {
                     Projectiles[i].Active = false;
-                    float damage = Projectiles[i].ProjectileDamage - player.myShip.Shield;
-                    player.myShip.Shield -= Projectiles[i].ProjectileDamage;
-                    if (damage > 0)
-                    {
-                        player.myShip.Health -= (int)damage;
-                    }
+                    DamageShip(Projectiles[i].ProjectileDamage, player.myShip);
                 }
 
+            }
+
+            for (int i = 0; i < Enemies.Count; i++)
+            {
+                if (player.CollisionBox.Intersects(Enemies[i].CollisionBox))
+                {
+                    Enemies[i].myShip.Health = 0;
+                    DamageShip(50, player.myShip); // Replace hard coded value with a variable
+                }
             }
 
             for (int i = 0; i < Astroids.Count; i++)
@@ -60,6 +60,16 @@ namespace Levi_Challenge
             // Check for game over
             if (player.myShip.Health <= 0)
                 Game1.gameState = Game1.GameState.GameOver;
+        }
+
+        private void DamageShip(int damageDealt, Ship ship)
+        {
+            float damage = damageDealt - ship.Shield;
+            ship.Shield -= damageDealt;
+            if (damage > 0)
+            {
+                ship.Health -= (int)damage;
+            }
         }
 
         private bool IntersectPixels(Rectangle rectangleA, Color[] dataA, Rectangle rectangleB, Color[] dataB)
