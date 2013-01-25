@@ -160,7 +160,7 @@ namespace Levi_Challenge
 
             // Shield recharge
             if (Shield > 0 && Shield < MaxShield && shieldDown == false)
-                Shield += (MaxShield / 100) * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 600f);
+                Shield += (MaxShield / 60) * (float)gameTime.ElapsedGameTime.TotalSeconds;
             else if (Shield <= 0 && shieldDown == false)
             {
                 shieldDown = true;
@@ -171,7 +171,7 @@ namespace Levi_Challenge
             else if (Shield < 0)
                 Shield = 0;
             else if (shieldReserve < (MaxShield / 100 * 25) && shieldDown == true)
-                shieldReserve += (MaxShield / 100) * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 600f);
+                shieldReserve += (MaxShield / 60) * (float)gameTime.ElapsedGameTime.TotalSeconds;
             else if (shieldReserve > (MaxShield / 100 * 25) && shieldDown == true)
             {
                 Shield = shieldReserve;
