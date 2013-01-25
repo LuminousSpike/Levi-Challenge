@@ -13,6 +13,7 @@ namespace Levi_Challenge
         public bool Active, Splitting = false;
         public float Value;
         public int Width, Height, Size, Health;
+        public Color[] TextureData;
 
         public Astroid(Texture2D texture1, Texture2D texture2, Texture2D texture3, Texture2D texture4)
         {
@@ -43,6 +44,8 @@ namespace Levi_Challenge
             SetSpeed();
             SetRotation();
             Active = true;
+            TextureData = new Color[Texture.Width * Texture.Height];
+            Texture.GetData(TextureData);
         }
 
         public void Update(GameTime gametime)
@@ -102,6 +105,9 @@ namespace Levi_Challenge
 
             Width = Texture.Width;
             Height = Texture.Height;
+
+            TextureData = new Color[Texture.Width * Texture.Height];
+            Texture.GetData(TextureData);
         }
 
         private void SetHealth()
