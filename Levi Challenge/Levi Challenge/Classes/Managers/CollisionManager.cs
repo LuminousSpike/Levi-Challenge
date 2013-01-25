@@ -56,6 +56,10 @@ namespace Levi_Challenge
                     }
                 }
             }
+
+            // Check for game over
+            if (player.myShip.Health <= 0)
+                Game1.gameState = Game1.GameState.GameOver;
         }
 
         private bool IntersectPixels(Rectangle rectangleA, Color[] dataA, Rectangle rectangleB, Color[] dataB)
