@@ -31,6 +31,10 @@ namespace Levi_Challenge
 
         public void Initialize(GraphicsDevice graphicsDevice, ContentManager content)
         {
+            Level = 0;
+            SpawnCount = 0;
+            SpawnLimit = 10;
+
             enemyManager = new EnemyManager(graphicsDevice);
             enemyManager.Initialize(content);
 
