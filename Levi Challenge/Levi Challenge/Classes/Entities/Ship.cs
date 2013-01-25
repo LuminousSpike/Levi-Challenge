@@ -9,7 +9,7 @@ namespace Levi_Challenge
     class Ship
     {
         public string Name, ShipTexturePath, ShipType, AI;
-        public int Health, WeaponClass, Armour, Cost, Level, Points, Hardpoints;
+        public int Health, MaxHealth, WeaponClass, Armour, Cost, Level, Points, Hardpoints;
         public float Shield, MaxShield, Speed;
         public Weapon[] myHardpoints;
         public Texture2D ShipTexture;
@@ -24,6 +24,7 @@ namespace Levi_Challenge
         {
             Name = name;
             Health = health;
+            MaxHealth = health;
             Shield = shield;
             MaxShield = shield;
             Speed = speed;
@@ -42,6 +43,7 @@ namespace Levi_Challenge
         {
             Name = name;
             Health = health;
+            MaxHealth = health;
             Shield = shield;
             MaxShield = shield;
             Speed = speed;
