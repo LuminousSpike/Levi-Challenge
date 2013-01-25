@@ -10,28 +10,35 @@ namespace Levi_Challenge
     {
         public void Update(Player player, List<Enemy> Enemies, List<Astroid> Astroids, List<Projectile> Projectiles)
         {
-            for (int i = 0; i < Enemies.Count; i++)
+            for (int i = 0; i < Projectiles.Count; i++)
             {
-                if (player.CollisionBox.Intersects(Enemies[i].CollisionBox))
+                for (int ii = 0; ii < Enemies.Count; ii++)
                 {
-                    Enemies[i].myShip.Health = 0;
-                }
-                for (int ii = 0; ii < Projectiles.Count; ii++)
-                {
-                    // Player
-                    if (Projectiles[ii].CollisionBox.Intersects(player.CollisionBox) && Projectiles[ii].ShooterShip != player.myShip)
+                    // Enemies
+                    if (Projectiles[i].CollisionBox.Intersects(Enemies[ii].CollisionBox) && Projectiles[i].ShooterShip != Enemies[ii].myShip)
                     {
-                        Projectiles[ii].Active = false;
-                        player.myShip.Health -= Projectiles[ii].ProjectileDamage;
+                        Projectiles[i].Active = false;
+                        Enemies[ii].myShip.Health -= Projectiles[i].ProjectileDamage;
                     }
 
-                    // Enemies
-                    if (Projectiles[ii].CollisionBox.Intersects(Enemies[i].CollisionBox) && Projectiles[ii].ShooterShip != Enemies[i].myShip)
+                    if (player.CollisionBox.Intersects(Enemies[ii].CollisionBox))
                     {
-                        Projectiles[ii].Active = false;
-                        Enemies[i].myShip.Health -= Projectiles[ii].ProjectileDamage;
+                        Enemies[ii].myShip.Health = 0;
                     }
                 }
+
+                // Player
+                if (Projectiles[i].CollisionBox.Intersects(player.CollisionBox) && Projectiles[i].ShooterShip != player.myShip)
+                {
+                    Projectiles[i].Active = false;
+                    float damage = Projectiles[i].ProjectileDamage - player.myShip.Shield;
+                    player.myShip.Shield -= Projectiles[i].ProjectileDamage;
+                    if (damage > 0)
+                    {
+                        player.myShip.Health -= (int)damage;
+                    }
+                }
+
             }
 
             for (int i = 0; i < Astroids.Count; i++)

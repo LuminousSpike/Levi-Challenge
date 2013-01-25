@@ -10,13 +10,14 @@ namespace Levi_Challenge
     {
         public string Name, ShipTexturePath, ShipType, AI;
         public int Health, WeaponClass, Armour, Cost, Level, Points, Hardpoints;
-        public float Shield, Speed;
+        public float Shield, MaxShield, Speed;
         public Weapon[] myHardpoints;
         public Texture2D ShipTexture;
         public Vector2 position;
         
-        private bool acceleratingX = false, acceleratingY = false;
+        private bool acceleratingX = false, acceleratingY = false, shieldDown = false;
         private Vector2 mySpeed = new Vector2();
+        private float shieldReserve;
 
         // Player Constructor
         public Ship(string name, int health, float shield, float speed, int weaponclass, int armour, string texture, int cost, string shiptype, int hardpoints)
@@ -24,6 +25,7 @@ namespace Levi_Challenge
             Name = name;
             Health = health;
             Shield = shield;
+            MaxShield = shield;
             Speed = speed;
             WeaponClass = weaponclass;
             Armour = armour;
@@ -41,6 +43,7 @@ namespace Levi_Challenge
             Name = name;
             Health = health;
             Shield = shield;
+            MaxShield = shield;
             Speed = speed;
             WeaponClass = weaponclass;
             Armour = armour;
@@ -142,7 +145,7 @@ namespace Levi_Challenge
             }
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             position += mySpeed;
             if (acceleratingX == true)
@@ -154,6 +157,26 @@ namespace Levi_Challenge
                 acceleratingY = false;
             else
                 Deaccelerate(false, true);
+
+            // Shield recharge
+            if (Shield > 0 && Shield < MaxShield && shieldDown == false)
+                Shield += (MaxShield / 100) * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 600f);
+            else if (Shield <= 0 && shieldDown == false)
+            {
+                shieldDown = true;
+                shieldReserve = 0f;
+            }
+            else if (Shield > MaxShield)
+                Shield = MaxShield;
+            else if (Shield < 0)
+                Shield = 0;
+            else if (shieldReserve < (MaxShield / 100 * 25) && shieldDown == true)
+                shieldReserve += (MaxShield / 100) * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 600f);
+            else if (shieldReserve > (MaxShield / 100 * 25) && shieldDown == true)
+            {
+                Shield = shieldReserve;
+                shieldDown = false;
+            }
         }
     }
 }

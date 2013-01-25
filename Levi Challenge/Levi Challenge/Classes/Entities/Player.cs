@@ -57,7 +57,7 @@ namespace Levi_Challenge
                 myShip.Move(myShip.Speed, 0f);
             }
 
-            myShip.Update();
+            myShip.Update(gameTime);
             myShip.FireWeapon(gameTime, projectileManager, myShip.position, true);
 
             // Make sure that the player does not go out of bounds

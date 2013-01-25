@@ -44,8 +44,6 @@ namespace Levi_Challenge
             SetSpeed();
             SetRotation();
             Active = true;
-            TextureData = new Color[Texture.Width * Texture.Height];
-            Texture.GetData(TextureData);
         }
 
         public void Update(GameTime gametime)
@@ -106,7 +104,7 @@ namespace Levi_Challenge
             Width = Texture.Width;
             Height = Texture.Height;
 
-            TextureData = new Color[Texture.Width * Texture.Height];
+            TextureData = new Color[Width * Height];
             Texture.GetData(TextureData);
         }
 
