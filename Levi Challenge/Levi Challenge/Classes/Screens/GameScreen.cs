@@ -106,7 +106,7 @@ namespace Levi_Challenge
             spawnManager.Update(gameTime, projectileManager);
             player.Update(gameTime, projectileManager);
             projectileManager.Update(graphicsDevice.Viewport);
-            collisionManager.Update(player, spawnManager.enemyManager.Enemies, spawnManager.enemyManager.Astroids, projectileManager.Projectiles);
+            collisionManager.Update(player, spawnManager.enemyManager.Enemies, spawnManager.enemyManager.Asteroids, projectileManager.Projectiles);
             hudManager.Update(graphicsDevice);
         }
 

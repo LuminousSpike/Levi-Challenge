@@ -10,10 +10,10 @@ namespace Levi_Challenge
     {
         public List<Texture2D> EnemyTexture;
         public List<Enemy> Enemies;
-        public List<Asteroid> Astroids;
+        public List<Asteroid> Asteroids;
 
         private GraphicsDevice graphicsDevice { get; set; }
-        private Texture2D AstroidTexture1, AstroidTexture2, AstroidTexture3, AstroidTexture4;
+        private Texture2D AsteroidTexture1, AsteroidTexture2, AsteroidTexture3, AsteroidTexture4;
 
         public EnemyManager(GraphicsDevice graphicsdevice)
         {
@@ -26,7 +26,7 @@ namespace Levi_Challenge
             EnemyTexture = new List<Texture2D>();
 
             Enemies = new List<Enemy>();
-            Astroids = new List<Asteroid>();
+            Asteroids = new List<Asteroid>();
         }
 
         public void Update(GameTime gameTime, ProjectileManager projectilemanager)
@@ -36,9 +36,9 @@ namespace Levi_Challenge
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            for (int i = 0; i < Astroids.Count; i++)
+            for (int i = 0; i < Asteroids.Count; i++)
             {
-                Astroids[i].Draw(spriteBatch);
+                Asteroids[i].Draw(spriteBatch);
             }
 
             for (int i = 0; i < Enemies.Count; i++)
@@ -57,37 +57,37 @@ namespace Levi_Challenge
 
         public void AddAstroid(Random random)
         {
-            Asteroid astroid = new Asteroid(AstroidTexture1, AstroidTexture2, AstroidTexture3, AstroidTexture4);
+            Asteroid astroid = new Asteroid(AsteroidTexture1, AsteroidTexture2, AsteroidTexture3, AsteroidTexture4);
             astroid.Initialize(random.Next(1, 5));
             astroid.Position = new Vector2(graphicsDevice.Viewport.Width + astroid.Texture.Width / 2, random.Next(100, graphicsDevice.Viewport.Height - 100));
-            Astroids.Add(astroid);
+            Asteroids.Add(astroid);
         }
 
         public void SplitAstroid(int size, Vector2 position)
         {
-            Asteroid astroid = new Asteroid(AstroidTexture1, AstroidTexture2, AstroidTexture3, AstroidTexture4);
+            Asteroid astroid = new Asteroid(AsteroidTexture1, AsteroidTexture2, AsteroidTexture3, AsteroidTexture4);
             astroid.Initialize(size);
             astroid.Position = position;
-            Astroids.Add(astroid);
+            Asteroids.Add(astroid);
         }
 
         private void UpdateEnemies(GameTime gameTime, ProjectileManager projectilemanager)
         {
-            for (int i = Astroids.Count - 1; i >= 0; i--)
+            for (int i = Asteroids.Count - 1; i >= 0; i--)
             {
-                if (Astroids[i].Splitting == true)
+                if (Asteroids[i].Splitting == true)
                 {
                     Random random = new Random();
-                    SplitAstroid(Astroids[i].Size, Astroids[i].Position + new Vector2(0, -25 * Astroids[i].Size));
-                    Astroids[i].Position += new Vector2(0, 25 * Astroids[i].Size);
-                    Astroids[i].Splitting = false;
+                    SplitAstroid(Asteroids[i].Size, Asteroids[i].Position + new Vector2(0, -25 * Asteroids[i].Size));
+                    Asteroids[i].Position += new Vector2(0, 25 * Asteroids[i].Size);
+                    Asteroids[i].Splitting = false;
                 }
 
-                Astroids[i].Update(gameTime);
+                Asteroids[i].Update(gameTime);
 
-                if (Astroids[i].Active == false)
+                if (Asteroids[i].Active == false)
                 {
-                    Astroids.RemoveAt(i);
+                    Asteroids.RemoveAt(i);
                 }
 
             }
@@ -105,10 +105,10 @@ namespace Levi_Challenge
 
         public void LoadContent(ContentManager content)
         {
-            AstroidTexture1 = content.Load<Texture2D>(@"Sprites\Asteroids\Asteroid-1");
-            AstroidTexture2 = content.Load<Texture2D>(@"Sprites\Asteroids\Asteroid-2");
-            AstroidTexture3 = content.Load<Texture2D>(@"Sprites\Asteroids\Asteroid-3");
-            AstroidTexture4 = content.Load<Texture2D>(@"Sprites\Asteroids\Asteroid-4");
+            AsteroidTexture1 = content.Load<Texture2D>(@"Sprites\Asteroids\Asteroid-1");
+            AsteroidTexture2 = content.Load<Texture2D>(@"Sprites\Asteroids\Asteroid-2");
+            AsteroidTexture3 = content.Load<Texture2D>(@"Sprites\Asteroids\Asteroid-3");
+            AsteroidTexture4 = content.Load<Texture2D>(@"Sprites\Asteroids\Asteroid-4");
         }
     }
 }
