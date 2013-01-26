@@ -10,7 +10,7 @@ namespace Levi_Challenge
         public Color[] TextureData;
         public Vector2 Position;
         public int ProjectileDamage;
-        public bool Active = true;
+        public bool Active = true, EnemyProjectile;
         public Ship ShooterShip;
         public Matrix myTransform;
 
@@ -28,7 +28,7 @@ namespace Levi_Challenge
             get { return ProjectileTexture.Height; }
         }
 
-        public Projectile(Texture2D projectileTexture, string projectileType, float projectileSpeed, int projectileDamage, Vector2 projectilePostition, Ship ship)
+        public Projectile(Texture2D projectileTexture, string projectileType, float projectileSpeed, int projectileDamage, Vector2 projectilePostition, Ship ship, bool enemyProjectile = false)
         {
             ProjectileTexture = projectileTexture;
             ProjectileType = projectileType;
@@ -36,6 +36,7 @@ namespace Levi_Challenge
             ProjectileDamage = projectileDamage;
             Position = projectilePostition;
             ShooterShip = ship;
+            EnemyProjectile = enemyProjectile;
             TextureData = new Color[ProjectileTexture.Width * ProjectileTexture.Height];
             ProjectileTexture.GetData(TextureData);
         }

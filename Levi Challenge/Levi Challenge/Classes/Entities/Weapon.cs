@@ -51,7 +51,7 @@ namespace Levi_Challenge
                     projectileSpeed = ProjectileSpeed;
                 else
                     projectileSpeed = -ProjectileSpeed;
-                Projectile myProjectile = new Projectile(ProjectileTexture, ProjectileType, projectileSpeed, ProjectileDamage, postition, ship);
+                Projectile myProjectile = new Projectile(ProjectileTexture, ProjectileType, projectileSpeed, ProjectileDamage, postition, ship, !isplayer);
                 myProjectile.Position.X += OffsetX;
                 myProjectile.Position.Y += OffsetY;
                 this.PreviousFireTime = gameTime.TotalGameTime;

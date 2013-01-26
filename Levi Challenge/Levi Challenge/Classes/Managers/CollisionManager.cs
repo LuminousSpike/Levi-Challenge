@@ -15,7 +15,7 @@ namespace Levi_Challenge
                 for (int ii = 0; ii < Enemies.Count; ii++)
                 {
                     // Enemies
-                    if (Projectiles[i].CollisionBox.Intersects(Enemies[ii].CollisionBox) && Projectiles[i].ShooterShip != Enemies[ii].myShip)
+                    if (Projectiles[i].CollisionBox.Intersects(Enemies[ii].CollisionBox) && Projectiles[i].ShooterShip != Enemies[ii].myShip && Projectiles[i].EnemyProjectile == false)
                     {
                         Projectiles[i].Active = false;
                         DamageShip(Projectiles[i].ProjectileDamage, Enemies[ii].myShip);
