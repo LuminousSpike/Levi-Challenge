@@ -105,10 +105,10 @@ namespace Levi_Challenge
 
         public void LoadContent(ContentManager content)
         {
-            AstroidTexture1 = content.Load<Texture2D>(@"Sprites\Astroids\Astroid-1");
-            AstroidTexture2 = content.Load<Texture2D>(@"Sprites\Astroids\Astroid-2");
-            AstroidTexture3 = content.Load<Texture2D>(@"Sprites\Astroids\Astroid-3");
-            AstroidTexture4 = content.Load<Texture2D>(@"Sprites\Astroids\Astroid-4");
+            AstroidTexture1 = content.Load<Texture2D>(@"Sprites\Asteroids\Asteroid-1");
+            AstroidTexture2 = content.Load<Texture2D>(@"Sprites\Asteroids\Asteroid-2");
+            AstroidTexture3 = content.Load<Texture2D>(@"Sprites\Asteroids\Asteroid-3");
+            AstroidTexture4 = content.Load<Texture2D>(@"Sprites\Asteroids\Asteroid-4");
         }
     }
 }

@@ -124,29 +124,29 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Astroids\Astroid-4.png">
-      <Name>Astroid-4</Name>
+    <Compile Include="Sprites\Asteroids\Asteroid-4.png">
+      <Name>Asteroid-4</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Astroids\Astroid-3.png">
-      <Name>Astroid-3</Name>
+    <Compile Include="Sprites\Asteroids\Asteroid-3.png">
+      <Name>Asteroid-3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Astroids\Astroid-2.png">
-      <Name>Astroid-2</Name>
+    <Compile Include="Sprites\Asteroids\Asteroid-2.png">
+      <Name>Asteroid-2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Astroids\Astroid-1.png">
-      <Name>Astroid-1</Name>
+    <Compile Include="Sprites\Asteroids\Asteroid-1.png">
+      <Name>Asteroid-1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
