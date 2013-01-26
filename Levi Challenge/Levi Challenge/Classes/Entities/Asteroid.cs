@@ -8,7 +8,7 @@ namespace Levi_Challenge
     class Asteroid
     {
         public Texture2D Texture;
-        public Vector2 Position;
+        public Vector2 Position, myOrigin;
         public Rectangle CollisionBox;
         public bool Active, Splitting = false;
         public float Value;
@@ -53,7 +53,7 @@ namespace Levi_Challenge
             Rotation += RotationRate;
             Rotation = Rotation % Circle;
             CollisionBox = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
-            myTransform = Matrix.CreateTranslation(new Vector3(Position, 0.0f));
+            myTransform = Matrix.CreateTranslation(new Vector3(-myOrigin, 0.0f)) * Matrix.CreateRotationZ(Rotation) * Matrix.CreateTranslation(new Vector3(Position, 0.0f));
 
             if (Position.X < -Width)
             {
@@ -67,7 +67,7 @@ namespace Levi_Challenge
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Position, null, Color.White, Rotation, new Vector2(Width / 2, Height / 2), 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(Texture, Position, null, Color.White, Rotation, myOrigin, 1f, SpriteEffects.None, 0f);
         }
 
         private void Split()
@@ -105,6 +105,7 @@ namespace Levi_Challenge
 
             Width = Texture.Width;
             Height = Texture.Height;
+            myOrigin = new Vector2(Width / 2, Height / 2);
 
             TextureData = new Color[Width * Height];
             Texture.GetData(TextureData);
