@@ -8,29 +8,36 @@ namespace Levi_Challenge
 {
     class CollisionManager
     {
-        public void Update(Player player, List<Enemy> Enemies, List<Astroid> Astroids, List<Projectile> Projectiles)
+        public void Update(Player player, List<Enemy> Enemies, List<Asteroid> Astroids, List<Projectile> Projectiles)
         {
+            for (int i = 0; i < Projectiles.Count; i++)
+            {
+                for (int ii = 0; ii < Enemies.Count; ii++)
+                {
+                    // Enemies
+                    if (Projectiles[i].CollisionBox.Intersects(Enemies[ii].CollisionBox) && Projectiles[i].ShooterShip != Enemies[ii].myShip)
+                    {
+                        Projectiles[i].Active = false;
+                        DamageShip(Projectiles[i].ProjectileDamage, Enemies[ii].myShip);
+                    }
+                    
+                }
+
+                // Player
+                if (Projectiles[i].CollisionBox.Intersects(player.CollisionBox) && Projectiles[i].ShooterShip != player.myShip)
+                {
+                    Projectiles[i].Active = false;
+                    DamageShip(Projectiles[i].ProjectileDamage, player.myShip);
+                }
+
+            }
+
             for (int i = 0; i < Enemies.Count; i++)
             {
                 if (player.CollisionBox.Intersects(Enemies[i].CollisionBox))
                 {
                     Enemies[i].myShip.Health = 0;
-                }
-                for (int ii = 0; ii < Projectiles.Count; ii++)
-                {
-                    // Player
-                    if (Projectiles[ii].CollisionBox.Intersects(player.CollisionBox) && Projectiles[ii].ShooterShip != player.myShip)
-                    {
-                        Projectiles[ii].Active = false;
-                        player.myShip.Health -= Projectiles[ii].ProjectileDamage;
-                    }
-
-                    // Enemies
-                    if (Projectiles[ii].CollisionBox.Intersects(Enemies[i].CollisionBox) && Projectiles[ii].ShooterShip != Enemies[i].myShip)
-                    {
-                        Projectiles[ii].Active = false;
-                        Enemies[i].myShip.Health -= Projectiles[ii].ProjectileDamage;
-                    }
+                    DamageShip(50, player.myShip); // Replace hard coded value with a variable
                 }
             }
 
@@ -42,13 +49,57 @@ namespace Levi_Challenge
                 }
                 for (int ii = 0; ii < Projectiles.Count; ii++)
                 {
-                    if (Projectiles[ii].CollisionBox.Intersects(Astroids[i].CollisionBox))
+                    if (IntersectPixels(Projectiles[ii].CollisionBox, Projectiles[ii].TextureData, Astroids[i].CollisionBox, Astroids[i].TextureData))
                     {
                         Projectiles[ii].Active = false;
                         Astroids[i].Health -= Projectiles[ii].ProjectileDamage;
                     }
                 }
             }
+
+            // Check for game over
+            if (player.myShip.Health <= 0)
+                Game1.gameState = Game1.GameState.GameOver;
+        }
+
+        private void DamageShip(int damageDealt, Ship ship)
+        {
+            float damage = damageDealt - ship.Shield;
+            ship.Shield -= damageDealt;
+            if (damage > 0)
+            {
+                ship.Health -= (int)damage;
+            }
+        }
+
+        private bool IntersectPixels(Rectangle rectangleA, Color[] dataA, Rectangle rectangleB, Color[] dataB)
+        {
+            // Find the bounds of the rectangle intersection
+            int top = Math.Max(rectangleA.Top, rectangleB.Top);
+            int bottom = Math.Min(rectangleA.Bottom, rectangleB.Bottom);
+            int left = Math.Max(rectangleA.Left, rectangleB.Left);
+            int right = Math.Min(rectangleA.Right, rectangleB.Right);
+
+            // Check every point within the intersection bounds
+            for (int y = top; y < bottom; y++)
+            {
+                for (int x = left; x < right; x++)
+                {
+                    // Get the color of both pixels at this point
+                    Color colorA = dataA[(x - rectangleA.Left) + (y - rectangleA.Top) * rectangleA.Width];
+                    Color colorB = dataB[(x - rectangleB.Left) + (y - rectangleB.Top) * rectangleB.Width];
+
+                    // If both pixels are not completely transparent
+                    if (colorA.A != 0 && colorB.A != 0)
+                    {
+                        // Then the intersection has been found
+                        return true;
+                    }
+                }
+            }
+
+            // No intersection has been found
+            return false;
         }
     }
 }

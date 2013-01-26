@@ -3,7 +3,7 @@
 <Ship PlayerShip="true">
   <Name>Old Gum</Name>
   <Health>100</Health>
-  <Shield>100</Shield>
+  <Shield>40</Shield>
   <Speed>4</Speed>
   <Hardpoints>2</Hardpoints>
   <WeaponClass>1</WeaponClass>

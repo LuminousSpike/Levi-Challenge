@@ -7,6 +7,7 @@ namespace Levi_Challenge
     class Projectile
     {
         public Rectangle CollisionBox;
+        public Color[] TextureData;
         public Vector2 Position;
         public int ProjectileDamage;
         public bool Active = true;
@@ -34,13 +35,15 @@ namespace Levi_Challenge
             ProjectileDamage = projectileDamage;
             Position = projectilePostition;
             ShooterShip = ship;
+            TextureData = new Color[ProjectileTexture.Width * ProjectileTexture.Height];
+            ProjectileTexture.GetData(TextureData);
         }
 
         public void Update(Viewport viewport)
         {
             Position.X += ProjectileSpeed;
             CollisionBox = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
-            if (Position.X + Width / 2 > viewport.Width)
+            if (Position.X - Width / 2 > viewport.Width || Position.X + Width / 2 < 0)
                 Active = false;
         }
 

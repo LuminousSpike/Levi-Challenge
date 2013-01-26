@@ -59,12 +59,12 @@ namespace Solar
                 myBox.UnloadContent();
         }
 
-        public void Update(int value)
+        public void Update(int value, int maxValue)
         {
             if (Texture == null)
                 myBox.UpdateScale(value);
             else
-                Scale.X = (((float)Texture.Width / 100) * (value / (float)Texture.Width));
+                Scale.X = (((float)Texture.Width / maxValue) * (value / (float)Texture.Width));
         }
 
         public void Draw(SpriteBatch spritebatch)

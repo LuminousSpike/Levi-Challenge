@@ -11,7 +11,7 @@ namespace Levi_Challenge
         public EnemyManager enemyManager;
 
         private static int Level = 0, SpawnCount = 0, SpawnLimit = 10;
-        private bool AstroidSwarm = false;
+        private bool AsteroidSwarm = false;
         private TimeSpan enemySpawnTime, previousSpawnTime;
         private Random random;
         private XMLEngine xmlEngine;
@@ -31,6 +31,10 @@ namespace Levi_Challenge
 
         public void Initialize(GraphicsDevice graphicsDevice, ContentManager content)
         {
+            Level = 0;
+            SpawnCount = 0;
+            SpawnLimit = 10;
+
             enemyManager = new EnemyManager(graphicsDevice);
             enemyManager.Initialize(content);
 
@@ -60,7 +64,7 @@ namespace Levi_Challenge
         {
             if (SpawnCount < SpawnLimit)
             {
-                if (AstroidSwarm == false)
+                if (AsteroidSwarm == false)
                 {
                     int rand = random.Next(100);
                     if (rand < 95)
@@ -80,10 +84,10 @@ namespace Levi_Challenge
                         }
                     }
                     else
-                        enemyManager.AddAstroid(random);
+                        enemyManager.AddAsteroid(random);
                 }
                 else
-                    enemyManager.AddAstroid(random);
+                    enemyManager.AddAsteroid(random);
                 SpawnCount ++;
             }
             else
@@ -95,7 +99,7 @@ namespace Levi_Challenge
                 if (Level >= 3)
                 {
                     if (random.Next(100) <= 12)
-                        AstroidSwarm = true;
+                        AsteroidSwarm = true;
                 }
             }
         }

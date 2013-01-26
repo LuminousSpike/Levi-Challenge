@@ -10,7 +10,7 @@ namespace Levi_Challenge
     {
         public Rectangle CollisionBox;
         public static int Score = 0;
-        public static float Flamoca;
+        public static float Flamoca = 0f;
         public Ship myShip;
         
         private Texture2D texture;
@@ -24,7 +24,8 @@ namespace Levi_Challenge
         
         public void Initialize()
         {
-            
+            Score = 0;
+            Flamoca = 0f;
         }
 
         public void LoadContent(ContentManager content, int screenWidth, int screenHeight)
@@ -57,7 +58,7 @@ namespace Levi_Challenge
                 myShip.Move(myShip.Speed, 0f);
             }
 
-            myShip.Update();
+            myShip.Update(gameTime);
             myShip.FireWeapon(gameTime, projectileManager, myShip.position, true);
 
             // Make sure that the player does not go out of bounds
