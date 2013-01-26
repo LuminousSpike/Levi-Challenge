@@ -11,7 +11,7 @@ namespace Levi_Challenge
         public EnemyManager enemyManager;
 
         private static int Level = 0, SpawnCount = 0, SpawnLimit = 10;
-        private bool AsteroidSwarm = true;
+        private bool AsteroidSwarm = false;
         private TimeSpan enemySpawnTime, previousSpawnTime;
         private Random random;
         private XMLEngine xmlEngine;
