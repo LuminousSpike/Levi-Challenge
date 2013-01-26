@@ -55,7 +55,7 @@ namespace Levi_Challenge
             Enemies.Add(enemy);
         }
 
-        public void AddAstroid(Random random)
+        public void AddAsteroid(Random random)
         {
             Asteroid astroid = new Asteroid(AsteroidTexture1, AsteroidTexture2, AsteroidTexture3, AsteroidTexture4);
             astroid.Initialize(random.Next(1, 5));
@@ -63,7 +63,7 @@ namespace Levi_Challenge
             Asteroids.Add(astroid);
         }
 
-        public void SplitAstroid(int size, Vector2 position)
+        public void SplitAsteroid(int size, Vector2 position)
         {
             Asteroid astroid = new Asteroid(AsteroidTexture1, AsteroidTexture2, AsteroidTexture3, AsteroidTexture4);
             astroid.Initialize(size);
@@ -78,7 +78,7 @@ namespace Levi_Challenge
                 if (Asteroids[i].Splitting == true)
                 {
                     Random random = new Random();
-                    SplitAstroid(Asteroids[i].Size, Asteroids[i].Position + new Vector2(0, -25 * Asteroids[i].Size));
+                    SplitAsteroid(Asteroids[i].Size, Asteroids[i].Position + new Vector2(0, -25 * Asteroids[i].Size));
                     Asteroids[i].Position += new Vector2(0, 25 * Asteroids[i].Size);
                     Asteroids[i].Splitting = false;
                 }
