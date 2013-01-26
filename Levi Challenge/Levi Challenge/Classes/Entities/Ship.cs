@@ -13,7 +13,8 @@ namespace Levi_Challenge
         public float Shield, MaxShield, Speed;
         public Weapon[] myHardpoints;
         public Texture2D ShipTexture;
-        public Vector2 position;
+        public Vector2 Position;
+        public Matrix myTransform;
         
         private bool acceleratingX = false, acceleratingY = false, shieldDown = false;
         private Vector2 mySpeed = new Vector2();
@@ -149,7 +150,7 @@ namespace Levi_Challenge
 
         public void Update(GameTime gameTime)
         {
-            position += mySpeed;
+            Position += mySpeed;
             if (acceleratingX == true)
                 acceleratingX = false;
             else
@@ -159,6 +160,7 @@ namespace Levi_Challenge
                 acceleratingY = false;
             else
                 Deaccelerate(false, true);
+            myTransform = Matrix.CreateTranslation(new Vector3(Position, 0.0f));
 
             // Shield recharge
             if (Shield > 0 && Shield < MaxShield && shieldDown == false)

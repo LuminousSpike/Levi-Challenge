@@ -49,7 +49,7 @@ namespace Levi_Challenge
                 }
                 for (int ii = 0; ii < Projectiles.Count; ii++)
                 {
-                    if (IntersectPixels(Projectiles[ii].CollisionBox, Projectiles[ii].TextureData, Astroids[i].CollisionBox, Astroids[i].TextureData))
+                    if (IntersectPixels(Projectiles[ii].myTransform, Projectiles[ii].Width, Projectiles[ii].Height, Projectiles[ii].TextureData, Astroids[i].myTransform, Astroids[i].Width, Astroids[i].Height, Astroids[i].TextureData))
                     {
                         Projectiles[ii].Active = false;
                         Astroids[i].Health -= Projectiles[ii].ProjectileDamage;
@@ -72,28 +72,34 @@ namespace Levi_Challenge
             }
         }
 
-        private bool IntersectPixels(Rectangle rectangleA, Color[] dataA, Rectangle rectangleB, Color[] dataB)
+        private bool IntersectPixels(Matrix transformA, int widthA, int heightA, Color[] dataA, Matrix transformB, int widthB, int heightB, Color[] dataB)
         {
-            // Find the bounds of the rectangle intersection
-            int top = Math.Max(rectangleA.Top, rectangleB.Top);
-            int bottom = Math.Min(rectangleA.Bottom, rectangleB.Bottom);
-            int left = Math.Max(rectangleA.Left, rectangleB.Left);
-            int right = Math.Min(rectangleA.Right, rectangleB.Right);
+            // Calculate a matrix which reansforms from A's local space into world space and then into B's local space
+            Matrix transformAToB = transformA * Matrix.Invert(transformB);
 
-            // Check every point within the intersection bounds
-            for (int y = top; y < bottom; y++)
+            // For each row of pixels in A
+            for (int yA = 0; yA < heightA; yA++)
             {
-                for (int x = left; x < right; x++)
+                // For each pixel in this row
+                for (int xA = 0; xA < widthA; xA++)
                 {
-                    // Get the color of both pixels at this point
-                    Color colorA = dataA[(x - rectangleA.Left) + (y - rectangleA.Top) * rectangleA.Width];
-                    Color colorB = dataB[(x - rectangleB.Left) + (y - rectangleB.Top) * rectangleB.Width];
+                    // Calculate this pixel's location in B
+                    Vector2 positionInB = Vector2.Transform(new Vector2(xA, yA), transformAToB);
 
-                    // If both pixels are not completely transparent
-                    if (colorA.A != 0 && colorB.A != 0)
+                    // Round to the nearest pixel
+                    int xB = (int)Math.Round(positionInB.X);
+                    int yB = (int)Math.Round(positionInB.Y);
+
+                    // If the pixel lies within the bounds of B
+                    if (0 <= xB && xB < widthB && 0 <= yB && yB < heightB)
                     {
-                        // Then the intersection has been found
-                        return true;
+                        // Get the colors of the overlapping pixels
+                        Color colorA = dataA[xA + yA * widthA];
+                        Color colorB = dataB[xB + yB * widthB];
+
+                        // If both pixels are not completely transparent
+                        if (colorA.A != 0 && colorB.A != 0)
+                            return true;
                     }
                 }
             }

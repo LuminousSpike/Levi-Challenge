@@ -14,6 +14,7 @@ namespace Levi_Challenge
         public float Value;
         public int Width, Height, Size, Health;
         public Color[] TextureData;
+        public Matrix myTransform;
 
         public Asteroid(Texture2D texture1, Texture2D texture2, Texture2D texture3, Texture2D texture4)
         {
@@ -52,6 +53,7 @@ namespace Levi_Challenge
             Rotation += RotationRate;
             Rotation = Rotation % Circle;
             CollisionBox = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
+            myTransform = Matrix.CreateTranslation(new Vector3(Position, 0.0f));
 
             if (Position.X < -Width)
             {

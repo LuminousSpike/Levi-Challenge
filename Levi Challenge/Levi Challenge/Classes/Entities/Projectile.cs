@@ -12,6 +12,7 @@ namespace Levi_Challenge
         public int ProjectileDamage;
         public bool Active = true;
         public Ship ShooterShip;
+        public Matrix myTransform;
 
         private Texture2D ProjectileTexture;
         private string ProjectileType;
@@ -43,6 +44,7 @@ namespace Levi_Challenge
         {
             Position.X += ProjectileSpeed;
             CollisionBox = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
+            myTransform = Matrix.CreateTranslation(new Vector3(Position, 0.0f));
             if (Position.X - Width / 2 > viewport.Width || Position.X + Width / 2 < 0)
                 Active = false;
         }

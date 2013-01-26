@@ -32,7 +32,7 @@ namespace Levi_Challenge
         {
             myShip = xmlEngine.PlayerShips[0].ShallowCopy();
             texture = myShip.ShipTexture;
-            myShip.position = new Vector2(screenWidth / 2 - texture.Width / 2, screenHeight / 2 - texture.Height / 2);
+            myShip.Position = new Vector2(screenWidth / 2 - texture.Width / 2, screenHeight / 2 - texture.Height / 2);
             screenSize = new Vector2(screenWidth, screenHeight);
         }
 
@@ -59,17 +59,17 @@ namespace Levi_Challenge
             }
 
             myShip.Update(gameTime);
-            myShip.FireWeapon(gameTime, projectileManager, myShip.position, true);
+            myShip.FireWeapon(gameTime, projectileManager, myShip.Position, true);
 
             // Make sure that the player does not go out of bounds
-            myShip.position.X = MathHelper.Clamp(myShip.position.X, 0, screenSize.X - texture.Width);
-            myShip.position.Y = MathHelper.Clamp(myShip.position.Y, 0, screenSize.Y - texture.Height);
-            CollisionBox = new Rectangle((int)myShip.position.X, (int)myShip.position.Y, texture.Width, texture.Height);
+            myShip.Position.X = MathHelper.Clamp(myShip.Position.X, 0, screenSize.X - texture.Width);
+            myShip.Position.Y = MathHelper.Clamp(myShip.Position.Y, 0, screenSize.Y - texture.Height);
+            CollisionBox = new Rectangle((int)myShip.Position.X, (int)myShip.Position.Y, texture.Width, texture.Height);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, myShip.position, Color.White);
+            spriteBatch.Draw(texture, myShip.Position, Color.White);
         }
     }
 }
