@@ -85,7 +85,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Entities\Astroid.cs" />
+    <Compile Include="Classes\Entities\Asteroid.cs" />
     <Compile Include="Classes\Managers\BackgroundManager.cs" />
     <Compile Include="Classes\Managers\CollisionManager.cs" />
     <Compile Include="Classes\Entities\Enemy.cs" />

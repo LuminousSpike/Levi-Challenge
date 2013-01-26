@@ -10,7 +10,7 @@ namespace Levi_Challenge
     {
         public List<Texture2D> EnemyTexture;
         public List<Enemy> Enemies;
-        public List<Astroid> Astroids;
+        public List<Asteroid> Astroids;
 
         private GraphicsDevice graphicsDevice { get; set; }
         private Texture2D AstroidTexture1, AstroidTexture2, AstroidTexture3, AstroidTexture4;
@@ -26,7 +26,7 @@ namespace Levi_Challenge
             EnemyTexture = new List<Texture2D>();
 
             Enemies = new List<Enemy>();
-            Astroids = new List<Astroid>();
+            Astroids = new List<Asteroid>();
         }
 
         public void Update(GameTime gameTime, ProjectileManager projectilemanager)
@@ -57,7 +57,7 @@ namespace Levi_Challenge
 
         public void AddAstroid(Random random)
         {
-            Astroid astroid = new Astroid(AstroidTexture1, AstroidTexture2, AstroidTexture3, AstroidTexture4);
+            Asteroid astroid = new Asteroid(AstroidTexture1, AstroidTexture2, AstroidTexture3, AstroidTexture4);
             astroid.Initialize(random.Next(1, 5));
             astroid.Position = new Vector2(graphicsDevice.Viewport.Width + astroid.Texture.Width / 2, random.Next(100, graphicsDevice.Viewport.Height - 100));
             Astroids.Add(astroid);
@@ -65,7 +65,7 @@ namespace Levi_Challenge
 
         public void SplitAstroid(int size, Vector2 position)
         {
-            Astroid astroid = new Astroid(AstroidTexture1, AstroidTexture2, AstroidTexture3, AstroidTexture4);
+            Asteroid astroid = new Asteroid(AstroidTexture1, AstroidTexture2, AstroidTexture3, AstroidTexture4);
             astroid.Initialize(size);
             astroid.Position = position;
             Astroids.Add(astroid);

@@ -8,7 +8,7 @@ namespace Levi_Challenge
 {
     class CollisionManager
     {
-        public void Update(Player player, List<Enemy> Enemies, List<Astroid> Astroids, List<Projectile> Projectiles)
+        public void Update(Player player, List<Enemy> Enemies, List<Asteroid> Astroids, List<Projectile> Projectiles)
         {
             for (int i = 0; i < Projectiles.Count; i++)
             {
