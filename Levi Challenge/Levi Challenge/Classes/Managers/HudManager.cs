@@ -60,8 +60,8 @@ namespace Levi_Challenge
             txtBoxScore.UpdateText("Score: " + Player.Score, graphicsDevice);
             txtBoxFlamoca.UpdateText("Flamoca: " + Math.Round((double)Player.Flamoca, 2), graphicsDevice);
             txtBoxWaves.UpdateText("Wave: " + SpawnManager.WaveCount, graphicsDevice);
-            lfbHealthBar.Update(playerRef.myShip.Health);
-            lfbShieldBar.Update((int)playerRef.myShip.Shield);
+            lfbHealthBar.Update(playerRef.myShip.Health, playerRef.myShip.MaxHealth);
+            lfbShieldBar.Update((int)playerRef.myShip.Shield, (int)playerRef.myShip.MaxShield);
         }
 
         public void Draw(SpriteBatch spritebatch)

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Levi_Challenge
 {
-    class Astroid
+    class Asteroid
     {
         public Texture2D Texture;
         public Vector2 Position;
@@ -13,8 +13,9 @@ namespace Levi_Challenge
         public bool Active, Splitting = false;
         public float Value;
         public int Width, Height, Size, Health;
+        public Color[] TextureData;
 
-        public Astroid(Texture2D texture1, Texture2D texture2, Texture2D texture3, Texture2D texture4)
+        public Asteroid(Texture2D texture1, Texture2D texture2, Texture2D texture3, Texture2D texture4)
         {
             Texture1 = texture1;
             Texture2 = texture2;
@@ -102,6 +103,9 @@ namespace Levi_Challenge
 
             Width = Texture.Width;
             Height = Texture.Height;
+
+            TextureData = new Color[Width * Height];
+            Texture.GetData(TextureData);
         }
 
         private void SetHealth()

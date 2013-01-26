@@ -9,10 +9,6 @@ Content\Sprites\Ships\Enemy-1.xnb
 Content\Sprites\Projectiles\Laser-1.xnb
 Content\Sprites\Projectiles\Missile-1.xnb
 Content\Sprites\Ships\Enemy-2.xnb
-Content\Sprites\Astroids\Astroid-4.xnb
-Content\Sprites\Astroids\Astroid-3.xnb
-Content\Sprites\Astroids\Astroid-2.xnb
-Content\Sprites\Astroids\Astroid-1.xnb
 Content\Sprites\GUI\Health-Bar.xnb
 Content\Sprites\GUI\Shield-Bar.xnb
 Content\Fonts\StartMenuButtonFont.xnb
@@ -20,6 +16,10 @@ Content\Fonts\StartMenuHeaderFont.xnb
 Content\Backgrounds\Clouds\Cloud-Blue-1.xnb
 Content\Backgrounds\Clouds\Cloud-Blue-2.xnb
 Content\Fonts\HUDFont.xnb
+Content\Sprites\Asteroids\Asteroid-4.xnb
+Content\Sprites\Asteroids\Asteroid-3.xnb
+Content\Sprites\Asteroids\Asteroid-2.xnb
+Content\Sprites\Asteroids\Asteroid-1.xnb
 Data\Ships\ES_Trimil.xml
 Data\Ships\ES_Vemrail.xml
 Data\Ships\PS_Old Gum.xml

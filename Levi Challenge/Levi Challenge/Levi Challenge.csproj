@@ -85,7 +85,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Entities\Astroid.cs" />
+    <Compile Include="Classes\Entities\Asteroid.cs" />
     <Compile Include="Classes\Managers\BackgroundManager.cs" />
     <Compile Include="Classes\Managers\CollisionManager.cs" />
     <Compile Include="Classes\Entities\Enemy.cs" />
@@ -129,6 +129,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Levi Challenge Editor\Levi Challenge Editor.csproj">
+      <Project>{B3847D4F-CE0B-4815-9DDE-4E255FC03B44}</Project>
+      <Name>Levi Challenge Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Solar\Solar.csproj">
       <Project>{7A0717A6-11BE-4AC7-B658-0BD2C94501E3}</Project>
       <Name>Solar</Name>

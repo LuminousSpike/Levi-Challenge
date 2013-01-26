@@ -24,6 +24,7 @@ namespace Levi_Challenge
             Loading,
             Playing,
             Paused,
+            GameOver,
             Exiting
         }
         public static Keys MoveUpKey = Keys.W, MoveDownKey = Keys.S, MoveLeftKey = Keys.A, MoveRightKey = Keys.D;
@@ -149,6 +150,20 @@ namespace Levi_Challenge
                 gameScreen.Update(gameTime, GraphicsDevice);
             }
 
+            // Gameover goes to Start Menu for now
+            if (gameState == GameState.GameOver)
+            {
+                gameState = GameState.StartMenu;
+                if (LoadedGameState != GameState.StartMenu)
+                {
+                    Content.Unload();
+                    startMenu = new StartMenuScreen(graphics);
+                    startMenu.Initialize();
+                    startMenu.LoadContent(Content, GraphicsDevice);
+                    LoadedGameState = GameState.StartMenu;
+                }
+                startMenu.Update(gameTime);
+            }
 
             if (gameState == GameState.Exiting)
                 this.Exit();
