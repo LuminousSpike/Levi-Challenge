@@ -51,19 +51,18 @@ namespace Levi_Challenge
             Backgrounds[0].Draw(spriteBatch);
             if(PlanetEnabled)
                 Planet.Draw(spriteBatch);
-            spriteBatch.End();
-            for (int i = 1; i < 3; i++)
-            {
-                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive);
-                Backgrounds[i].Draw(spriteBatch);
-                spriteBatch.End();
-            }
             for (int i = 3; i < 5; i++)
             {
-                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
                 Backgrounds[i].Draw(spriteBatch);
-                spriteBatch.End();
             }
+            spriteBatch.End();
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive);
+            for (int i = 1; i < 3; i++)
+            {
+                Backgrounds[i].Draw(spriteBatch);
+            }
+            spriteBatch.End();
+
         }
 
         private void Add(ParallaxBackground PB, int Layer)

@@ -64,7 +64,6 @@ namespace Solar
             Text = text;
             if (MainTexture == null)
             {
-                DefaultBox = new GuiBox(Position, Width, Height, BWidth, MColor, BColor, graphicsdevice);
                 TextPosition = new Vector2((int)(Position.X + (Width / 2) - (Font.MeasureString(Text).X / 2)), (int)(Position.Y + (Height / 2) - (Font.MeasureString(Text).Y / 2)));
             }
             else
