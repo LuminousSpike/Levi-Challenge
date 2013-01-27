@@ -28,12 +28,12 @@ namespace Levi_Challenge
             Flamoca = 0f;
         }
 
-        public void LoadContent(ContentManager content, int screenWidth, int screenHeight)
+        public void LoadContent(ContentManager content)
         {
             myShip = xmlEngine.PlayerShips[0].ShallowCopy();
             texture = myShip.ShipTexture;
-            myShip.Position = new Vector2(screenWidth / 2 - texture.Width / 2, screenHeight / 2 - texture.Height / 2);
-            screenSize = new Vector2(screenWidth, screenHeight);
+            myShip.Position = new Vector2(Game1.ViewPortWidth / 2 - texture.Width / 2, Game1.ViewPortHeight / 2 - texture.Height / 2);
+            screenSize = new Vector2(Game1.ViewPortWidth, Game1.ViewPortHeight);
         }
 
         public void Update(GameTime gameTime, ProjectileManager projectileManager)

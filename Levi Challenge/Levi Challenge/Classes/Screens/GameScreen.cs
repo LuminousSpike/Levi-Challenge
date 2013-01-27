@@ -75,7 +75,7 @@ namespace Levi_Challenge
 
             
 
-            player.LoadContent(Content, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height);
+            player.LoadContent(Content);
             hudManager.LoadContent(Content, graphicsDevice);
             // TODO: use this.Content to load your game content here
         }
@@ -105,7 +105,7 @@ namespace Levi_Challenge
             backgroundManager.Update();
             spawnManager.Update(gameTime, projectileManager);
             player.Update(gameTime, projectileManager);
-            projectileManager.Update(graphicsDevice.Viewport);
+            projectileManager.Update();
             collisionManager.Update(player, spawnManager.enemyManager.Enemies, spawnManager.enemyManager.Asteroids, projectileManager.Projectiles);
             hudManager.Update(graphicsDevice);
         }
@@ -114,16 +114,16 @@ namespace Levi_Challenge
         /// This is called when the game should draw itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public void Draw(GameTime gameTime, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
+        public void Draw(GameTime gameTime, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, Matrix spriteScale)
         {
             // TODO: Add your drawing code here
-            backgroundManager.Draw(spriteBatch);
-            spriteBatch.Begin();
+            backgroundManager.Draw(spriteBatch, spriteScale);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, spriteScale);
             projectileManager.Draw(spriteBatch);
             spawnManager.Draw(spriteBatch);
             player.Draw(spriteBatch);
-            spriteBatch.End();
             hudManager.Draw(spriteBatch);
+            spriteBatch.End();
         }
     }
 }

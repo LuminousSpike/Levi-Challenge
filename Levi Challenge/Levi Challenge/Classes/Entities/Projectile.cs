@@ -41,12 +41,12 @@ namespace Levi_Challenge
             ProjectileTexture.GetData(TextureData);
         }
 
-        public void Update(Viewport viewport)
+        public void Update()
         {
             Position.X += ProjectileSpeed;
             CollisionBox = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
             myTransform = Matrix.CreateTranslation(new Vector3(Position, 0.0f));
-            if (Position.X - Width / 2 > viewport.Width || Position.X + Width / 2 < 0)
+            if (Position.X - Width / 2 > Game1.ViewPortWidth || Position.X + Width / 2 < 0)
                 Active = false;
         }
 

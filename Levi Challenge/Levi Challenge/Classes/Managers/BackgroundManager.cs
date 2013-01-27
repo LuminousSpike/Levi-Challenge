@@ -19,19 +19,19 @@ namespace Levi_Challenge
 
         public void LoadContent(ContentManager content, GraphicsDevice graphics, String Cloud1, String Cloud2)
         {
-            Create(content, @"Backgrounds\Stars\Stars1", graphics.Viewport.Width, -0.1f, 0);
-            Create(content, @"Backgrounds\Stars\Stars2", graphics.Viewport.Width, -0.3f, 1);
-            Create(content, @"Backgrounds\Stars\Stars3", graphics.Viewport.Width, -1f, 2);
-            Create(content, Cloud1, graphics.Viewport.Width, -0.2f, 3);
-            Create(content, Cloud2, graphics.Viewport.Width, -0.6f, 4);
+            Create(content, @"Backgrounds\Stars\Stars1", Game1.ViewPortWidth, -0.1f, 0);
+            Create(content, @"Backgrounds\Stars\Stars2", Game1.ViewPortWidth, -0.3f, 1);
+            Create(content, @"Backgrounds\Stars\Stars3", Game1.ViewPortWidth, -1f, 2);
+            Create(content, Cloud1, Game1.ViewPortWidth, -0.2f, 3);
+            Create(content, Cloud2, Game1.ViewPortWidth, -0.6f, 4);
             if (PlanetEnabled)
-                Planet.Initialize(content, @"Backgrounds\Planets\Planet3-game", graphics.Viewport.Width, -0.1f);
+                Planet.Initialize(content, @"Backgrounds\Planets\Planet3-game", -0.1f);
         }
 
-        public void Create(ContentManager content, String texturePath, int screenWidth, float speed, int Layer)
+        public void Create(ContentManager content, String texturePath, float screenWidth, float speed, int Layer)
         {
             ParallaxBackground NewPB = new ParallaxBackground();
-            NewPB.Initialize(content, texturePath, screenWidth, speed);
+            NewPB.Initialize(content, texturePath, speed);
             Add(NewPB, Layer);
         }
 
@@ -45,9 +45,9 @@ namespace Levi_Challenge
                 Planet.Update();
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Matrix spriteScale)
         {
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, spriteScale);
             Backgrounds[0].Draw(spriteBatch);
             if(PlanetEnabled)
                 Planet.Draw(spriteBatch);
@@ -56,7 +56,7 @@ namespace Levi_Challenge
                 Backgrounds[i].Draw(spriteBatch);
             }
             spriteBatch.End();
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, spriteScale);
             for (int i = 1; i < 3; i++)
             {
                 Backgrounds[i].Draw(spriteBatch);

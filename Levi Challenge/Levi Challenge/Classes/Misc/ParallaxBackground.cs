@@ -16,7 +16,7 @@ namespace Levi_Challenge
         // The speed
         public float speed;
 
-        public virtual void Initialize(ContentManager content, String texturePath, int screenWidth, float speed)
+        public virtual void Initialize(ContentManager content, String texturePath, float speed)
         {
             // Load the texture
             texture = content.Load<Texture2D>(texturePath);
@@ -26,7 +26,7 @@ namespace Levi_Challenge
 
             // Divide the screen width to determine how many tiles needed
             // Add 1 so there is no gap in the tiling
-            positions = new Vector2[screenWidth / texture.Width + 2];
+            positions = new Vector2[(int)Game1.ViewPortWidth / texture.Width + 2];
 
             // Set the inital positions
             for (int i = 0; i < positions.Length; i++)

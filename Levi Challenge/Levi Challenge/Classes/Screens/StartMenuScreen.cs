@@ -40,15 +40,15 @@ namespace Levi_Challenge
             HeaderFont = Content.Load<SpriteFont>(@"Fonts\StartMenuHeaderFont");
             HUDFont = Content.Load<SpriteFont>(@"Fonts\HUDFont");
 
-            HeaderPosition = new Vector2(graphicsDevice.Viewport.Width / 2 - (HeaderFont.MeasureString("Levi Challenge").X / 2), graphicsDevice.Viewport.Height / 20);
-            MadeByPosition = new Vector2(10, graphicsDevice.Viewport.Height - HUDFont.MeasureString("Made by Nathan Todd").Y);
+            HeaderPosition = new Vector2(Game1.ViewPortWidth / 2 - (HeaderFont.MeasureString("Levi Challenge").X / 2), Game1.ViewPortHeight / 20);
+            MadeByPosition = new Vector2(10, Game1.ViewPortHeight - HUDFont.MeasureString("Made by Nathan Todd").Y);
             
-            boxHeaderLine = new GuiBox(new Vector2(graphicsDevice.Viewport.Width / 2 - (float)((HeaderFont.MeasureString("Levi Challenge").X * 1.3) / 2), graphicsDevice.Viewport.Height / 6), (int)(HeaderFont.MeasureString("Levi Challenge").X * 1.3), 2, 0, Color.White * 0.4f, Color.White, graphicsDevice);
+            boxHeaderLine = new GuiBox(new Vector2(Game1.ViewPortWidth / 2 - (float)((HeaderFont.MeasureString("Levi Challenge").X * 1.3) / 2), Game1.ViewPortHeight / 6), (int)(HeaderFont.MeasureString("Levi Challenge").X * 1.3), 2, 0, Color.White * 0.4f, Color.White, graphicsDevice);
 
-            btnNewGame = new GuiButton(new Vector2(graphicsDevice.Viewport.Width / 2 - 168, graphicsDevice.Viewport.Height / 4), 336, 69, 0, Color.Black * 0.3f, Color.YellowGreen * 0.3f, Color.White, Color.White * 0.6f, "New Game", @"Fonts\StartMenuButtonFont");
-            btnContinue = new GuiButton(new Vector2(graphicsDevice.Viewport.Width / 2 - 168, graphicsDevice.Viewport.Height / 4 + 69), 336, 69, 0, Color.Black * 0.15f, Color.YellowGreen * 0.15f, Color.White, Color.White * 0.6f, "Continue", @"Fonts\StartMenuButtonFont");
-            btnOptions = new GuiButton(new Vector2(graphicsDevice.Viewport.Width / 2 - 168, graphicsDevice.Viewport.Height / 4 + 138), 336, 69, 0, Color.Black * 0.3f, Color.YellowGreen * 0.3f, Color.White, Color.White * 0.6f, "Options", @"Fonts\StartMenuButtonFont");
-            btnExit = new GuiButton(new Vector2(graphicsDevice.Viewport.Width / 2 - 168, graphicsDevice.Viewport.Height / 4 + 207), 336, 69, 0, Color.Black * 0.15f, Color.YellowGreen * 0.15f, Color.White, Color.White * 0.6f, "Exit", @"Fonts\StartMenuButtonFont");
+            btnNewGame = new GuiButton(new Vector2(Game1.ViewPortWidth / 2 - 168, Game1.ViewPortHeight / 4), 336, 69, 0, Color.Black * 0.3f, Color.YellowGreen * 0.3f, Color.White, Color.White * 0.6f, "New Game", @"Fonts\StartMenuButtonFont");
+            btnContinue = new GuiButton(new Vector2(Game1.ViewPortWidth / 2 - 168, Game1.ViewPortHeight / 4 + 69), 336, 69, 0, Color.Black * 0.15f, Color.YellowGreen * 0.15f, Color.White, Color.White * 0.6f, "Continue", @"Fonts\StartMenuButtonFont");
+            btnOptions = new GuiButton(new Vector2(Game1.ViewPortWidth / 2 - 168, Game1.ViewPortHeight / 4 + 138), 336, 69, 0, Color.Black * 0.3f, Color.YellowGreen * 0.3f, Color.White, Color.White * 0.6f, "Options", @"Fonts\StartMenuButtonFont");
+            btnExit = new GuiButton(new Vector2(Game1.ViewPortWidth / 2 - 168, Game1.ViewPortHeight / 4 + 207), 336, 69, 0, Color.Black * 0.15f, Color.YellowGreen * 0.15f, Color.White, Color.White * 0.6f, "Exit", @"Fonts\StartMenuButtonFont");
             
             guiSystem.Add(boxHeaderLine);
             guiSystem.Add(btnNewGame);
@@ -88,10 +88,10 @@ namespace Levi_Challenge
             
         }
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix spriteScale)
         {
-            backgroundManager.Draw(spriteBatch);
-            spriteBatch.Begin();
+            backgroundManager.Draw(spriteBatch, spriteScale);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, spriteScale);
             spriteBatch.DrawString(HeaderFont, "Levi Challenge", HeaderPosition, Color.White * 0.6f);
             spriteBatch.DrawString(HUDFont, "Made by Nathan Todd", MadeByPosition, Color.White * 0.6f);
             guiSystem.Draw(spriteBatch);

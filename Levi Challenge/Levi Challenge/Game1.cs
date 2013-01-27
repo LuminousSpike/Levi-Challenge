@@ -33,6 +33,8 @@ namespace Levi_Challenge
 
         public static GameState gameState = new GameState();
 
+        public static float ViewPortWidth = 1024, ViewPortHeight = 576;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -40,10 +42,15 @@ namespace Levi_Challenge
         OptionsMenuScreen optionsMenuScreen;
         GameScreen gameScreen;
 
+        Matrix SpriteScale;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            graphics.PreferredBackBufferWidth = 1024;
+            graphics.PreferredBackBufferHeight = 576;
+            graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -79,8 +86,9 @@ namespace Levi_Challenge
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             startMenu.LoadContent(Content, GraphicsDevice);
-            //optionsMenuScreen.LoadContent(Content, GraphicsDevice);
-            //gameScreen.LoadContent(Content, GraphicsDevice);
+            float screenscaleX = graphics.GraphicsDevice.Viewport.Width / ViewPortWidth;
+            float screenscaleY = graphics.GraphicsDevice.Viewport.Height / ViewPortHeight;
+            SpriteScale = Matrix.CreateScale(screenscaleX, screenscaleY, 1);
             // TODO: use this.Content to load your game content here
         }
 
@@ -178,16 +186,16 @@ namespace Levi_Challenge
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
+            
             // TODO: Add your drawing code here
             if (gameState == GameState.StartMenu && LoadedGameState == GameState.StartMenu)
-                startMenu.Draw(gameTime, spriteBatch);
+                startMenu.Draw(gameTime, spriteBatch, SpriteScale);
 
             if (gameState == GameState.OptionsMenu && LoadedGameState == GameState.OptionsMenu)
                 optionsMenuScreen.Draw(spriteBatch);
 
             if (gameState == GameState.Playing && LoadedGameState == GameState.Playing)
-                gameScreen.Draw(gameTime, GraphicsDevice, spriteBatch);
+                gameScreen.Draw(gameTime, GraphicsDevice, spriteBatch, SpriteScale);
 
             base.Draw(gameTime);
         }

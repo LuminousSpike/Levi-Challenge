@@ -20,11 +20,11 @@ namespace Levi_Challenge
             Projectiles = new List<Projectile>();
         }
 
-        public void Update(Viewport viewport)
+        public void Update()
         {
             for (int i = Projectiles.Count - 1; i >= 0; i--)
             {
-                Projectiles[i].Update(viewport);
+                Projectiles[i].Update();
                 if (Projectiles[i].Active == false)
                 {
                     Projectiles.RemoveAt(i);

@@ -50,7 +50,7 @@ namespace Levi_Challenge
         public void AddEnemy(Random random, Ship ship)
         {
             Enemy enemy = new Enemy(ship);
-            Vector2 position = new Vector2(graphicsDevice.Viewport.Width + enemy.myShip.ShipTexture.Width / 2, random.Next(100, graphicsDevice.Viewport.Height - 100));
+            Vector2 position = new Vector2(Game1.ViewPortWidth + enemy.myShip.ShipTexture.Width / 2, random.Next(100, (int)Game1.ViewPortHeight - 100));
             enemy.LoadContent(position);
             Enemies.Add(enemy);
         }
@@ -59,7 +59,7 @@ namespace Levi_Challenge
         {
             Asteroid astroid = new Asteroid(AsteroidTexture1, AsteroidTexture2, AsteroidTexture3, AsteroidTexture4);
             astroid.Initialize(random.Next(1, 5));
-            astroid.Position = new Vector2(graphicsDevice.Viewport.Width + astroid.Texture.Width / 2, random.Next(100, graphicsDevice.Viewport.Height - 100));
+            astroid.Position = new Vector2(Game1.ViewPortWidth + astroid.Texture.Width / 2, random.Next(100, (int)Game1.ViewPortHeight - 100));
             Asteroids.Add(astroid);
         }
 
